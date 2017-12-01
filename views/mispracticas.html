@@ -1,0 +1,71 @@
+<div class="row">
+  <h4 class="col-sm-8">Mis Practicas</h4>
+<!-- <p>{{mispracticas}}</p>
+<p>--{{lista}}</p> -->
+<!--  <div class="clearfix"> -->
+    <button class="col-sm-2 btn btn-primary pull-right" ng-click="crearPractica()">Crear Nueva</button>
+</div>
+
+
+    <div class="table table-hover table-bordered table-dark" ng-show="lista" >
+
+
+
+              <table id="mytable" class="table table-bordred table-striped table-hover">
+
+                    <thead>
+                       <th>Nombre</th>
+                       <th>Descipcion</th>
+                       <th>Tipo</th>
+                       <th>Creacion</th>
+                       <th>Duracion</th>
+                       <th></th>
+                       <th>Borrar</th>
+                       <th>Edit</th>
+                       <th>Play</th>
+                   </thead>
+
+    <tbody ng-repeat="practica in lista">
+
+    <tr>
+
+    <td>{{practica.propiedades.nombre}} </td>
+    <td>{{practica.propiedades.descripcion}}</td>
+    <td>{{practica.propiedades.publico=='true' ? "publica": "privada"}} </td>
+    <td>{{practica.propiedades.fechaCreacion}}</td>
+    <td>{{practica.propiedades.duracion}}</td>
+    <td></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" ng-click="borrarPractica(practica)" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+ <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" ng-click="crearPractica(practica)" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-success btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-play"></span></button></p></td>
+    </tr>
+    </tbody>
+    </table>
+        <!-- <div class="item-container row list-item" ng-repeat="practica in lista" > -->
+             <!-- <thead> -->
+
+         <!-- <div class="col-sm-4"><img ng-src="{{practica.nombre}}" alt="producto"></div> -->
+            <!-- <div class="col-sm-8"> -->
+                <!-- <p>nombre: {{practica.propiedades.nombre}}  </p> -->
+                <!-- <p>{{practica.propiedades.nombre}} ({{practica.propiedades.descripcion}})  </p> -->
+                <!-- <p>descripcion: {{practica.propiedades.descripcion}}</p> -->
+                <!-- <p>Usuario Creador: {{practica.propiedades.usuarioCreador}}</p> -->
+                <!-- <p>Fecha Creacion: {{practica.propiedades.fechaCreacion}}</p> -->
+                <!-- <p>Tipo: {{practica.propiedades.publica ? "publica": "privada"}} </p> -->
+                <!-- <p>Duracion: {{practica.propiedades.duracion}} </p> -->
+
+                <!-- <p>PracticaKey: {{practica.$id}}</p> -->
+
+                <!-- <button ng-click="configurar(practica)">modificar</button> -->
+                <!-- <button ng-click="borrarPractica(practica)">borrar</button> -->
+            <!-- </div> -->
+
+
+    <!-- </div> -->
+
+
+    </div>
+
+
+
+

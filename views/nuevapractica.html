@@ -1,0 +1,53 @@
+ <h4 ng-hide="modificacion">Nueva Practica</h4>
+ <h4 ng-show="modificacion">Modificacion</h4>
+
+<p class="bg-danger">{{error}}</p>
+
+<form role="form">
+  <p class="form-group">
+    <label for="nombre">nombre</label>
+    <input id="nombre" required name="nombre" type="text" ng-model="nombre" class="form-control" />
+  </p>
+
+<p class="form-group">
+    <label for="descripcion">descripcion</label>
+    <input id="descripcion" required name="descripcion" type="text" ng-model="descripcion" class="form-control" />
+  </p>
+
+<p class="form-group">
+    <label for="creador">creador: </label>
+    <span id ="creador">{{userCreador}}</span>
+<!--     <input id="descripcion" required name="descripcion" type="text" ng-model="descripcion" class="form-control" /> -->
+  </p>
+
+<p class="form-group">
+    <label for="fechaCreacion">Fecha Creacion: </label>
+    <span id ="fechaCreacion">{{fechaCreacion | date:'dd-MM-yyyy'}}</span>
+  </p>
+
+
+<p class="form-group">
+        <label for="Tipo">Tipo:  </label>
+
+  <input type="radio" ng-model="publico" value="true" >Publico
+  <input type="radio" ng-model="publico" value="false">Privado
+
+</p>
+<!--
+  <p class="form-group" ng-cloak ng-show="createMode">
+    <label for="loginConfirm">confirm pass</label>
+    <input id="loginConfirm" required name="confirm" type="password" ng-model="confirm" class="form-control" />
+  </p>
+ -->
+  <p>
+    <button  class="btn btn-primary" ng-click="createNewPractica(nombre, descripcion,publico)" >Guardar</button>
+    <!-- <button  class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Register</button>
+    <button  class="btn btn-primary" ng-cloak ng-show="createMode"
+            ng-click="login.createAccount(email, pass, confirm)">Create Account</button> -->
+    <button  class="btn btn-default" ng-cloak  onclick="history.back()" >Cancel</button>
+  </p>
+</form>
+
+      <!--  creador: {},fechaCreacion:"",fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        //
+
+ -->
