@@ -101,7 +101,7 @@ this.writeNuevaPractica=function(userKey, model,propiedades) {
 
 };
 
-this.leerMisPracticas=function(userKey) {
+this.linkMisPracticas=function(userKey) {
      console.log('leerMisPracticas');
       var ref = firebase.database().ref();
   var newPracticaKey= ref.child('Mispracticas').child(userKey);
@@ -112,7 +112,31 @@ this.leerMisPracticas=function(userKey) {
 
 };
 
+this.cargarMisPracticas=function(userKey) {
+     console.log('cargarMisPracticas');
 
+return new Promise(function (resolve, reject){
+    console.log("Construccion de la promesa cargarMisPracticas");
+
+      var ref = firebase.database().ref();
+  var newPracticaKey= ref.child('Mispracticas').child(userKey);
+
+ var list = $firebaseArray(newPracticaKey);
+ list.$loaded(
+  function(x) {
+    // x === list; // true
+    console.log('cargarMisPracticas exito');
+    console.log(list);
+   resolve({ value: "retorno cargarMisPracticas", result: list});
+
+  }, function(error) {
+    console.error("Error:", error);
+    reject({ value: "error cargarMisPracticas", result: error});
+  });
+
+
+});
+};
 
 
 
@@ -170,6 +194,27 @@ this.writeModificacionPractica=function(practicaKey,userKey, model,propiedades) 
             }, function(error) {
               console.log("Error:", error);
             });
+};
+
+this.borrarPrac=function(userKey, practicaKey) {
+     console.log('borrar Practica');
+      var r = firebase.database().ref();
+  var ref= r.child('practicas').child(userKey).child(practicaKey);
+
+var obj = $firebaseObject(ref);
+obj.$remove().then(function(ref) {
+  console.log(ref);// data has been deleted locally and in the database
+}, function(error) {
+  console.log("Error:", error);
+});
+
+};
+
+
+this.getDate=function(){
+  console.log('getDate');
+  console.log(firebase.database.ServerValue.TIMESTAMP);
+  return firebase.database.ServerValue.TIMESTAMP;
 };
 
 

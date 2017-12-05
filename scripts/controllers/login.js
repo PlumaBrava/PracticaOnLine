@@ -63,7 +63,8 @@ this.emailPasswordLogin=function(email, password){
         // console.log('user uid: '+user.uid);
         // console.log(user);
            $scope.err=CallBackuser.email;
-    // console.log(user);
+   self.muestraMensaje('Signed in as:'+ CallBackuser.displayName);
+  self.registrarUsuario(CallBackuser);
 
         // fb.setUserKey(user.uid);
         // fb.setUser(user.email);
@@ -115,7 +116,7 @@ this.createAccount=function(email, password,confirm){
             // var user = firebase.auth().currentUser;
             self.muestraMensaje('mail: '+CallBackuser.email);
             console.log('CallBackuser: '+CallBackuser.email);
-            self.registrarUsuario(firebaseUser);
+            self.registrarUsuario(CallBackuser);
             // console.log('user mail: '+user.email);
   //          console.log(user);
 
@@ -189,7 +190,7 @@ this.loginFacebook=function(){
   console.log(firebaseUser);
     console.log('Signed in as:', firebaseUser.user.displayName);
   self.muestraMensaje('Signed in as:'+ firebaseUser.user.displayName);
-  self.registrarUsuario(firebaseUser);
+  self.registrarUsuario(firebaseUser.user);
     // console.log(firebaseUser);
   }).catch(function(error) {
     console.log('Authentication failed:', error);
@@ -215,7 +216,7 @@ this.loginGoogle=function(){
   console.log(firebaseUser);
     console.log('Signed in as:', firebaseUser.user.displayName);
   self.muestraMensaje('Signed in as:'+ firebaseUser.user.displayName);
-  self.registrarUsuario(firebaseUser);
+  self.registrarUsuario(firebaseUser.user);
     // console.log(firebaseUser);
   }).catch(function(error) {
     console.log('Authentication failed:', error);
@@ -250,14 +251,14 @@ this.sendPasswordResetEmail=function(email){
 }
 };
 
-this.registrarUsuario=function(firebaseUser){
-     console.log(firebaseUser);
-     fb.setUserKey(firebaseUser.user.uid);
-     var user={};
-     user.displayName=firebaseUser.user.displayName;
-     user.email=firebaseUser.user.email;
+this.registrarUsuario=function(user){
+     console.log(user);
+     fb.setUserKey(user.uid);
+     var u={};
+     u.displayName=user.displayName;
+     u.email=user.email;
 
-    fb.setUser(user);
+    fb.setUser(u);
     // fb.setUser(firebaseUser.user.providerData[0]);
     // fb.setUser(firebaseUser.user);
 };

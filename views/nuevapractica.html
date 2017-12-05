@@ -20,7 +20,7 @@
 <!--     <input id="descripcion" required name="descripcion" type="text" ng-model="descripcion" class="form-control" /> -->
   </p>
 
-<p class="form-group">
+<p class="form-group" ng-show="modificacion">
     <label for="fechaCreacion">Fecha Creacion: </label>
     <span id ="fechaCreacion">{{fechaCreacion | date:'dd-MM-yyyy'}}</span>
   </p>
@@ -40,14 +40,12 @@
   </p>
  -->
   <p>
-    <button  class="btn btn-primary" ng-click="createNewPractica(nombre, descripcion,publico)" >Guardar</button>
+    <button  class="btn btn-primary" ng-click="savePractica(nombre, descripcion,publico)" >Guardar</button>
     <!-- <button  class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Register</button>
     <button  class="btn btn-primary" ng-cloak ng-show="createMode"
             ng-click="login.createAccount(email, pass, confirm)">Create Account</button> -->
     <button  class="btn btn-default" ng-cloak  onclick="history.back()" >Cancel</button>
+     <button  class="btn btn-default btn-primary pull-right" ng-cloak  ng-click="armarPractica()" ng-show="modificacion" >Armar Práctica</button>
+  </p>
   </p>
 </form>
-
-      <!--  creador: {},fechaCreacion:"",fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        //
-
- -->

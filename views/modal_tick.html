@@ -1,0 +1,39 @@
+<!-- <p>This is the modal_leer view.</p> -->
+<!-- <div ng-controller="NestedListsDemoController as $ctrl" class="modal-demo"> -->
+<div  class="modal-demo">
+    <!-- <script type="text/ng-template" id="myModalContent.html"> -->
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Tick</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+            <ul>
+                <!-- <li > -->
+                    <a > intervalo_ms
+                        <input type="text"  ng-model="$ctrl.itemq.intervalo_ms"/>
+                    </a>
+                    <a > volumen
+                        <input type="text"  ng-model="$ctrl.itemq.volumen"/>
+                    </a>
+                    <a > duracion
+                        <input type="text"  ng-model="$ctrl.itemq.duracion"/>
+                    </a>
+                <!-- </li> -->
+            </ul>
+            <!-- Selected: <b>{{ $ctrl.selected.item }}</b> -->
+
+            <!-- <div class="texto">{{$ctrl.item.texto}}</div> -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+    <!-- </script> -->
+<!--     <script type="text/ng-template" id="stackedModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+        </div>
+        <div class="modal-body" id="modal-body-{{name}}">
+            Having multiple modals open at once is probably bad UX but it's technically possible.
+        </div>
+         </script> -->
+        </div>

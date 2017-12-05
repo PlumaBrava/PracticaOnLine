@@ -12,7 +12,13 @@ angular.module('practicaApp')
   .controller('MispracticasCtrl', ['$scope','$state','fb',function ($scope,$state,fb) {
 
    // var self=this;
-     $scope.lista=fb.leerMisPracticas(fb.getUserKey());
+     fb.cargarMisPracticas(fb.getUserKey()).then(function(lista){
+
+      console.log('retorno promesa');
+      console.log(lista);
+       $scope.$apply(function () {
+      $scope.lista=lista.result;});
+     });
 
  console.log($scope.lista);
 
@@ -53,11 +59,19 @@ $scope.crearPractica=function(data){
 
 $scope.borrarPractica=function(item)   {
 console.log("borrarPractica");
+console.log(item);
 $scope.lista.$remove(item).then(function(ref) {
     console.log(ref);
+  fb.borrarPrac(fb.getUserKey(),ref.key);
   // ref.key === item.$id; // true
 });
 
+
 };
+
+  $scope.$on("$destroy", function() {
+     // $scope.lista=fb.leerMisPracticas(fb.getUserKey());
+     console.log("$destroy");
+    });
 
 }]);

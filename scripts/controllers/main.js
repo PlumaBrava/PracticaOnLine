@@ -37,12 +37,15 @@ auth.$onAuthStateChanged(function(firebaseUser) {
             // $scope.$apply(function () {
             $scope.photoURLshow=true;
             $scope.photoURL=firebaseUser.photoURL;
-            $state.go('mispracticas');
+            // $state.go('mispracticas');
             // } );
         // console.log('$scope.photoURLshow:', $scope.photoURLshow);
         // console.log('$scope.photoURL:', $scope.photoURL);
     }
+     console.log('path Main to mis practicas');
+     console.log($state);
 
+  // $state.go('mispracticas');
   } else {
     console.log('Signed out');
     $scope.user='Sign Up';

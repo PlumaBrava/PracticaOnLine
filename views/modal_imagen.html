@@ -1,0 +1,26 @@
+<div  class="modal-demo">
+
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Ingrese Imagen</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+
+
+                 <form>
+                     <input type="file" ng-file-select="onFileSelect($files)" >
+ <!--  <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
+                </form>
+                <b>Preview:</b><br />
+                <i ng-hide="imageSrc">No image choosed</i>
+                <img class="imagenx" ng-src="{{imageSrc}}" alt="Sin Imagen"/><br/>
+                <b>Progress:</b>
+                <progress value="{{progress}}"></progress>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-show="okdisponible" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+        </div>
+
+        </div>
+

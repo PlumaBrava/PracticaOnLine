@@ -20,13 +20,13 @@ angular.module('practicaApp')
         $scope.fechaCreacion=$stateParams.param1.propiedades.fechaCreacion;
         $scope.modificacion=true;
     } else{
-    $scope.fechaCreacion = new Date();
+    $scope.fechaCreacion = fb.getDate();
     $scope.userCreador = fb.getUser().displayName;
     $scope.modificacion=false;
-    };
+    }
 
-    $scope.createNewPractica=function(nombre, descripcion,publico,currentDate){
-    console.log('createNewPractica');
+    $scope.savePractica=function(nombre, descripcion,publico){
+    console.log('savePractica');
 
     console.log(nombre);
     console.log(descripcion);
@@ -49,17 +49,12 @@ angular.module('practicaApp')
             propiedades.nombre=nombre;
             propiedades.descripcion=descripcion;
             propiedades.publico=publico;
-            // propiedades.fechaCreacion=Date.now;
+            propiedades.fechaCreacion=$scope.fechaCreacion;
 
-            // propiedades.usuarioCreador=$scope.userCreador;
-            console.log('new Date()');
-            console.log(Date.now());
             propiedades.userCreador=fb.getUser().displayName;
             // propiedades.fechaCreacion=currentDate;
 
 
-            // propiedades.usuarioCreador=fb.getUser();
-            // propiedades.usuarioCreador=fb.getUser();
             var dropzones= {
                 'A': [
                     {
@@ -74,7 +69,7 @@ angular.module('practicaApp')
                 fb.writeModificacionPractica($stateParams.param1.$id,fb.getUserKey(), model,propiedades);
             }else {
                 fb.writeNuevaPractica(fb.getUserKey(), model,propiedades);
-            };
+            }
 
             $state.go('mispracticas');
 
@@ -88,7 +83,11 @@ angular.module('practicaApp')
 
     };
 
+$scope.armarPractica=function(){
+    console.log('armarpractica');
+    $state.go('armarpractica');
 
+};
 
 
   }]);

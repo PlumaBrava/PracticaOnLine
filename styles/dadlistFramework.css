@@ -1,0 +1,131 @@
+/*body {
+    padding-top: 70px;
+    padding-bottom: 30px;
+}
+*/
+.box {
+    /*margin-bottom: 20px;*/
+    background-color: #FFF;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+
+}
+
+.box > h3 {
+    color: #333;
+    border-color: #ddd;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-repeat: repeat-x;
+    display: block;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+    /*background-color: red;*/
+}
+
+.box-padding {
+    padding: 15px;
+}
+
+.box-padding > h3 {
+    margin: -15px;
+    margin-bottom: 15px;
+}
+
+.box-grey {
+    border-color: #ddd;
+}
+
+.box-grey > h3 {  /*titulos de la clumna derecha*/
+    background-color: #f5f5f5;
+    /*background-color: red;*/
+    background-image: -webkit-linear-gradient(top,#f5f5f5 0,#e8e8e8 100%);
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+}
+
+.box-blue {
+    border-color: #bce8f1;
+}
+
+.box-blue > h3 {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    background-image: -webkit-linear-gradient(top,#d9edf7 0,#c4e3f3 100%);
+    background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);
+}
+
+.box-yellow {  /*pinta el borde de la columna*/
+    border-color: #faebcc;
+    /*background-color: red;*/
+}
+
+.box-yellow > h3 {  /*pinta los titulos de las columans (h3) , el gradiente se superpone al fondo*/
+    color: #8a6d3b;
+    /*background-color: red;*/
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    background-image: -webkit-linear-gradient(top,#fcf8e3 0,#faf2cc 100%);
+    background-image: linear-gradient(to bottom,#fcf8e3 0,#faf2cc 100%);
+}
+
+.box-orange {
+    border-color: #FF6A00;
+
+}
+
+.box-orange > h3 {
+    color: #fcf8e3; /*color del texto*/
+    background-color: #ff6a00;
+    border-color: #FF6A00;
+    background-image: -webkit-linear-gradient(top,#ff6a00 0,#faf2cc 100%);
+    background-image: linear-gradient(to bottom,#FF6A00 0,#faf2cc 100%);
+}
+
+
+ /*ordena las cosas dentro de un bloque (elementos en paralelo)
+ uno al lado del otro!!!*/
+ .box-orange .leer {
+    float: left;
+ }
+  .box-orange .item{
+    float: left;
+ }
+
+  .box-orange .box-orange{
+    float: left;
+ }
+
+  .box-orange .box-blue{
+    float: left;
+ }
+
+   .box-orange .imagen{
+    float: left;
+ }
+
+
+ /*ordena las cosas dentro de un herramientas, uno al lado del otro!!!*/
+
+
+   .trashcan  li{
+    float: left;
+ }
+
+    .toolbox  li{
+    float: left;
+ }
+    .toolbox  ul{      /* //revisar para separa los botones*/
+    /*margin:4px;*/
+    padding: 4px;
+ }
+
+ .practica {
+    height: 500px;
+    overflow-y: scroll; /* Only add scroll to vertical column*/
+ }
