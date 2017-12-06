@@ -28,15 +28,15 @@ angular.module('practicaApp')
 
             // {type: "container", id: 1, duracion:0, columns: [[]], iconClass:"glyphicon glyphicon-object-align-vertical"},//Se ejecutan tareas en serie
             // {type: "bloque", id: 2, duracion:0, nombre:"nombre",columns: [[]],iconClass:"glyphicon glyphicon-object-align-horizontal"},         //Se ejecutan tareas en paralelo
-            {type: "spotify", id: 3,search: "track" , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:" btn-success fa fa-spotify " },        // Dipara musica de Spotify
-             {type: "youtube", id: 4,link:"",name:"jj",description:"",duracion:0,iconClass:"btn-danger fa fa-youtube"}, // link a you tube
-            {type: "audio", id: 5, link:"",volumen:1,name:"",iconClass:"btn-warning glyphicon glyphicon-music" },          // Reporduce audio
-            {type: "leer", id: 6, texto:"Texto de prueba",iconClass:"btn-info glyphicon glyphicon-bullhorn"},           // Lee un texto
+            {type: "spotify", id: 3,search: "track" , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:" btn-spotify fa fa-spotify " },        // Dipara musica de Spotify
+             {type: "youtube", id: 4,link:"",name:"jj",description:"",duracion:0,iconClass:"btn-youtube fa fa-youtube"}, // link a you tube
+            {type: "audio", id: 5, link:"",volumen:1,name:"",iconClass:"btn-audio glyphicon glyphicon-music" },          // Reporduce audio
+            {type: "leer", id: 6, texto:"Texto de prueba",iconClass:"btn-leer glyphicon glyphicon-bullhorn"},           // Lee un texto
             {type: "escribir", id: 7, texto:"Texto en Pantalla",iconClass:"btn-escribir glyphicon glyphicon-pencil"},           // Escribe un texto en Pantalla
             {type: "imagen", id: 8,link:"",name:"", iconClass:"btn-imagen glyphicon glyphicon-picture"  },                           // Muestra Imagen
             {type: "tick", id: 9, intervalo_ms: 1000, volumen:1,duracion:6000,iconClass:"btn-tick glyphicon glyphicon-bell"},       // activa el cuenta timpo
             {type: "cronometro", id: 10, digital:true, analogico:true,iconClass:"btn-cronometro glyphicon glyphicon-hourglass"},      // permite medir mi tiempo.
-            {type: "registro", id: 11,iconClass:"btn-registro glyphicon glyphicon-glyphicon-picture" }        // permite tomar registo de tiempo o cantidades...
+            {type: "registro", id: 11,iconClass:"btn-registro glyphicon glyphicon-registration-mark" }        // permite tomar registo de tiempo o cantidades...
         ],
         propiedades:{nombre: "nombre de la practica",descripcion:"description", usuarioCreador: {},fechaCreacion:"",fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
         dropzones: {
@@ -942,12 +942,13 @@ console.log($scope.itemq );
 
 }])
 
- .controller('ModalInstanceAudio',["$scope","$uibModalInstance","item", "subirarchivofb","recorderService", function ($scope, $uibModalInstance,  item,subirArchivoFb,recorderService) {
+ .controller('ModalInstanceAudio',["$scope","$uibModalInstance","item", "subirarchivofb","recorderService", "comandos", function ($scope, $uibModalInstance,  item,subirArchivoFb,recorderService,comandos) {
   // .controller('PerfilesCtrl' ,['$element', 'recorderService', 'recorderUtils', '$scope', '$timeout', '$interval', 'recorderPlaybackStatus', function ($element, recorderService, recorderUtils, $scope, $timeout, $interval, recorderPlaybackStatus) {
 
   // .controller(, function ($uibModalInstance,  item) {
   var $ctrl = this;
-  $scope.nombre="nombre";
+  $scope.nombre=item.name;
+  $scope.path=item.link;
 
   $ctrl.itemq = {
 
@@ -965,7 +966,8 @@ console.log(recorderService );
 
   this.ok = function () {
      console.log("uibModalInstance.ok: " );
-    $uibModalInstance.close($ctrl.itemq);
+    $scope.subir();
+
   };
 
   $ctrl.cancel = function () {
@@ -973,16 +975,41 @@ console.log(recorderService );
     $uibModalInstance.dismiss('cancel');
   }
 
+  $scope.error=null;
 
     $scope.getFile = function () {
         $scope.progress = 0;
+        $scope.error=null;
+             $scope.$apply(function () {
+            $scope.okdisponible=false;
+            });
 
+        if($scope.file){
+        if($scope.file.type=="audio/mp3"){
+             $scope.$apply(function () {
+            $scope.okdisponible=true;
+            $scope.nombre=$scope.file.name;
+            });
 
+            }else{
+
+            $scope.$apply(function () {
+            $scope.error="tipo de Archivo incorrercto";
+            });
+        };
+        };
+};
+
+this.playAudioFile=function(){
+    console.log("playAudioFile");
+    console.log($scope.path);
+    comandos.playAudio($scope.path);
+}
+
+$scope.subir=function(){
           // subirUrl:   $scope.file: archivo (nombre y datos con los que se guardara)
           //             $scople donde se expone el avance
-          //             el path firebase sera.  "imagen"/userKey/fileName.
-
-
+          //             el path firebase sera.  "audio"/userKey/fileName.
         subirArchivoFb.subirUrl($scope.file, $scope,"audio")
                       .then(function(result) {
                         console.log("result audio");
@@ -995,18 +1022,19 @@ console.log(recorderService );
 
                                 link :result.downloadURL,
                                 name:result.metadata.name
+                                // name:$scope.nombre
                               };
-                          $scope.okdisponible=true;
-        //                   var aFileParts = ['<a id="a"><b id="b">hey!</b></a>'];
-        // recorderService.$html5AudioProps.audioInput= $scope.file;
-        // recorderService.isReady=true;
+
+                           $uibModalInstance.close($ctrl.itemq);
+
 
                       },function(result) {
                       console.log("error Imagen");
                       console.log(result);
+                      $scope.error=reject;
                       });
-    };
 
+};
     $scope.$on("fileProgress", function(e, progress) {
 
         $scope.progress = progress.loaded / progress.total;

@@ -578,5 +578,55 @@ return new Promise(function (resolve, reject){
 }; // fin de la funcion get AccessTocken
 
 
+// Play Audio
+
+this.playAudio=function(link){
+  console.log("playAudio: "+link);
+  console.log(link);
+  // self.tick=interval( self.playTick,timeMs);
+  // console.log(self.tick);
+return new Promise(function (resolve, reject){
+    console.log("Construccion de la promesa playAudio");
+    //  console.log("$scope.estado: "+$scope.estado);
+    // if($scope.estado==ESTADO_STOP){
+    //          console.log("$scope.estado: ESTADO_STOP"+$scope.estado);
+    //     // self.stopTick();
+    // }
+    // else{
+
+   Howler.mobileAutoEnable = true;
+
+    var sound = new Howl({
+      src: [link],
+      format: ['mp3'],
+      html5: true
+
+    });
+
+
+
+    // Clear listener after first call.
+  sound.once('load', function(){
+        console.log("playAudio..load");
+        console.log(sound);
+    sound.play();
+  });
+
+// Fires when the sound finishes playing.
+    sound.on('end', function(){
+
+
+            console.log("playAudio end: ");
+            resolve({ value: "playAudio", result: "end playAudio"});
+      sound.unload();
+    });
+
+    // }
+});
+
+
+};
+
+
   }]);
 

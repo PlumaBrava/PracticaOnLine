@@ -169,7 +169,7 @@
 .leer h5{
  text-align: center;
 font-weight: bold;
-background-color: lightblue;
+background-color:  tomato;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   margin-top:0;
@@ -189,7 +189,7 @@ background-color: lightblue;
 .imagen h5{
  text-align: center;
 font-weight: bold;
-background-color: lightblue;
+background-color: slateblue;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   margin-top:0;
@@ -304,8 +304,29 @@ margin-top:0;
 
 }
 
-.btn-imagen{
+
+.btn-spotify{
+  background:mediumseagreen;
+  margin: auto;
+}
+
+.btn-youtube{
   background: red;
+  margin: auto;
+}
+
+.btn-imagen{
+  background: slateblue;
+  margin: auto;
+}
+
+.btn-audio{
+  background: dodgerblue;
+  margin:auto ;
+}
+
+.btn-leer{
+  background: tomato;
   margin: auto;
 }
 
@@ -323,4 +344,143 @@ margin-top:0;
 
 .btn-registro{
   background: orange;
+}
+
+.spotify {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.spotify h5{
+ text-align: center;
+font-weight: bold;
+background-color: mediumseagreen;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+
+.youtube {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.youtube h5{
+ text-align: center;
+font-weight: bold;
+background-color: red;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+
+.audio {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.audio h5{
+ text-align: center;
+font-weight: bold;
+background-color: dodgerblue;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+
+.escribir {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.escribir h5{
+ text-align: center;
+font-weight: bold;
+background-color: slateblue;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+
+.tick {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.tick h5{
+ text-align: center;
+font-weight: bold;
+background-color: pink;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+
+.cronometro {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.cronometro h5{
+ text-align: center;
+font-weight: bold;
+background-color: magenta;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
+}
+.registro {
+  /*background-color: lightblue;;*/
+    margin: 5px;
+   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 96px;
+    width: 96px;
+  border-radius: 8px;
+
+}
+.registro h5{
+ text-align: center;
+font-weight: bold;
+background-color: orange;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin-top:0;
 }

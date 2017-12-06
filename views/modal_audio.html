@@ -4,19 +4,28 @@
             <h3 class="modal-title" id="modal-title">Audio</h3>
         </div>
         <div class="modal-body" id="modal-body">
-        <SPAN>nombre:</SPAN>
-        <input type="text"  ng-model="nombre"  pattern="[a-z]{4,8}" size="10"/>
-                 <form>
-                     <input type="file" ng-file-select="onFileSelect($files)" >
+
+<form>
+      <SPAN>referencia:</SPAN>
+
+      <input type="text"  ng-model="nombre"  pattern="[a-z]{4,8}" size="10"/>
+
+
  <!--  <input type="file" ng-file-select="onFileSelect($files)" multiple> -->
                 </form>
-                <!-- <b>Preview:</b><br />
-                <i ng-hide="imageSrc">No image choosed</i>
-                <img class="imagenx" ng-src="{{imageSrc}}" alt="Sin Imagen"/><br/> -->
-                <b>Progress:</b>
-                <progress value="{{progress}}"></progress>
 
+<div class="row">
+    <div class="col-sm-6">
+   <b>Seleccionar Archivo</b><br />
+      <input type="file" ng-file-select="onFileSelect($files)" >
 
+         <button class="btn btn-primary" type="button" ng-show="path" ng-click="$ctrl.playAudioFile()">Play</button>
+
+                <b class="bg-danger" ng-show="error">Error: {{error}}</b><br />
+
+    </div>
+    <div class="col-sm-6">
+      <b>Grabar</b><br />
 <ng-audio-recorder id='audioInput' audio-model='recordedInputjj' show-player="true" >
   <!-- Start controls, exposed via recorder-->
   <div ng-if="recorder.isAvailable">
@@ -44,9 +53,21 @@
   </div>
   <!-- End controls-->
 </ng-audio-recorder>
-   <button ng-click="$ctrl.f1(recordedInputjj)"  >save</button>
+   <!-- <button ng-click="$ctrl.f1(recordedInputjj)"  >save</button> -->
    <!-- <button ng-click="$ctrl.ok()"  >f21</button> -->
 
+
+
+
+
+    </div>
+
+</div>
+
+                <!-- <i ng-hide="imageSrc">No image choosed</i>
+                <img class="imagenx" ng-src="{{imageSrc}}" alt="Sin Imagen"/><br/> -->
+                <b>Progress:</b>
+                <progress value="{{progress}}"></progress>
 
 
 
