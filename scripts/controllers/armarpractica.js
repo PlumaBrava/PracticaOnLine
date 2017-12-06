@@ -28,15 +28,15 @@ angular.module('practicaApp')
 
             // {type: "container", id: 1, duracion:0, columns: [[]], iconClass:"glyphicon glyphicon-object-align-vertical"},//Se ejecutan tareas en serie
             // {type: "bloque", id: 2, duracion:0, nombre:"nombre",columns: [[]],iconClass:"glyphicon glyphicon-object-align-horizontal"},         //Se ejecutan tareas en paralelo
-            {type: "spotify", id: 3,search: "track" , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:"fa fa-spotify " },        // Dipara musica de Spotify
-             {type: "youtube", id: 4,link:"",name:"jj",description:"",duracion:0,iconClass:"fa fa-youtube"}, // link a you tube
-            {type: "audio", id: 5, link:"",volumen:1,name:"",iconClass:"glyphicon glyphicon-music" },          // Reporduce audio
-            {type: "leer", id: 6, texto:"Texto de prueba",iconClass:"glyphicon glyphicon-bullhorn"},           // Lee un texto
-            {type: "escribir", id: 7, texto:"Texto en Pantalla",iconClass:"glyphicon glyphicon-pencil"},           // Escribe un texto en Pantalla
-            {type: "imagen", id: 8,link:"",name:"", iconClass:"glyphicon glyphicon-picture"  },                           // Muestra Imagen
-            {type: "tick", id: 9, intervalo_ms: 1000, volumen:1,duracion:6000,iconClass:"glyphicon glyphicon-bell"},       // activa el cuenta timpo
-            {type: "cronometro", id: 10, digital:true, analogico:true,iconClass:"glyphicon glyphicon-hourglass"},      // permite medir mi tiempo.
-            {type: "registro", id: 11,iconClass:"glyphicon glyphicon-glyphicon-picture" }        // permite tomar registo de tiempo o cantidades...
+            {type: "spotify", id: 3,search: "track" , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:" btn-success fa fa-spotify " },        // Dipara musica de Spotify
+             {type: "youtube", id: 4,link:"",name:"jj",description:"",duracion:0,iconClass:"btn-danger fa fa-youtube"}, // link a you tube
+            {type: "audio", id: 5, link:"",volumen:1,name:"",iconClass:"btn-warning glyphicon glyphicon-music" },          // Reporduce audio
+            {type: "leer", id: 6, texto:"Texto de prueba",iconClass:"btn-info glyphicon glyphicon-bullhorn"},           // Lee un texto
+            {type: "escribir", id: 7, texto:"Texto en Pantalla",iconClass:"btn-escribir glyphicon glyphicon-pencil"},           // Escribe un texto en Pantalla
+            {type: "imagen", id: 8,link:"",name:"", iconClass:"btn-imagen glyphicon glyphicon-picture"  },                           // Muestra Imagen
+            {type: "tick", id: 9, intervalo_ms: 1000, volumen:1,duracion:6000,iconClass:"btn-tick glyphicon glyphicon-bell"},       // activa el cuenta timpo
+            {type: "cronometro", id: 10, digital:true, analogico:true,iconClass:"btn-cronometro glyphicon glyphicon-hourglass"},      // permite medir mi tiempo.
+            {type: "registro", id: 11,iconClass:"btn-registro glyphicon glyphicon-glyphicon-picture" }        // permite tomar registo de tiempo o cantidades...
         ],
         propiedades:{nombre: "nombre de la practica",descripcion:"description", usuarioCreador: {},fechaCreacion:"",fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
         dropzones: {
@@ -554,12 +554,17 @@ $scope.openImagenModal = function (size, item) {
     });
 
     modalInstance.result.then(function (returnedItem) {
-
+    console.log("returnedItem");
+    console.log(returnedItem);
+        // item=returnedItem;
         item.link  = returnedItem.link;
         item.name  = returnedItem.name;
+        item.duracion  = returnedItem.duracion;
+        item.volumen  = returnedItem.volumen;
+        item.titulo  = returnedItem.titulo;
+        item.autor  = returnedItem.autor;
 
-
-    }, function () {
+       }, function () {
 
         console.log("return dismissed:");
 
@@ -767,38 +772,132 @@ console.log($ctrl );
 }])
 
 
-.controller('ModalInstanceYouTube',["$scope","$uibModalInstance","item", "subirarchivofb",'ngYoutubeEmbedService',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService) {
+.controller('ModalInstanceYouTube',["$scope","$uibModalInstance","item", "subirarchivofb",'ngYoutubeEmbedService','$http',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http) {
 
  console.log("ModalInstanceYouTube");
   var $ctrl = this;
 $scope.videoURL=item.link;
  $scope.name=item.name;
  $scope.okdisponible=false;
- $scope.link="https://www.youtube.com/watch?v=cKzK88y3o1Q";
+ $scope.link=item.link;
 
 
 this.select=function(){
- console.log("select" );
- console.log($scope );
- $scope.videoURL= $scope.link;
-//     $scope.scrYouTube=function() {
-//     return $sce.getTrustedResourceUrl("https://www.youtube.com/embed/"+$scope.link);
-//   };
-// console.log($scope.scrYouTube );
-$scope.okdisponible=true;
-     var player = ngYoutubeEmbedService.getPlayerById('myvideo'); // Returns the iframe player instance
-      console.log("Player");
-      console.log(ngYoutubeEmbedService);
-      console.log(player);
+    console.log("select" );
+
+
+    $scope.okdisponible=true;
+    var player = ngYoutubeEmbedService.getPlayerById("myvideo"); // Returns the iframe player instance
+    console.log("Player");
+    console.log($scope.videoURL);
+    console.log(ngYoutubeEmbedService);
+    console.log(player);
+    player.loadVideoById($scope.link);
+
+
 };
 
- $ctrl.itemq = {
+this.showVideoInfo = function() {
+    var player = ngYoutubeEmbedService.getPlayerById("myvideo");
+    console.log(player);
+      console.log(player.getDuration());
+    // console.log(player.showVideoInfo());
 
-    link : item.link,
-    name: item.name
-
+    console.log(player.getVideoData());
+    console.log(player.getVolume());
   };
 
+ $scope.stateChanged = function(e) {
+    console.log("stateChanged");
+    console.log(e);
+  };
+
+ // Gets fired when the iframe player has finished loading
+    $scope.playerReady = function(event) {
+        console.log("playerReady"); // Event data logged
+        console.log(event); // Event data logged
+    };
+
+    // Gets fired when the state of the iframe player changes
+    $scope.playerStateChanged = function(event) {
+        console.log("playerStateChanged"); // Event data logged
+        console.log(event); // Event data logged
+            console.log("player.getVideoData()");
+            var player1 = ngYoutubeEmbedService.getPlayerById("myvideo");
+    console.log(player1);
+    var videoData=player1.getVideoData();
+    console.log(videoData);
+        $scope.$apply(function () {
+        $scope.itemq = {
+
+         duracion:player1.getDuration(),
+            volumen:player1.getVolume(),
+            titulo:videoData.title,
+            autor:videoData.author
+        }});
+  };
+
+
+
+
+this.getVideoProperties=function(){
+
+var req = {
+        // method: 'put',
+        method: 'GET',
+        // url: 'https://api.spotify.com/v1/me/player/play&device_id=c565f68c8ac24d000809da8f41c839cf68003510',
+        url: 'https://www.googleapis.com/youtube/v3/videos?id=9bZkp7q19f0&part=contentDetails&key=AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk'
+        // headers: {
+        //   "Accept": "application/json",
+        //   "Content-Type": "application/json"
+        //     // "Accept-Encoding":"gzip, deflate, compress"
+        //   },
+        // data: {
+
+        // "id":"9bZkp7q19f0",
+        // "part": "contentDetails",
+        // "key":"AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk"
+        //  }
+      };
+
+      console.log("getVideoProperties http req");
+      $http(req).then(function (response) {
+        console.log('getVideoProperties Respuesta', response.data);
+        console.log(response);
+
+        // console.log("PlaySong name: "+song.name);
+        // console.log("PlaySong duration: "+song.duration_ms);
+
+        // setTimeout(function() {
+        // console.log('PlaySong  setTimeout: ' + song.duration_ms);
+        //     resolve({ value: "PlaySong tiempo cumplido", result:song.duration_ms});
+
+        // }, song.duration_ms);
+
+
+
+        }).catch( function (error) {
+          console.log('getVideoProperties http(req) an error occurred', error.data);
+          // reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
+      });
+
+
+//https://www.googleapis.com/youtube/v3/videos?id=9bZkp7q19f0&part=contentDetails&key=AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk;
+
+};
+
+// $ctrl.itemq=item;
+ $scope.itemq = {
+
+    link : item.link,
+    name: item.name,
+    duracion:item.duracion,
+    volumen:item.volumen,
+    titulo:item.titulo,
+    autor:item.autor
+  };
+console.log("itemq");
+console.log($scope.itemq );
  // Gets fired when the iframe player has finished loading
     $scope.playerReady = function(event) {
         console.log("playerReady"); // Event data logged
@@ -811,13 +910,25 @@ $scope.okdisponible=true;
 
   this.ok = function () {
      console.log("uibModalInstance.ok: " );
-     $ctrl.itemq = {
+
+      var player = ngYoutubeEmbedService.getPlayerById("myvideo");
+    console.log(player);
+      console.log(player.getDuration());
+    // console.log(player.showVideoInfo());
+
+    console.log();
+    console.log(player.getVolume())
+     $scope.itemq = {
 
     link : $scope.link,
-    name: $scope.name
+    name: $scope.name,
+    duracion:player.getDuration(),
+    volumen:player.getVolume(),
+    titulo:player.getVideoData().title,
+    autor:player.getVideoData().author
 
   };
-    $uibModalInstance.close($ctrl.itemq);
+    $uibModalInstance.close($scope.itemq);
   };
 
   $ctrl.cancel = function () {

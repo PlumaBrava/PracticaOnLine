@@ -1,4 +1,3 @@
-<p>This is the modal_youtube view.</p>
 <div  class="modal-demo">
 
         <div class="modal-header">
@@ -10,25 +9,36 @@
                  <form>         <SPAN>nombre</SPAN>
         <input type="text"  ng-model="name" />
 
-                    <SPAN>videoURL</SPAN>
+                    <SPAN>video ID </SPAN>
         <input type="text"  ng-model="link" />
          <button class="btn btn-primary" type="button" ng-click="$ctrl.select()">select</button>
+       <!--   <button class="btn btn-primary" type="button" ng-click="$ctrl.getVideoProperties()">Propiedades</button>
+         <button class="btn btn-primary" type="button" ng-click="$ctrl.showVideoInfo()">showVideoInfo</button> -->
 
                 </form>
-                <b>Preview: {{videoURL}}</b><br />
 
-<ng-youtube-embed
-    video="videoURL"
-    videoid="myvideo"
-    autoplay="true"
-    color="white"
-    disablekb="true"
-
-    >
+<div class="row">
+    <div class="col-sm-8">
+    <ng-youtube-embed
+        video="videoURL"
+        videoid="myvideo"
+        autoplay="true"
+        color="white"
+        disablekb="true"
+        enablejsapi="true"
+        onready="playerReady"
+        onstatechange="playerStateChanged"
+                >
     <!-- end="20" -->
-</ng-youtube-embed>
+    </ng-youtube-embed>
+    </div>
+    <div class="col-sm-4">
+          <SPAN><b>Titulo {{itemq.titulo}} </b>{{itemq.titulo}}</b></SPAN><br />
+          <SPAN><b>Autor </b>{{itemq.autor}}</b></SPAN><br />
+          <SPAN><b>Duracion </b>{{itemq.duracion}}</b></SPAN><br />
 
-
+    </div>
+</div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-show="okdisponible" ng-click="$ctrl.ok()">OK</button>

@@ -166,7 +166,7 @@
     text-overflow: ellipsis;
 }
 
-.leer h3{
+.leer h5{
  text-align: center;
 font-weight: bold;
 background-color: lightblue;
@@ -186,7 +186,7 @@ background-color: lightblue;
   border-radius: 8px;
 
 }
-.imagen h3{
+.imagen h5{
  text-align: center;
 font-weight: bold;
 background-color: lightblue;
@@ -248,7 +248,7 @@ margin-top:0;
 
 /* Mouse-over effects */
 .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
+    opacity: .5; /* Fully shown on mouse-over */
 }
 
 /* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */
@@ -272,14 +272,21 @@ margin-top:0;
         border-radius: 50%;
 }
 
+.CarrouselDiv{
+    width: 180px; /* Set a specific slider handle width */
+    height: 180px; /* Slider handle height */
+     margin: auto;
+}
 
 .itemIcon{
      width: 32px; /* Set a specific slider handle width */
     height: 32px; /* Slider handle height */
     border-radius: 5%;
-      background-color: red;
-      margin-left: 32px;
-       color: #fff;
+      /*background-color: red;*/
+      /*margin-left: 32px;*/
+      margin: auto;
+       /*color: #fff;*/
+       color: green;
     text-shadow: 1px 1px 1px #ccc;
     font-size: 1.5em;
 
@@ -295,4 +302,25 @@ margin-top:0;
     text-shadow: 1px 1px 1px #ccc;
     font-size: 1.5em;
 
+}
+
+.btn-imagen{
+  background: red;
+  margin: auto;
+}
+
+.btn-escribir{
+  background: brown;
+}
+
+.btn-tick{
+  background: pink;
+}
+
+.btn-cronometro{
+  background: magenta;
+}
+
+.btn-registro{
+  background: orange;
 }

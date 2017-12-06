@@ -1,21 +1,22 @@
 <div  class="modal-demo">
 
         <div class="modal-header">
-            <h3 class="modal-title" id="modal-title">Audio</h3>
+            <h3 class="modal-title" id="modal-title">Spotify</h3>
         </div>
-        <div class="modal-body" id="modal-body">
+
+<div class="modal-body" id="modal-body">
 
 
 <div class="row">
 <p>Buscar:</p>
 
-<div>
-<label class="radio-inline"><input type="radio" name="optradio" checked ng-model='mOption' value='MisListas' >Mis Listas</label>
-<label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Artista'>Artista</label>
-<label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Album'>Album</label>
-<label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Track'>Track</label>
-<label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='PlayList'>Play List</label>
-</div>
+    <div>
+    <label class="radio-inline"><input type="radio" name="optradio" checked ng-model='mOption' value='MisListas' >Mis Listas</label>
+    <label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Artista'>Artista</label>
+    <label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Album'>Album</label>
+    <label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='Track'>Track</label>
+    <label class="radio-inline"><input type="radio" name="optradio" ng-model='mOption' value='PlayList'>Play List</label>
+    </div>
 
 <input id="ex12"  type="text" ng-model="buscarTexto" ng-show="mOption!='MisListas'"/>
 
@@ -32,6 +33,7 @@
 
 
 <!--  -->
+<div class="CarrouselDiv">
 <div id="myCarousel" class="carousel slide row" data-ride="carousel" ng-show="$ctrl.items" data-interval="false" >
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -72,7 +74,7 @@
     <span class="glyphicon glyphicon-chevron-right"></span>
     <span class="sr-only">Next</span>
   </a>
-
+</div>
 </div>
 <!-- ///// tabla de tracks -->
  <h3  ng-show="$ctrl.tracks" >tracks {{$ctrl.tracks.length}} Duracion {{$ctrl.msToDHMSMS( $ctrl.tracks.duracionTotal_ms)}} </h3 >

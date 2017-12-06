@@ -106,7 +106,7 @@
 <!-- Template for a normal Imagem -->
 <script type="text/ng-template" id="imagen.html">
     <div class="imagen" ng-click="openImagenModal('lg',  item)">
-        <h3>Imagen</h3>
+        <h5>Imagen</h3>
 
                     <img class="imagenx " ng-src="{{item.link}}" alt="Seleccione Imagen" />
 <!--                     <p ng-hide="item.name==''">{{item.name}}</p> -->
@@ -134,26 +134,18 @@
         <h3>youtube</h3>
 
                     <!-- <img class="imagenx " ng-src="{{item.link}}" alt="Seleccione link" /> -->
-<!--                     <p ng-hide="item.name==''">{{item.name}}</p> -->
-<!-- <ng-youtube-embed
-    video="{{item.link}}"
-    videoid="myvideo"
-    autoplay="false"
-    color="white"
-    disablekb="true"
-    end="0"
-    > -->
+                    <p ng-hide="item.name==''">{{item.name}}</p>
         <div>
 
 
         <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
+         uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
         </div>
         <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
+         uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
         </div>
         <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
+         uib-popover={{item.titulo}} popover-trigger="'mouseenter'">
         </div>
         </div>
 
@@ -163,8 +155,11 @@
 
 <script type="text/ng-template" id="leer.html">
     <div class="leer" ng-click="open('sm', 'false', item)">
-        <h3>Leer </h3>
-        <div class="itemIcon {{item.iconClass}}"></div>
+        <h5>Leer </h5>
+        <!-- <div class="itemIcon btn  btn-lg {{item.iconClass}}"></div> -->
+ <button type="button" class="btn btn-primary {{item.iconClass}} center-block" > </button>
+
+
 <div>
         <div class="iteminfo glyphicon glyphicon-time"
          uib-popover={{item.texto}} popover-trigger="'mouseenter'">
@@ -200,12 +195,13 @@
 </script>
 
 
-<!-- Template for a normal list item -->
+<!-- Template for a audio item -->
 <script type="text/ng-template" id="audio.html">
     <div class="leer" ng-click="openAudioModal('lg',  item)">
    <h3>Audio</h3>
 
-    <p class="texto"><b>name:</b>{{item.name}} </p>
+    <!-- <p class="texto"><b>name:</b>{{item.name}} </p> -->
+ <button type="button" class="btn btn-primary {{item.iconClass}} center-block" > </button>
 
 <div>
         <div class="iteminfo glyphicon glyphicon-time"
@@ -221,7 +217,7 @@
 </div>
 </script>
 
-<!-- Template for a normal list item -->
+<!-- Template for Spotify item -->
 <script type="text/ng-template" id="spotify.html">
     <div class="leer" ng-click="openSpotifyModal('lg',  item)">
    <h3>Spotify</h3>
@@ -326,7 +322,7 @@
                   uib-popover={{item.type}} popover-trigger="'mouseenter'"
                   class="btn-group"
                 >
-                <button type="button" class="btn btn-primary btn-lg {{item.iconClass}}" disabled="disabled"> </button>
+                <button type="button" class="btn  btn-lg {{item.iconClass}}" disabled="disabled"> </button>
 
 
             </li>
