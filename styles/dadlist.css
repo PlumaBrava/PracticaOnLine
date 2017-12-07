@@ -140,61 +140,6 @@
 
 }
 
-.leer{
-  margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /*margin-bottom: 10px;*/
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
-}
-
-
-
-.leer p{
-    /*background-color: green;*/
-    /*margin: 5px;*/
- text-align: justify;
- width: 100%;
- max-height: 68px;
-  padding: 0px 0px 0px 5px;
-     font-size:small;
-      overflow:hidden;
-    white-space:nowrap;
-    text-overflow: ellipsis;
-}
-
-.leer h5{
- text-align: center;
-font-weight: bold;
-background-color:  tomato;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
-}
-
-.imagen {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
-}
-.imagen h5{
- text-align: center;
-font-weight: bold;
-background-color: slateblue;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
-}
-
 .imagenx{
     height: 48px;
     width: 48px;
@@ -207,13 +152,7 @@ margin-top:0;
 
 
 }
-.imagen p{
 
- text-align: center;
- width: 100%;
-  /*padding: 0px 2px 2px;*/
-  font:status-bar;
-}
 
 
 /*****************************  Modal Spotify *************************/
@@ -293,26 +232,64 @@ margin-top:0;
 }
 
 .itemInformation{
-     width: 8px; /* Set a specific slider handle width */
-    height: 8px; /* Slider handle height */
+     width: 90%;  /*Set a specific slider handle width */
+    /*height: 8px;*/ /* Slider handle height */
     border-radius: 5%;
-      background-color: red;
-      margin-left: 32px;
-       color: #fff;
-    text-shadow: 1px 1px 1px #ccc;
-    font-size: 1.5em;
+      background-color: transparent;
+       /*margin: 8px;*/
+      margin:0 auto;
+     /*  color: #fff;
+    text-shadow: 1px 1px 1px #ccc*/;
+    /*font-size: 1.5em;*/
+
+  /*display: inline-block;*/
+/*FlexBox*/
 
 }
+.itemInfo1 {
+  width: 25%;
+   /*float:left;*/
+   /*width:24px;*/
+height:24px;
+     /*margin:0 auto;*/
+   /*background-color: blue;*/
+   display: inline-block;
+ margin:2px;
+    /*border: 3px solid #73AD21;*/
+}
 
+/*--------------------------------------------------*/
+/* Estas clases se usa para la lista de herramientas*/
+/*--------------------------------------------------*/
+
+.btn-size{      /*Se usa para determinar el tamaño de los iconos de Spotify y youTube*/
+   width:40px;
+  height:40px;
+  padding: 0px;
+  margin: 0px;
+}
 
 .btn-spotify{
-  background:mediumseagreen;
+  background:#1EA62A;
+  border-color: #1EA62A;
+}
+
+
+.toolbox .btn-spotify{   /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
+  padding: 0px;
   margin: auto;
 }
 
-.btn-youtube{
-  background: red;
+.toolbox .btn-youtube{ /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
+  padding: 0px;
   margin: auto;
+}
+.btn-youtube{           /*Las clases btn-xxxx se colocan el apramarpractiva.js para que se puedan modificar segun el caso*/
+  background: #FF790BE7;
+  border-color: #FF790BE7;
+  margin: auto;
+   width:48px;
+  height:48px;
 }
 
 .btn-imagen{
@@ -346,141 +323,101 @@ margin-top:0;
   background: orange;
 }
 
-.spotify {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/*--------------------------------------------------------*/
+/*-------------Templates de la dropzone-------------------*/
+/*--------------------------------------------------------*/
 
-    height: 96px;
-    width: 96px;
+.btnItem{
+  margin: auto;
+  padding: 0px;
+
+}
+
+/*Cada Template tiene su clase que determina el tamaño y color general*/
+.spotify , .youtube, .audio, .leer, .escribir, .imagen, .tick, .cronometro, .registro {
+
+  margin: 5px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: 96px;
+  width: 96px;
   border-radius: 8px;
 
 }
-.spotify h5{
- text-align: center;
+/*Cada Template tiene su titlo en un h5 que determina el tamaño y posiciones generales */
+.spotify h5, .youtube h5, .audio h5, .leer h5, .escribir h5, .imagen h5, .tick h5, .cronometro h5, .registro h5 {
+
+text-align: center;
 font-weight: bold;
-background-color: mediumseagreen;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+margin-top:0;
 }
 
-.youtube {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/* Aqui van las caracteristicas particulares */
 
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
+.spotify img, .youtube img {        /*Tamaño de la imagen interior*/
+  width:48px;
+  height:48px;
 
 }
-.youtube h5{
- text-align: center;
-font-weight: bold;
-background-color: red;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
+
+.spotify h5{                    /*Color del titulo*/
+background-color: #1ED760;
 }
 
-.audio {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
+.youtube h5{                    /*Color del titulo*/
+background-color: #E42B26;
 }
-.audio h5{
- text-align: center;
-font-weight: bold;
+
+.audio h5{                      /*Color del titulo*/
 background-color: dodgerblue;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
 }
 
-.escribir {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
-}
-.escribir h5{
- text-align: center;
-font-weight: bold;
-background-color: slateblue;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
+.leer h5{                      /*Color del titulo*/
+background-color: tomato;
 }
 
-.tick {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
+.escribir h5{                   /*Color del titulo*/
+background-color: brown;
 }
-.tick h5{
- text-align: center;
-font-weight: bold;
+
+.tick h5{                       /*Color del titulo*/
 background-color: pink;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
 }
 
-.cronometro {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
-}
-.cronometro h5{
- text-align: center;
-font-weight: bold;
+.cronometro h5{                 /*Color del titulo*/
 background-color: magenta;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
 }
-.registro {
-  /*background-color: lightblue;;*/
-    margin: 5px;
-   background-color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-    height: 96px;
-    width: 96px;
-  border-radius: 8px;
-
-}
-.registro h5{
- text-align: center;
-font-weight: bold;
+.registro h5{                   /*Color del titulo*/
 background-color: orange;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  margin-top:0;
+}
+
+.spotify button, .youtube button{   /*Color del Boton*/
+  background-color: transparent;
+}
+
+.audio button{                      /*Color del Boton*/
+background-color: dodgerblue;
+}
+
+.leer button{                      /*Color del Boton*/
+background-color: tomato;
+}
+
+.escribir button{                  /*Color del Boton*/
+background-color: brown;
+}
+
+.tick button{                      /*Color del Boton*/
+background-color: pink;
+}
+
+.cronometro button{                 /*Color del Boton*/
+background-color: magenta;
+}
+
+.registro button{                   /*Color del Boton*/
+background-color: orange;
 }

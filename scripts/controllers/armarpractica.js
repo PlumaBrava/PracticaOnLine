@@ -8,9 +8,9 @@
  * Controller of the practicaApp
  */
 angular.module('practicaApp')
-   .controller("ArmarpracticaCtrl", ['$scope','comandos','$uibModal','fb',function($scope,comandos,$uibModal,fb) {
-   // .controller("ArmarpracticaCtrl", ['$scope','$uibModal','fb',function($scope,$uibModal,fb) {
-    console.log("ArmarpracticaCtrl");
+   .controller('ArmarpracticaCtrl', ['$scope','comandos','$uibModal','fb',function($scope,comandos,$uibModal,fb) {
+   // .controller('ArmarpracticaCtrl', ['$scope','$uibModal','fb',function($scope,$uibModal,fb) {
+    console.log('ArmarpracticaCtrl');
 
 
     var self=this;
@@ -20,141 +20,140 @@ angular.module('practicaApp')
 
         templatesConetendores: [
 
-            {type: "container", id: 1, duracion:0, nombre:"nombre",columns: [[]], iconClass:"glyphicon glyphicon-object-align-vertical"},//Se ejecutan tareas en serie
-            {type: "bloque", id: 2, duracion:0, nombre:"nombre",columns: [[]],iconClass:"glyphicon glyphicon-object-align-horizontal"},         //Se ejecutan tareas en paralelo
+            {type: 'container', id: 1, duracion:0, nombre:'nombre',columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical'},//Se ejecutan tareas en serie
+            {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
 
         ],
         templates: [
 
-            // {type: "container", id: 1, duracion:0, columns: [[]], iconClass:"glyphicon glyphicon-object-align-vertical"},//Se ejecutan tareas en serie
-            // {type: "bloque", id: 2, duracion:0, nombre:"nombre",columns: [[]],iconClass:"glyphicon glyphicon-object-align-horizontal"},         //Se ejecutan tareas en paralelo
-            {type: "spotify", id: 3,search: "track" , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:" btn-spotify fa fa-spotify " },        // Dipara musica de Spotify
-             {type: "youtube", id: 4,link:"",name:"jj",description:"",duracion:0,iconClass:"btn-youtube fa fa-youtube"}, // link a you tube
-            {type: "audio", id: 5, link:"",volumen:1,name:"",iconClass:"btn-audio glyphicon glyphicon-music" },          // Reporduce audio
-            {type: "leer", id: 6, texto:"Texto de prueba",iconClass:"btn-leer glyphicon glyphicon-bullhorn"},           // Lee un texto
-            {type: "escribir", id: 7, texto:"Texto en Pantalla",iconClass:"btn-escribir glyphicon glyphicon-pencil"},           // Escribe un texto en Pantalla
-            {type: "imagen", id: 8,link:"",name:"", iconClass:"btn-imagen glyphicon glyphicon-picture"  },                           // Muestra Imagen
-            {type: "tick", id: 9, intervalo_ms: 1000, volumen:1,duracion:6000,iconClass:"btn-tick glyphicon glyphicon-bell"},       // activa el cuenta timpo
-            {type: "cronometro", id: 10, digital:true, analogico:true,iconClass:"btn-cronometro glyphicon glyphicon-hourglass"},      // permite medir mi tiempo.
-            {type: "registro", id: 11,iconClass:"btn-registro glyphicon glyphicon-registration-mark" }        // permite tomar registo de tiempo o cantidades...
+            // {type: 'container', id: 1, duracion:0, columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical'},//Se ejecutan tareas en serie
+            // {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
+            {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' },        // Dipara musica de Spotify
+             {type: 'youtube', id: 4,link:'',name:'jj',description:'',duracion:0,iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
+            {type: 'audio', id: 5, link:'',volumen:1,name:'',iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
+            {type: 'leer', id: 6, texto:'Texto de prueba',iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
+            {type: 'escribir', id: 7, texto:'Texto en Pantalla',iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
+            {type: 'imagen', id: 8,link:'',name:'', iconClass:'btn-imagen glyphicon glyphicon-picture'  },                           // Muestra Imagen
+            {type: 'tick', id: 9, intervaloMs: 1000, volumen:1,duracion:6000,iconClass:'btn-tick glyphicon glyphicon-bell'},       // activa el cuenta timpo
+            {type: 'cronometro', id: 10, digital:true, analogico:true,iconClass:'btn-cronometro glyphicon glyphicon-hourglass'},      // permite medir mi tiempo.
+            {type: 'registro', id: 11,iconClass:'btn-registro glyphicon glyphicon-registration-mark' }        // permite tomar registo de tiempo o cantidades...
         ],
-        propiedades:{nombre: "nombre de la practica",descripcion:"description", usuarioCreador: {},fechaCreacion:"",fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
+        propiedades:{nombre: 'nombre de la practica',descripcion:'description', usuarioCreador: {},fechaCreacion:'',fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
         dropzones: {
-            "A": [
+            'A': [
                 {
-                    "type": "container",
-                    "id": 1,
-                    "columns": [
+                    'type': 'container',
+                    'id': 1,
+                    'columns': [
                         [
                             {
-                                "type": "item",
-                                "id": "1"
+                                'type': 'item',
+                                'id': '1'
                             },
                             {
-                                "type": "item",
-                                "id": "2"
+                                'type': 'item',
+                                'id': '2'
                             }
                         ],
                         [
                             {
-                                "type": "item",
-                                "id": "3"
+                                'type': 'item',
+                                'id': '3'
                             }
                         ]
                     ]
                 },
                 {
-                    "type": "item",
-                    "id": "4"
+                    'type': 'item',
+                    'id': '4'
                 },
                 {
-                    "type": "item",
-                    "id": "5"
+                    'type': 'item',
+                    'id': '5'
                 },
                 {
-                    "type": "item",
-                    "id": "6"
+                    'type': 'item',
+                    'id': '6'
                 }
-            ]
-            ,
-            "B": [
+            ]  ,
+            'B': [
                 {
-                    "type": "item",
-                    "id": 7
+                    'type': 'item',
+                    'id': 7
                 }]
 
 
                 // ,
             //     {
-            //         "type": "item",
-            //         "id": "8"
+            //         'type': 'item',
+            //         'id': '8'
             //     },
             //     {
-            //         "type": "container",
-            //         "id": "2",
-            //         "columns": [
+            //         'type': 'container',
+            //         'id': '2',
+            //         'columns': [
             //             [
             //                 {
-            //                     "type": "item",
-            //                     "id": "9"
+            //                     'type': 'item',
+            //                     'id': '9'
             //                 },
             //                 {
-            //                     "type": "item",
-            //                     "id": "10"
+            //                     'type': 'item',
+            //                     'id': '10'
             //                 },
             //                 {
-            //                     "type": "item",
-            //                     "id": "11"
+            //                     'type': 'item',
+            //                     'id': '11'
             //                 }
             //             ],
             //             [
             //                 {
-            //                     "type": "item",
-            //                     "id": "12"
+            //                     'type': 'item',
+            //                     'id': '12'
             //                 },
             //                 {
-            //                     "type": "container",
-            //                     "id": "3",
-            //                     "columns": [
+            //                     'type': 'container',
+            //                     'id': '3',
+            //                     'columns': [
             //                         [
             //                             {
-            //                                 "type": "item",
-            //                                 "id": "13"
+            //                                 'type': 'item',
+            //                                 'id': '13'
             //                             }
             //                         ],
             //                         [
             //                             {
-            //                                 "type": "item",
-            //                                 "id": "14"
+            //                                 'type': 'item',
+            //                                 'id': '14'
             //                             }
             //                         ]
             //                     ]
             //                 },
             //                 {
-            //                     "type": "item",
-            //                     "id": "15"
+            //                     'type': 'item',
+            //                     'id': '15'
             //                 },
             //                 {
-            //                     "type": "item",
-            //                     "id": "16"
+            //                     'type': 'item',
+            //                     'id': '16'
             //                 }
             //             ]
             //         ]
             //     },
             //     {
-            //         "type": "item",
-            //         "id": 16
+            //         'type': 'item',
+            //         'id': 16
             //     }
             // ],
 
-            // "c": [
+            // 'c': [
             //     {
-            //         "type": "item",
-            //         "id": 7
+            //         'type': 'item',
+            //         'id': 7
             //     },
             //     {
-            //         "type": "item",
-            //         "id": "8"
+            //         'type': 'item',
+            //         'id': '8'
             //     }
             //     ]
         }
@@ -177,23 +176,23 @@ var objInterno=null;
 // igualar las estructuras de datos.
 
 switch(obj.type){
-    case "container":
-          console.log("Container nivel:" +level+" - duracion container: "+ obj.duracion);
+    case 'container':
+          console.log('Container nivel:' +level+' - duracion container: '+ obj.duracion);
           objInterno=obj.columns[0];
           break;
 
-          case "bloque":
-          console.log("Bloque nivel:" +level+" - duracion bloque: "+ obj.duracion);
+          case 'bloque':
+          console.log('Bloque nivel:' +level+' - duracion bloque: '+ obj.duracion);
           objInterno=obj.columns[0];
           break;
 
           default:
-          console.log("default:" +level+" - duracion default: "+ obj.duracion);
+          console.log('default:' +level+' - duracion default: '+ obj.duracion);
           objInterno=obj;
 
-};
+}
 
-          console.log("objInterno:");
+          console.log('objInterno:');
           console.log(objInterno);
 
 // recorro el objeto y calculo la duración del bloque y del container.
@@ -201,11 +200,11 @@ switch(obj.type){
 
 
     for (var i=0;i<objInterno.length;i++){
-      console.log("i :"+i);
+      console.log('i :'+i);
       console.log(objInterno[i].type);
          switch (objInterno[i].type){
-          case "item":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'item':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
@@ -213,8 +212,8 @@ switch(obj.type){
 
           break;
 
-          case "container":
-          console.log("level:" +level+" " +objInterno[i].type +" - duracion: "+ objInterno[i].duracion);
+          case 'container':
+          console.log('level:' +level+' ' +objInterno[i].type +' - duracion: '+ objInterno[i].duracion);
           objInterno[i]=self.calculoDeDuracion(objInterno[i],++level);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
@@ -222,8 +221,8 @@ switch(obj.type){
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "bloque":
-          console.log("level:" +level+" " +objInterno[i].type +" - duracion: "+ objInterno[i].duracion);
+          case 'bloque':
+          console.log('level:' +level+' ' +objInterno[i].type +' - duracion: '+ objInterno[i].duracion);
           objInterno[i]=self.calculoDeDuracion(objInterno[i],++level);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
@@ -231,84 +230,84 @@ switch(obj.type){
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "spotify":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'spotify':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "audio":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'audio':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "leer":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'leer':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "imagen":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'imagen':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "tick":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'tick':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "cronometro":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'cronometro':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
-          case "registro":
-          console.log("level:" +level +" " +objInterno[i].type+" - duracion: "+" :"+ objInterno[i].duracion);
+          case 'registro':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
             duracionBloque=objInterno[i].duracion;
           }
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
-          };// fin switch
-    };//fin for
+          }// fin switch
+    }//fin for
 
 console.log(obj.type);
   obj.duracion=duracionContainer;
 switch(obj.type){
-    case "container":
+    case 'container':
           obj.duracion=duracionContainer;
-          console.log("level:" +level+" " +obj.type +" - duracion container: "+ obj.duracion);
+          console.log('level:' +level+' ' +obj.type +' - duracion container: '+ obj.duracion);
 
           break;
 
-          case "bloque":
+          case 'bloque':
           obj.duracion=duracionBloque;
-          console.log("level:" +level+" " +obj.type +" - duracion container: "+ obj.duracion);
+          console.log('level:' +level+' ' +obj.type +' - duracion container: '+ obj.duracion);
             break;
 
-};
+}
 
 
 // retorno el objeto completo para que con la recursividad se ajusten todas las duraciones.
 
-console.log("retorno:");
+console.log('retorno:');
 console.log(obj);
 return obj;
 
@@ -318,17 +317,17 @@ return obj;
 
 
 var load=function(){
-    console.log("load");
+    console.log('load');
       console.log(comandos.getModelAsJason());
 if (!comandos.getModelAsJason()){
-    console.log("load undefined");
+    console.log('load undefined');
 
 }
     else{
-    console.log("load no null");
+    console.log('load no null');
     console.log(comandos.getModelAsJason);
     $scope.models.dropzones=    angular.fromJson(comandos.getModelAsJason());
-};
+}
 };
 
 
@@ -339,8 +338,8 @@ load();
     }, true);
 
 $scope.save=function(){
-    console.log("save");
-    console.log("save: "+fb.getUserKey());
+    console.log('save');
+    console.log('save: '+fb.getUserKey());
     comandos.setModelAsJason($scope.modelAsJson);
     fb.writePractica(fb.getUserKey(), $scope.modelAsJson, $scope.models.propiedades);
 };
@@ -356,14 +355,14 @@ $scope.save=function(){
   $scope.dragoverCallback = function(index, external, type, callback) {
         $scope.logListEvent('dragged over', index, external, type);
         // Invoke callback to origin for container types.
-        if (type == 'container' && !external) {
+        if (type === 'container' && !external) {
             console.log('Container being dragged contains ' + callback() + ' items');
         }
         return index < 10; // Disallow dropping in the third row.
     };
 
     $scope.dropCallback = function(event,index, item, external, type,list) {
-      console.log("CallbackBloqueRaiz");
+      console.log('CallbackBloqueRaiz');
       $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
         $scope.logListEvent('dropped at', index, external, type);
         // Return false here to cancel drop. Return true if you insert the item yourself.
@@ -377,7 +376,7 @@ $scope.save=function(){
     };
 
      $scope.dropCallbackBloque = function(event,index, item, external, type) {
-               console.log("CallbackBloque");
+               console.log('CallbackBloque');
         $scope.logListEvent('dropped at', index, external, type);
         // Return false here to cancel drop. Return true if you insert the item yourself.
           console.log(event);
@@ -400,7 +399,7 @@ $scope.save=function(){
 
 
     $scope.onDragstart = function(list, event) {
-        console.log("onDragstart");
+        console.log('onDragstart');
         console.log(list);
         console.log(event);
        // list.dragging = true;
@@ -414,7 +413,7 @@ $scope.save=function(){
 
  $scope.open = function (size, parentSelector,item) {
 
-    var parentElem = undefined;
+    var parentElem = null;
     // var parentElem = parentSelector ?
     //   angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
     var modalInstance = $uibModal.open({
@@ -440,7 +439,7 @@ $scope.save=function(){
     modalInstance.result.then(function (returnedItem) {
 
 
-        console.log("return:"+returnedItem);
+        console.log('return:'+returnedItem);
         console.log(returnedItem);
         console.log(item);
 
@@ -448,14 +447,14 @@ $scope.save=function(){
 
     }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
 
 $scope.openTickModal = function (size, item) {
 
-    var parentElem = undefined;
+    var parentElem = null;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -478,27 +477,27 @@ $scope.openTickModal = function (size, item) {
     modalInstance.result.then(function (returnedItem) {
 
 
-        console.log("return:"+returnedItem);
+        console.log('return:'+returnedItem);
         console.log(returnedItem);
         console.log(item);
 
 
         // item.texto=returnedItem;
-        item.intervalo_ms = returnedItem.intervalo_ms,
-        item.volumen = returnedItem.volumen,
+        item.intervaloMs = returnedItem.intervaloMs;
+        item.volumen = returnedItem.volumen;
         item.duracion = Number(returnedItem.duracion);
         $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
 
     }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
 
 $scope.openImagenModal = function (size, item) {
 
-    var parentElem = undefined;
+    var parentElem = null;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -526,14 +525,14 @@ $scope.openImagenModal = function (size, item) {
 
     }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
 
     });
   };
 
   $scope.openYoutubeModal = function (size, item) {
 
-    var parentElem = undefined;
+    var parentElem =null;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -554,7 +553,7 @@ $scope.openImagenModal = function (size, item) {
     });
 
     modalInstance.result.then(function (returnedItem) {
-    console.log("returnedItem");
+    console.log('returnedItem');
     console.log(returnedItem);
         // item=returnedItem;
         item.link  = returnedItem.link;
@@ -566,14 +565,14 @@ $scope.openImagenModal = function (size, item) {
 
        }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
 
     });
   };
 
 $scope.openAudioModal = function (size, item) {
 
-    var parentElem = undefined;
+    var parentElem = null;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -596,20 +595,20 @@ $scope.openAudioModal = function (size, item) {
     modalInstance.result.then(function (returnedItem) {
 
 
-        console.log("return:"+returnedItem);
+        console.log('return:'+returnedItem);
         console.log(returnedItem);
         console.log(item);
 
 
         // item.texto=returnedItem;
-        item.link = returnedItem.link,
-        item.name = returnedItem.name
-        item.duracion = returnedItem.duracion
+        item.link = returnedItem.link;
+        item.name = returnedItem.name;
+        item.duracion = returnedItem.duracion;
 
 
     }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
@@ -618,7 +617,7 @@ $scope.openAudioModal = function (size, item) {
 
 $scope.openSpotifyModal = function (size, item) {
 
-    var parentElem = undefined;
+    var parentElem = null;
 
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
@@ -641,15 +640,15 @@ $scope.openSpotifyModal = function (size, item) {
     modalInstance.result.then(function (returnedItem) {
 
 
-        console.log("return:"+returnedItem);
+        console.log('return:'+returnedItem);
         console.log(returnedItem);
         console.log(item);
 
 
 
-        item.link = returnedItem.link,
-        item.name = returnedItem.name
-        item.duracion = returnedItem.duracion
+        item.link = returnedItem.link;
+        item.name = returnedItem.name;
+        item.duracion = returnedItem.duracion;
         item.numeroTracks=returnedItem.duracion;
         item.tracks=returnedItem.tracks;
         item.volumen=returnedItem.volumen;
@@ -657,7 +656,7 @@ $scope.openSpotifyModal = function (size, item) {
 
     }, function () {
 
-        console.log("return dismissed:");
+        console.log('return dismissed:');
       // $log.info('Modal dismissed at: ' + new Date());
     });
   };
@@ -671,48 +670,48 @@ $scope.openSpotifyModal = function (size, item) {
   $ctrl.selected = {
     item: $ctrl.items[0]
   };
-console.log("$uibModalInstance" );
+console.log('$uibModalInstance' );
 console.log(items );
 console.log($uibModalInstance );
 console.log($ctrl );
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
     $uibModalInstance.close($ctrl.itemq);
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
   };
 })
 .controller('ModalInstanceTick', function ($uibModalInstance,  item) {
   var $ctrl = this;
-     // {type: "tick", id: 8, intervalo_ms: 1000, volumen:1,duracion:6000},       // activa el cuenta timpo
+     // {type: 'tick', id: 8, intervaloMs: 1000, volumen:1,duracion:6000},       // activa el cuenta timpo
 
   $ctrl.itemq = {
 
-    intervalo_ms : item.intervalo_ms,
+    intervaloMs : item.intervaloMs,
     volumen : item.volumen,
     duracion : item.duracion
   };
-console.log("$uibModalInstance" );
+console.log('$uibModalInstance' );
 console.log(item );
 console.log($uibModalInstance );
 console.log($ctrl );
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
     $uibModalInstance.close($ctrl.itemq);
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
-  }
+  };
 })
 
-  .controller('ModalInstanceImagen',["$scope","$uibModalInstance","item", "subirarchivofb", function ($scope, $uibModalInstance,  item,subirArchivoFb) {
+  .controller('ModalInstanceImagen',['$scope','$uibModalInstance','item', 'subirarchivofb', function ($scope, $uibModalInstance,  item,subirArchivoFb) {
 
- console.log("ModalInstanceImagen");
+ console.log('ModalInstanceImagen');
   var $ctrl = this;
  $scope.imageSrc=item.link;
  $scope.name=item.name;
@@ -730,11 +729,11 @@ console.log($ctrl );
 
           // subirUrl:   $scope.file: archivo (nombre y datos con los que se guardara)
           //             $scople donde se expone el avance
-          //             el path firebase sera.  "imagen"/userKey/fileName.
+          //             el path firebase sera.  'imagen'/userKey/fileName.
 
-        subirArchivoFb.subirUrl($scope.file, $scope,"imagen")
+        subirArchivoFb.subirUrl($scope.file, $scope,'imagen')
                       .then(function(result) {
-                        console.log("result Imagen");
+                        console.log('result Imagen');
                         console.log(result);
                           $scope.imageSrc = result.downloadURL;
                           $ctrl.itemq = {
@@ -743,12 +742,12 @@ console.log($ctrl );
                               };
                           $scope.okdisponible=true;
                       },function(result) {
-                      console.log("error Imagen");
+                      console.log('error Imagen');
                       console.log(result);
                       });
     };
 
-    $scope.$on("fileProgress", function(e, progress) {
+    $scope.$on('fileProgress', function(e, progress) {
 
         $scope.progress = progress.loaded / progress.total;
 
@@ -756,12 +755,12 @@ console.log($ctrl );
 
 
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
     $uibModalInstance.close($ctrl.itemq);
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
   };
 
@@ -772,9 +771,9 @@ console.log($ctrl );
 }])
 
 
-.controller('ModalInstanceYouTube',["$scope","$uibModalInstance","item", "subirarchivofb",'ngYoutubeEmbedService','$http',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http) {
+.controller('ModalInstanceYouTube',['$scope','$uibModalInstance','item', 'subirarchivofb','ngYoutubeEmbedService','$http',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http) {
 
- console.log("ModalInstanceYouTube");
+ console.log('ModalInstanceYouTube');
   var $ctrl = this;
 $scope.videoURL=item.link;
  $scope.name=item.name;
@@ -783,12 +782,12 @@ $scope.videoURL=item.link;
 
 
 this.select=function(){
-    console.log("select" );
+    console.log('select' );
 
 
     $scope.okdisponible=true;
     var player = ngYoutubeEmbedService.getPlayerById("myvideo"); // Returns the iframe player instance
-    console.log("Player");
+    console.log('Player');
     console.log($scope.videoURL);
     console.log(ngYoutubeEmbedService);
     console.log(player);
@@ -798,7 +797,7 @@ this.select=function(){
 };
 
 this.showVideoInfo = function() {
-    var player = ngYoutubeEmbedService.getPlayerById("myvideo");
+    var player = ngYoutubeEmbedService.getPlayerById('myvideo');
     console.log(player);
       console.log(player.getDuration());
     // console.log(player.showVideoInfo());
@@ -808,21 +807,21 @@ this.showVideoInfo = function() {
   };
 
  $scope.stateChanged = function(e) {
-    console.log("stateChanged");
+    console.log('stateChanged');
     console.log(e);
   };
 
  // Gets fired when the iframe player has finished loading
     $scope.playerReady = function(event) {
-        console.log("playerReady"); // Event data logged
+        console.log('playerReady'); // Event data logged
         console.log(event); // Event data logged
     };
 
     // Gets fired when the state of the iframe player changes
     $scope.playerStateChanged = function(event) {
-        console.log("playerStateChanged"); // Event data logged
+        console.log('playerStateChanged'); // Event data logged
         console.log(event); // Event data logged
-            console.log("player.getVideoData()");
+            console.log('player.getVideoData()');
             var player1 = ngYoutubeEmbedService.getPlayerById("myvideo");
     console.log(player1);
     var videoData=player1.getVideoData();
@@ -834,7 +833,8 @@ this.showVideoInfo = function() {
             volumen:player1.getVolume(),
             titulo:videoData.title,
             autor:videoData.author
-        }});
+        };
+    });
   };
 
 
@@ -848,37 +848,37 @@ var req = {
         // url: 'https://api.spotify.com/v1/me/player/play&device_id=c565f68c8ac24d000809da8f41c839cf68003510',
         url: 'https://www.googleapis.com/youtube/v3/videos?id=9bZkp7q19f0&part=contentDetails&key=AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk'
         // headers: {
-        //   "Accept": "application/json",
-        //   "Content-Type": "application/json"
-        //     // "Accept-Encoding":"gzip, deflate, compress"
+        //   'Accept': 'application/json',
+        //   'Content-Type': 'application/json'
+        //     // 'Accept-Encoding':'gzip, deflate, compress'
         //   },
         // data: {
 
-        // "id":"9bZkp7q19f0",
-        // "part": "contentDetails",
-        // "key":"AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk"
+        // 'id':'9bZkp7q19f0',
+        // 'part': 'contentDetails',
+        // 'key':'AIzaSyDvIgZ8FpDoSTJuSbHl8VJH0zacuN4Z_Fk'
         //  }
       };
 
-      console.log("getVideoProperties http req");
+      console.log('getVideoProperties http req');
       $http(req).then(function (response) {
         console.log('getVideoProperties Respuesta', response.data);
         console.log(response);
 
-        // console.log("PlaySong name: "+song.name);
-        // console.log("PlaySong duration: "+song.duration_ms);
+        // console.log('PlaySong name: '+song.name);
+        // console.log('PlaySong duration: '+song.durationMs);
 
         // setTimeout(function() {
-        // console.log('PlaySong  setTimeout: ' + song.duration_ms);
-        //     resolve({ value: "PlaySong tiempo cumplido", result:song.duration_ms});
+        // console.log('PlaySong  setTimeout: ' + song.durationMs);
+        //     resolve({ value: 'PlaySong tiempo cumplido', result:song.durationMs});
 
-        // }, song.duration_ms);
+        // }, song.durationMs);
 
 
 
         }).catch( function (error) {
           console.log('getVideoProperties http(req) an error occurred', error.data);
-          // reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
+          // reject({ value: 'PlaySong Respuesta de la Promesa error', result: error.data});
       });
 
 
@@ -896,20 +896,20 @@ var req = {
     titulo:item.titulo,
     autor:item.autor
   };
-console.log("itemq");
+console.log('itemq');
 console.log($scope.itemq );
  // Gets fired when the iframe player has finished loading
     $scope.playerReady = function(event) {
-        console.log("playerReady"); // Event data logged
+        console.log('playerReady'); // Event data logged
         console.log(event); // Event data logged
         var player = ngYoutubeEmbedService.getPlayerById('myvideo'); // Returns the iframe player instance
-      console.log("Player");
+      console.log('Player');
       console.log(player);
     };
 
 
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
 
       var player = ngYoutubeEmbedService.getPlayerById("myvideo");
     console.log(player);
@@ -917,7 +917,7 @@ console.log($scope.itemq );
     // console.log(player.showVideoInfo());
 
     console.log();
-    console.log(player.getVolume())
+    console.log(player.getVolume());
      $scope.itemq = {
 
     link : $scope.link,
@@ -932,7 +932,7 @@ console.log($scope.itemq );
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
   };
 
@@ -942,7 +942,7 @@ console.log($scope.itemq );
 
 }])
 
- .controller('ModalInstanceAudio',["$scope","$uibModalInstance","item", "subirarchivofb","recorderService", "comandos", function ($scope, $uibModalInstance,  item,subirArchivoFb,recorderService,comandos) {
+ .controller('ModalInstanceAudio',['$scope','$uibModalInstance','item', 'subirarchivofb','recorderService', 'comandos', function ($scope, $uibModalInstance,  item,subirArchivoFb,recorderService,comandos) {
   // .controller('PerfilesCtrl' ,['$element', 'recorderService', 'recorderUtils', '$scope', '$timeout', '$interval', 'recorderPlaybackStatus', function ($element, recorderService, recorderUtils, $scope, $timeout, $interval, recorderPlaybackStatus) {
 
   // .controller(, function ($uibModalInstance,  item) {
@@ -957,23 +957,23 @@ console.log($scope.itemq );
     name:item.name,
     duracion : item.duracion
   };
-console.log("ModalInstanceAudio" );
+console.log('ModalInstanceAudio' );
 console.log(item );
 console.log($uibModalInstance );
 console.log($ctrl );
-console.log("recorderService" );
+console.log('recorderService' );
 console.log(recorderService );
 
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
     $scope.subir();
 
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
-  }
+  };
 
   $scope.error=null;
 
@@ -985,7 +985,7 @@ console.log(recorderService );
             });
 
         if($scope.file){
-        if($scope.file.type=="audio/mp3"){
+        if($scope.file.type==='audio/mp3'){
              $scope.$apply(function () {
             $scope.okdisponible=true;
             $scope.nombre=$scope.file.name;
@@ -994,30 +994,30 @@ console.log(recorderService );
             }else{
 
             $scope.$apply(function () {
-            $scope.error="tipo de Archivo incorrercto";
+            $scope.error='tipo de Archivo incorrercto';
             });
-        };
-        };
+        }
+        }
 };
 
 this.playAudioFile=function(){
-    console.log("playAudioFile");
+    console.log('playAudioFile');
     console.log($scope.path);
     comandos.playAudio($scope.path);
-}
+};
 
 $scope.subir=function(){
           // subirUrl:   $scope.file: archivo (nombre y datos con los que se guardara)
           //             $scople donde se expone el avance
-          //             el path firebase sera.  "audio"/userKey/fileName.
-        subirArchivoFb.subirUrl($scope.file, $scope,"audio")
+          //             el path firebase sera.  'audio'/userKey/fileName.
+        subirArchivoFb.subirUrl($scope.file, $scope,'audio')
                       .then(function(result) {
-                        console.log("result audio");
+                        console.log('result audio');
                         console.log(result);
                         console.log($scope.file);
                           $scope.imageSrc = result.downloadURL;
-                          console.log("result audio");
-                          console.log("result)");
+                          console.log('result audio');
+                          console.log('result)');
                           $ctrl.itemq = {
 
                                 link :result.downloadURL,
@@ -1029,13 +1029,13 @@ $scope.subir=function(){
 
 
                       },function(result) {
-                      console.log("error Imagen");
+                      console.log('error audio');
                       console.log(result);
-                      $scope.error=reject;
+                      $scope.error=result;
                       });
 
 };
-    $scope.$on("fileProgress", function(e, progress) {
+    $scope.$on('fileProgress', function(e, progress) {
 
         $scope.progress = progress.loaded / progress.total;
 
@@ -1049,15 +1049,15 @@ $ctrl.f1=function(a){
       // console.log($scope.recorder);
       // console.log($scope.recorder.elapsedTime);
 
-    subirArchivoFb.subirUrl(a, $scope,"audio")
+    subirArchivoFb.subirUrl(a, $scope,'audio')
                       .then(function(result) {
-                        console.log("result Imagen");
+                        console.log('result Imagen');
                         console.log(result);
                           $scope.imageSrc = result.downloadURL;
                           $ctrl.itemq = {
-      link: result.downloadURL,
+      // link: result.downloadURL,
     volumen:item.volumen,
-    name:result.downloadURL,
+    // name:result.downloadURL,
     duracion : item.duracion,
 
                                 link :result.downloadURL,
@@ -1065,7 +1065,7 @@ $ctrl.f1=function(a){
                               };
                           $scope.okdisponible=true;
                       },function(result) {
-                      console.log("error Imagen");
+                      console.log('error Imagen');
                       console.log(result);
                       });
 
@@ -1074,7 +1074,7 @@ $ctrl.f1=function(a){
 
 }])
 
- .controller('ModalInstanceSpotify',["$scope","$uibModalInstance","item", 'Spotify','$http', function ($scope, $uibModalInstance,  item, Spotify,$http) {
+ .controller('ModalInstanceSpotify',['$scope','$uibModalInstance','item', 'Spotify','$http', function ($scope, $uibModalInstance,  item, Spotify,$http) {
 
   var self=this;
   var $ctrl = this;
@@ -1089,15 +1089,15 @@ $ctrl.f1=function(a){
   };
 
 $scope.okdisponible=false; // habilita el boton de ok
-$scope.volumen;
-var access_token;         // Tocken para acceder a Spotify
+$scope.volumen=item.volumen;
+var accessToken;         // Tocken para acceder a Spotify
 
 
-console.log("ModalInstanceSpotify" );
+console.log('ModalInstanceSpotify' );
 console.log(item );
 console.log($uibModalInstance );
 console.log($ctrl );
-var spotifyUserId=null;   // Spotify User ID
+// var spotifyUserId=null;   // Spotify User ID
 // this.volumen=50;       Volumen;
 
 
@@ -1107,28 +1107,28 @@ this.setTracksformItem=function(item){
   self.tracks=item.tracks;
   $scope.mVolumen=item.volumen;
   self.tracks.duracion=item.duracion;
-};
+}
 };
 
 this.setTracksformItem(item);
 
   this.ok = function () {
-     console.log("uibModalInstance.ok: " );
+     console.log('uibModalInstance.ok: ' );
     $uibModalInstance.close($ctrl.itemq);
   };
 
   $ctrl.cancel = function () {
-     console.log("uibModalInstance.cancel: " );
+     console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
-  }
+  };
 
 //Loggin a Spotify
 console.log('Loggin a Spotify 4');
       Spotify.login().then(function (data) {
         console.log('Loggin a Spotify 4');
-        access_token=data;
+        accessToken=data;
         console.log(data);
-        // alert("You are now logged in");
+        // alert('You are now logged in');
         self.getSpotifyUser();
 });
 
@@ -1137,12 +1137,12 @@ console.log('Loggin a Spotify 4');
 
 this.getSpotifyUser=function(){
 Spotify.getCurrentUser().then(function (data) {
-  console.log("getSpotifyUser");
+  console.log('getSpotifyUser');
   console.log(data);
   self.spotifyUserId=data.data.id;
 self.getUserProfile();
   // Spotify.getUser(data.data.id).then(function (data) {
-  //   console.log("getUser");
+  //   console.log('getUser');
   //   console.log(data);
   // });
 
@@ -1151,21 +1151,21 @@ self.getUserProfile();
 };
 
 
-$scope.mOption="MisListas"; // opcion de busqueda en modal_spotify
+$scope.mOption='MisListas'; // opcion de busqueda en modal_spotify
 
 $ctrl.buscar=function(buscarTexto){
    // search: function (q, type, options) {
-    // Spotify.search(buscarTexto,"album,artist,track,playlist",{"limit":10}).then(function(data){
-    // Spotify.search(buscarTexto,"album",{"limit":10}).then(function(data){
+    // Spotify.search(buscarTexto,'album,artist,track,playlist',{'limit':10}).then(function(data){
+    // Spotify.search(buscarTexto,'album',{'limit':10}).then(function(data){
 
 
   switch($scope.mOption){
 //buscar UserPlay List
     case 'MisListas':
-      Spotify.getUserPlaylists(self.spotifyUserId,{"limit":10}).then(function(data){
-      console.log("search ok");
+      Spotify.getUserPlaylists(self.spotifyUserId,{'limit':10}).then(function(data){
+      console.log('search ok');
       var dataObj= angular.fromJson(data);
-      // console.log("href "+dataObj.data.albums.items[0].name);
+      // console.log('href '+dataObj.data.albums.items[0].name);
       console.log(dataObj);
         self.setResult(angular.fromJson(data));
       }, function (error) {
@@ -1175,10 +1175,10 @@ $ctrl.buscar=function(buscarTexto){
 
 //buscar Artista
     case 'Artista':
-  Spotify.search(buscarTexto,"artist",{"limit":10}).then(function(data){
-      console.log("search ok");
+  Spotify.search(buscarTexto,'artist',{'limit':10}).then(function(data){
+      console.log('search ok');
       var dataObj= angular.fromJson(data);
-      // console.log("href "+dataObj.data.albums.items[0].name);
+      // console.log('href '+dataObj.data.albums.items[0].name);
       console.log(dataObj);
         self.setResult(angular.fromJson(data));
       }, function (error) {
@@ -1189,10 +1189,10 @@ $ctrl.buscar=function(buscarTexto){
 
 //buscar Album
     case 'Album':
-      Spotify.search(buscarTexto,"album",{"limit":10}).then(function(data){
-      console.log("search ok");
+      Spotify.search(buscarTexto,'album',{'limit':10}).then(function(data){
+      console.log('search ok');
       var dataObj= angular.fromJson(data);
-      // console.log("href "+dataObj.data.albums.items[0].name);
+      // console.log('href '+dataObj.data.albums.items[0].name);
       console.log(dataObj);
         self.setResult(angular.fromJson(data));
       }, function (error) {
@@ -1203,10 +1203,10 @@ $ctrl.buscar=function(buscarTexto){
 
 //buscar Track
     case 'Track':
-     Spotify.search(buscarTexto,"track",{"limit":10}).then(function(data){
-      console.log("search ok");
+     Spotify.search(buscarTexto,'track',{'limit':10}).then(function(data){
+      console.log('search ok');
       var dataObj= angular.fromJson(data);
-      // console.log("href "+dataObj.data.albums.items[0].name);
+      // console.log('href '+dataObj.data.albums.items[0].name);
       console.log(dataObj);
         self.setResult(angular.fromJson(data));
       }, function (error) {
@@ -1216,17 +1216,17 @@ $ctrl.buscar=function(buscarTexto){
 
 //buscar PlayList
     case 'PlayList':
-     Spotify.search(buscarTexto,"playlist",{"limit":10}).then(function(data){
-      console.log("search ok");
+     Spotify.search(buscarTexto,'playlist',{'limit':10}).then(function(data){
+      console.log('search ok');
       var dataObj= angular.fromJson(data);
-      // console.log("href "+dataObj.data.albums.items[0].name);
+      // console.log('href '+dataObj.data.albums.items[0].name);
       console.log(dataObj);
         self.setResult(angular.fromJson(data));
       }, function (error) {
       console.log('search an error occurred', error.data);
       });
     break;
-  };
+  }
 
 
 };
@@ -1236,7 +1236,7 @@ $ctrl.buscar=function(buscarTexto){
 // Coloca en items el resultado de las busquedas para mostrar las canciones. Es el listado de albums, Artistas, misListas o Listas Publicas.
 // En caso de buscar tracks, carga el resultado directamente en this.tracks.
 this.setResult=function(data){
- console.log("setResult"+ data);
+ console.log('setResult'+ data);
  console.log(data);
 
   switch($scope.mOption){
@@ -1263,7 +1263,7 @@ this.setResult=function(data){
     case 'PlayList':
       this.items=data.data.playlists.items;
     break;
-  };
+  }
 
 };
 
@@ -1275,14 +1275,21 @@ this.buscarAlbumTracks=function(albumId){
   console.log('buscarAlbumTracks');
   Spotify.getAlbumTracks(albumId).then(function (data) {
   console.log(data);
-  self.tracks=data.data.items;
+  // self.tracks=data.data.items;
   var duracion=0;
     for(var i = 0; i<data.data.items.length; i++ ) {
     var track=data.data.items[i];
-    duracion+=track.duration_ms;
-  };
-  self.tracks.duracionTotal_ms=duracion;
-  console.log("tracks ");
+    var t={
+        'artist': track.artists[0].name,
+        'trackId':track.id,
+        'name': track.name,
+        'durationMs':track.duration_ms,
+        'uri':track.uri};
+      duracion+=track.duration_ms;
+      self.tracks=self.tracks.concat(t);
+  }
+  self.tracks.DuracionTotalMs=duracion;
+  console.log('tracks ');
   console.log( self.tracks);
   });
 };
@@ -1298,16 +1305,16 @@ this.buscarPlayListTracks=function(ownerId,playListId){
       for(var i = 0; i<data.data.items.length; i++ ) {
       var track=data.data.items[i].track;
       var t={
-        "artist": track.artists[0].name,
-        "trackId":track.id,
-        "name": track.name,
-        "duration_ms":track.duration_ms,
-        "uri":track.uri};
+        'artist': track.artists[0].name,
+        'trackId':track.id,
+        'name': track.name,
+        'durationMs':track.duration_ms,
+        'uri':track.uri};
       duracion+=track.duration_ms;
       self.tracks=self.tracks.concat(t);
-      };
-    self.tracks.duracionTotal_ms=duracion;
-    console.log("tracks ");
+      }
+    self.tracks.DuracionTotalMs=duracion;
+    console.log('tracks ');
     console.log(self.tracks);
     });
  };
@@ -1325,16 +1332,16 @@ this.buscarArtistTracks=function(artistId,CountryCode){
       for(var i = 0; i<data.data.tracks.length; i++ ) {
         var track=data.data.tracks[i];
         var t={
-        "artist": track.artists[0].name,
-        "trackId":track.id,
-        "name": track.name,
-        "duration_ms":track.duration_ms,
-        "uri":track.uri};
+        'artist': track.artists[0].name,
+        'trackId':track.id,
+        'name': track.name,
+        'durationMs':track.duration_ms,
+        'uri':track.uri};
         duracion+=track.duration_ms;
         self.tracks=self.tracks.concat(t);
-      };
-    self.tracks.duracionTotal_ms=duracion;
-    console.log("tracks ");
+      }
+    self.tracks.DuracionTotalMs=duracion;
+    console.log('tracks ');
     console.log(self.tracks);
   });
 };
@@ -1345,26 +1352,26 @@ this.buscarArtistTracks=function(artistId,CountryCode){
 this.setTracks=function(data){
   self.clearTracks();
   //set Tracks
- console.log(" set tracks ");
+ console.log(' set tracks ');
  console.log(data);
 var duracion=0;
     for(var i = 0; i<data.length; i++ ) {
     var track=data[i];
-
+console.log( 'duration'+track.duration_ms);
    var t={
-    "artist": track.artists[0].name,
-    "trackId":track.id,
-    "name": track.name,
-    "duration_ms":track.duration_ms,
-    "uri":track.uri};
+    'artist': track.artists[0].name,
+    'trackId':track.id,
+    'name': track.name,
+    'durationMs':track.duration_ms,
+    'uri':track.uri};
     duracion+=track.duration_ms;
 
 self.tracks=self.tracks.concat(t);
 
 
-  };
-self.tracks.duracionTotal_ms=duracion;
- console.log("tracks ");
+  }
+self.tracks.DuracionTotalMs=duracion;
+ console.log('tracks ');
  console.log(self.tracks);
 
 };
@@ -1372,7 +1379,7 @@ self.tracks.duracionTotal_ms=duracion;
 // Limplia la Tracks para que puedan mostrarse nuevos resultados.
 
 this.clearTracks=function(){
-   console.log("clearTracks: ");
+   console.log('clearTracks: ');
   this.tracks=null;
   self.tracks=[];
 };
@@ -1389,7 +1396,7 @@ this.msToDHMSMS = function(time){
 
 //Anteponiendo un 0 a los segundos si son menos de 10
   seconds = seconds < 10 ? '0' + seconds : seconds;
-  var result = hours + ":" + minutes + ":" + seconds;
+  var result = hours + ':' + minutes + ':' + seconds;
 
   return result;
 
@@ -1397,11 +1404,11 @@ this.msToDHMSMS = function(time){
 
 
 // determina con que función se buscan los tracks mirando que opción se eligió para realizar la busqueda.
-
+// se dispara desde el click del carrousel
 this.buscarTracks=function(ownerId,id){
- console.log("setResult: "+ id);
+ console.log('setResult: '+ id);
 
- console.log("ownerId: "+ ownerId);
+ console.log('ownerId: '+ ownerId);
 
 
   switch($scope.mOption){
@@ -1419,16 +1426,16 @@ this.buscarTracks=function(ownerId,id){
       self.buscarAlbumTracks(id);
     break;
 
-//buscar Track
+//buscar Track Esto no se usa por el click del carrousel
     case 'Track':
-      this.items=data.data.tracks.items;
+      // this.items=data.data.tracks.items;
     break;
 
 //buscar PlayList
     case 'PlayList':
             self.buscarPlayListTracks(ownerId,id);
     break;
-  };
+  }
 
 };
 
@@ -1441,11 +1448,11 @@ var reqVolumen = {
  method: 'put',
  url: 'https://api.spotify.com/v1/me/player/volume?volume_percent='+volumen,
  headers: {
-   "Accept": "application/json",
-    "Content-Type": "application/json"
+   'Accept': 'application/json',
+    'Content-Type': 'application/json'
     }
 };
-reqVolumen.headers.Authorization="Bearer " +access_token;
+reqVolumen.headers.Authorization='Bearer ' +accessToken;
   $http(reqVolumen).then(function (response) {
     console.log('all is good', response.data);
 }, function (error) {
@@ -1456,46 +1463,46 @@ reqVolumen.headers.Authorization="Bearer " +access_token;
 //Marca o libera todos los tracks que se muestran.
 
 this.selectAllTracks=function(select){
-  console.log("selectAllTracks "+select);
+  console.log('selectAllTracks '+select);
   var duracion=0;
   for(var i = 0; i<self.tracks.length; i++ ) {
-    console.log("self.tracks.duracionTotal_ms "+self.tracks.duracionTotal_ms);
-    console.log("self.tracks[i].duration_ms "+self.tracks[i].duration_ms);
-    duracion=duracion+self.tracks[i].duration_ms;
+    console.log('self.tracks.DuracionTotalMs '+self.tracks.DuracionTotalMs);
+    console.log('self.tracks[i].durationMs '+self.tracks[i].durationMs);
+    duracion=duracion+self.tracks[i].durationMs;
     self.tracks[i].selected=select;
-  };
-  self.tracks.duracionTotal_ms=duracion;
+  }
+  self.tracks.DuracionTotalMs=duracion;
   if(!select){
-    self.tracks.duracionTotal_ms=0;
-  };
+    self.tracks.DuracionTotalMs=0;
+  }
 
-  console.log("self.tracks.duracionTotal_ms "+self.tracks.duracionTotal_ms);
+  console.log('self.tracks.DuracionTotalMs '+self.tracks.DuracionTotalMs);
   self.setItemq();
 };
 
 //Marca o libera un track para ser sumarlo a la lista de canciones que se van a reproducir
 
 this.selectTracks=function(id,select){
-  console.log("selectTracks "+select);
-  console.log("selectTracks "+id);
+  console.log('selectTracks '+select);
+  console.log('selectTracks '+id);
   self.tracks[id].selected=select;
-  console.log("self.tracks.duracionTotal_ms "+self.tracks.duracionTotal_ms);
+  console.log('self.tracks.DuracionTotalMs '+self.tracks.DuracionTotalMs);
   if(select){
-    self.tracks.duracionTotal_ms=self.tracks.duracionTotal_ms+self.tracks[id].duration_ms;
-    console.log("self.tracks[id].duration_ms"+self.tracks[id].duration_ms);
+    self.tracks.DuracionTotalMs=self.tracks.DuracionTotalMs+self.tracks[id].durationMs;
+    console.log('self.tracks[id].durationMs'+self.tracks[id].durationMs);
     }
     else{
-    self.tracks.duracionTotal_ms=self.tracks.duracionTotal_ms-self.tracks[id].duration_ms;
-    console.log("self.tracks[id].duration_ms "+self.tracks[id].duration_ms);
+    self.tracks.DuracionTotalMs=self.tracks.DuracionTotalMs-self.tracks[id].durationMs;
+    console.log('self.tracks[id].durationMs '+self.tracks[id].durationMs);
     }
-    console.log("self.tracks.duracionTotal_ms "+self.tracks.duracionTotal_ms);
+    console.log('self.tracks.DuracionTotalMs '+self.tracks.DuracionTotalMs);
     self.setItemq();
 };
 
 // Set de Itemq que contiene los valores que retorna cuando se aprieta ok
 this.setItemq=function(){
   self.itemq.tracks=self.tracks;
-  self.itemq.duracion=self.tracks.duracionTotal_ms;
+  self.itemq.duracion=self.tracks.DuracionTotalMs;
   self.itemq.numeroTracks=self.tracks.length;
   $scope.okdisponible=true;
   self.itemq.volumen=$scope.mVolumen;
@@ -1509,20 +1516,20 @@ $ctrl.playAlbum=function(albumUri){
 
   url: 'https://api.spotify.com/v1/me/player/play',
   headers: {
-    "Accept": "application/json",
-    "Content-Type": "application/json"
-    // "Accept-Encoding":"gzip, deflate, compress"
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    // 'Accept-Encoding':'gzip, deflate, compress'
   },
   data: {
-    "context_uri": albumUri,
-    "offset": {
-    "position": 0}
+    'context_uri': albumUri,
+    'offset': {
+    'position': 0}
   }};
 
   console.log('albumUri', albumUri);
-  console.log('access_token', access_token);
+  console.log('accessToken', accessToken);
   console.log('itemActual', self.itemActual);
-  req.headers.Authorization="Bearer " +access_token;
+  req.headers.Authorization='Bearer ' +accessToken;
   $http(req).then(function (response) {
     console.log('playAlbum', response.data);
     console.log(response);
@@ -1533,25 +1540,25 @@ $ctrl.playAlbum=function(albumUri){
 
 
 this.playSong=function(songUri){
-  console.log("playSong");
+  console.log('playSong');
   console.log(songUri);
   var req = {
     method: 'put',
     // url: 'https://api.spotify.com/v1/me/player/play&device_id=c565f68c8ac24d000809da8f41c839cf68003510',
      url: 'https://api.spotify.com/v1/me/player/play',
     headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-        // "Accept-Encoding":"gzip, deflate, compress"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+        // 'Accept-Encoding':'gzip, deflate, compress'
       },
     data: {
-     // "context_uri": songUri,
-    "uris":[songUri],
-    "offset": {
-    "position": 0
+     // 'context_uri': songUri,
+    'uris':[songUri],
+    'offset': {
+    'position': 0
     }}
   };
-  req.headers.Authorization="Bearer " +access_token;
+  req.headers.Authorization='Bearer ' +accessToken;
   $http(req).then(function (response) {
     console.log('playAlbum', response.data);
   }, function (error) {
@@ -1561,27 +1568,27 @@ this.playSong=function(songUri){
 
 
 this.getUserProfile=function(){
-  console.log("getUserProfile");
+  console.log('getUserProfile');
   // console.log(songUri);
   var req = {
     method: 'put',
 
      url: 'https://api.spotify.com/v1/me',
     headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json"
-        // "Accept-Encoding":"gzip, deflate, compress"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+        // 'Accept-Encoding':'gzip, deflate, compress'
       }
       // ,
     // data: {
-     // "context_uri": songUri,
-    // "uris":[songUri],
-    // "offset": {
-    // "position": 0
+     // 'context_uri': songUri,
+    // 'uris':[songUri],
+    // 'offset': {
+    // 'position': 0
     // }
   // }
   };
-  req.headers.Authorization="Bearer " +access_token;
+  req.headers.Authorization='Bearer ' +accessToken;
   $http(req).then(function (response) {
     console.log('playAlbum', response.data);
   }, function (error) {

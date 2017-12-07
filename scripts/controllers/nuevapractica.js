@@ -42,7 +42,7 @@ angular.module('practicaApp')
             // var userKey=fb.getUserKey();
 
             // var ref = firebase.database().ref();
-            // var objRef = ref.child("practica").push();
+            // var objRef = ref.child('practica').push();
             // var propiedades = $firebaseObject(objRef);
             // propiedades.nombre=nombre;
             var propiedades={};

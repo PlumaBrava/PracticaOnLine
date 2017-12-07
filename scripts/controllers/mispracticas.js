@@ -23,17 +23,17 @@ angular.module('practicaApp')
  console.log($scope.lista);
 
 //     var setData=function(){
-//         console.log("MispracticasCtrl getUserKey()");
+//         console.log('MispracticasCtrl getUserKey()');
 //         console.log(fb.getUserKey());
 //     fb.leerMisPracticas(fb.getUserKey()).then(function(data){
-//         console.log("MispracticasCtrl leerMisPracticas them");
+//         console.log('MispracticasCtrl leerMisPracticas them');
 //         console.log(data);
 //          $scope.$apply(function () {
 //             $scope.lista=data.result;
 //             console.log($scope.lista);
 //      });
 //     }).catch(function(data){
-//         console.log("MispracticasCtrl leerMisPracticas catch");
+//         console.log('MispracticasCtrl leerMisPracticas catch');
 //         console.log(data);
 //     });
 // };
@@ -58,7 +58,7 @@ $scope.crearPractica=function(data){
     // setData();
 
 $scope.borrarPractica=function(item)   {
-console.log("borrarPractica");
+console.log('borrarPractica');
 console.log(item);
 $scope.lista.$remove(item).then(function(ref) {
     console.log(ref);
@@ -69,9 +69,9 @@ $scope.lista.$remove(item).then(function(ref) {
 
 };
 
-  $scope.$on("$destroy", function() {
+  $scope.$on('$destroy', function() {
      // $scope.lista=fb.leerMisPracticas(fb.getUserKey());
-     console.log("$destroy");
+     console.log('$destroy');
     });
 
 }]);

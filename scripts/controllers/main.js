@@ -84,4 +84,4 @@ $scope.logOut=function () {
   }]);
 
 
-// code : "auth/account-exists-with-different-credential"
+// code : 'auth/account-exists-with-different-credential'

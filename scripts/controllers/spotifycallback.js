@@ -9,7 +9,7 @@
  */
 angular.module('practicaApp')
 .config(['SpotifyProvider',function (SpotifyProvider) {
-     console.log("Spotify config");
+     console.log('Spotify config');
      console.log(SpotifyProvider);
 
 
@@ -56,49 +56,49 @@ angular.module('practicaApp')
 }])
 
 .controller('SpotifycallbackCtrl',['$stateParams', '$state','$location', function (stateParams, state,location) {
-    console.log(" Spotify callback");
-    console.log(" stateParams");
-    this.access_token=stateParams.access_token;
-    this.expires_in=stateParams.expires_in;
-    this.token_type=stateParams.token_type;
+    console.log(' Spotify callback');
+    console.log(' stateParams');
+    this.AccessToken=stateParams.access_token;
+    this.ExpiresIn=stateParams.expires_in;
+    this.TokenType=stateParams.token_type;
     console.log(stateParams);
-    console.log(" state");
+    console.log(' state');
     console.log(state.current.name);
-    console.log("location");
+    console.log('location');
     console.log(location.path());
 
 
-    this.error="";
+    this.error='';
     var self=this;
 
 
 
 
 
-        if(this.access_token&&this.expires_in&&this.token_type){
-          localStorage.setItem('spotify-token', this.access_token);
+        if(this.AccessToken&&this.ExpiresIn&&this.TokenType){
+          localStorage.setItem('spotify-token', this.AccessToken);
           window.close();
         } else
         {
-        self.error="Error al ingresar a Spotify";
+        self.error='Error al ingresar a Spotify';
         }
 
 
 //     window.onload = function () {
 //         var hash = window.location.hash;
-//         console.log("hash "+hash);
+//         console.log('hash '+hash);
 
-//       if (window.location.search.substring(1).indexOf("error") !== -1) {
-//         console.log("ERROR en Sotify callback");
+//       if (window.location.search.substring(1).indexOf('error') !== -1) {
+//         console.log('ERROR en Sotify callback');
 //         $.allbackId.append('<p>'+error+'</p>');
-//         self.error="err";
-// console.log("ERROR en Sotify callback");
+//         self.error='err';
+// console.log('ERROR en Sotify callback');
 
 //       } else if (hash) {
 //         // login success
 //         self.tocken = window.location.hash.split('&')[0].split('=')[1];
 //         // $.callbackId.append('<p>'+tocken+'</p>');
-// console.log("OK en Sotify callback");
+// console.log('OK en Sotify callback');
 // console.log(self.tocken);
 
 //         localStorage.setItem('spotify-token', self.tocken);

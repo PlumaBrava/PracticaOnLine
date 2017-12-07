@@ -9,7 +9,7 @@
  */
 angular.module('practicaApp')
 
-  .factory('subirarchivofb',["$q", "$log",'fb','$firebaseStorage', function ($q,$log,fb,$firebaseStorage) {
+  .factory('subirarchivofb',['$q', '$log','fb','$firebaseStorage', function ($q,$log,fb,$firebaseStorage) {
 
      var self=this;
     //  var getUploadTask=function(deferred, scope){
@@ -18,7 +18,7 @@ angular.module('practicaApp')
     // uploadTask.$progress=$progress(uploadTask, scope);
     //        // uploadTask.$complete=$complete(uploadTask, deferred, scope);
     // uploadTask.$complete(function(snapshot) {
-    //           console.log("getUploadTask complete");
+    //           console.log('getUploadTask complete');
     //           console.log(snapshot);
     //           console.log(snapshot.downloadURL);
     // });
@@ -26,7 +26,7 @@ angular.module('practicaApp')
     //           return uploadTask;
     // };
 
-    this.modal_scope=null
+    this.ModalScopeA=null;
     this.deferred=null;
 
         // Subir Url funcion que carga en firebase un archivo
@@ -41,9 +41,9 @@ angular.module('practicaApp')
     var subirUrl = function (file, scope,path) {
 
     self.deferred = $q.defer();
-    self.modal_scope=scope;
+    self.ModalScopeA=scope;
   // create a Storage reference for the $firebaseStorage binding
-  console.log("path+'/'+fb.getUserKey+'/'+file.name");
+  // console.log('path+'/'+fb.getUserKey+'/'+file.name');
   console.log(path+'/'+fb.getUserKey()+'/'+file.name);
   var storageRef = firebase.storage().ref(path+'/'+fb.getUserKey()+'/'+file.name);
   var storage = $firebaseStorage(storageRef);
@@ -51,7 +51,7 @@ angular.module('practicaApp')
   var uploadTask = storage.$put(file);
   uploadTask.$progress(function(snapshot) {
 
-      self.modal_scope.$broadcast("fileProgress",
+      self.ModalScopeA.$broadcast('fileProgress',
                     {
                         total: snapshot.totalBytes,
                         loaded: snapshot.bytesTransferred
@@ -61,17 +61,17 @@ angular.module('practicaApp')
   });
 
   uploadTask.$complete(function(snapshot) {
-      console.log("complete");
+      console.log('complete');
       console.log(snapshot);
-      self.modal_scope.$evalAsync(function () {
+      self.ModalScopeA.$evalAsync(function () {
       self.deferred.resolve(snapshot);
       });
   });
 
   uploadTask.$error(function(error) {
-      console.log("error");
+      console.log('error');
       console.log(error);
-      self.modal_scope.$evalAsync(function () {
+      self.ModalScopeA.$evalAsync(function () {
       self.deferred.reject(error);
       });
   });

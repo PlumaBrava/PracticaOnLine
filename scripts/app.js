@@ -20,29 +20,29 @@ $urlRouterProvider.rule(function ($injector, $location) {
 
        //what this function returns will be set as the $location.url
         var path = $location.path(), normalized = path.toLowerCase();
-        console.log("$urlRouterProvider");
+        console.log('$urlRouterProvider');
         console.log($injector);
         console.log('path: '+path);
-        console.log("-"+path+"-");
+        console.log('-'+path+'-');
         console.log('path nomalized :'+normalized);
         console.log($location);
         console.log($location.url());
-         // $location.url("/spotifycallback/"+$location.url().replace("#","?"));
+         // $location.url('/spotifycallback/'+$location.url().replace('#','?'));
 
 
-          console.log($location.url().indexOf("access_token")); // -1 si no le encuenta, de lo contrario da el lugar en el array
-          console.log($location.url().indexOf("token_type")); // -1 si no le encuenta, de lo contrario da el lugar en el array
-          console.log($location.url().indexOf("expires_in")); // -1 si no le encuenta, de lo contrario da el lugar en el array
+          console.log($location.url().indexOf('access_token')); // -1 si no le encuenta, de lo contrario da el lugar en el array
+          console.log($location.url().indexOf('token_type')); // -1 si no le encuenta, de lo contrario da el lugar en el array
+          console.log($location.url().indexOf('expires_in')); // -1 si no le encuenta, de lo contrario da el lugar en el array
 
-          if(path=="" && $location.url().indexOf("access_token")!=-1 && $location.url().indexOf("token_type")!=-1 && $location.url().indexOf("expires_in"))
+          if(path==='' && $location.url().indexOf('access_token')!==-1 && $location.url().indexOf('token_type')!==-1 && $location.url().indexOf('expires_in'))
             {
-              console.log("cambio URL")
-              $location.url("/spotifycallback/"+$location.url().replace("#","?"));
-            // $location.replace().path("/spotifycallback/");
+              console.log('cambio URL');
+              $location.url('/spotifycallback/'+$location.url().replace('#','?'));
+            // $location.replace().path('/spotifycallback/');
         }
 
         console.log(normalized);
-        if (path != normalized) {
+        if (path !== normalized) {
         //     //instead of returning a new url string, I'll just change the $location.path directly so I don't have to worry about constructing a new url string and so a new state change is not triggered
         //     // $location.replace().path(normalized);
         }
@@ -115,15 +115,14 @@ $stateProvider
     templateUrl:'views/spotifycallback.html',
     resolve: {
     'urlFix': ['$location', function($location){
-      console.log(" resolve");
+      console.log(' resolve');
       console.log($location.url());
-        // $location.url($location.url().replace("#","?"));
+        // $location.url($location.url().replace('#','?'));
      }]
-   }
-    ,
+   },
     controller:'SpotifycallbackCtrl as sp'
 });
- console.log(" resolve location");
+ console.log(' resolve location');
  console.log($stateProvider);
 
 
@@ -164,6 +163,3 @@ $stateProvider
 .run(['editableOptions', function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 }]);
-
-    ;
-

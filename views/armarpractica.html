@@ -50,8 +50,8 @@
        <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
     edit
   </button>
-</div></h3>
-
+</h3>
+</div>
 
         <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"  ></div>
         <div class="clearfix"></div>
@@ -85,53 +85,46 @@
 <script type="text/ng-template" id="tick.html">
     <div class="tick" ng-click="openTickModal('sm',  item)">
    <h5>Tick</h5>
-   <button type="button" class="btn btn-primary {{item.iconClass}} center-block" > </button>
-  <!--   <p class="texto"><b>Intervalo:</b>{{item.intervalo_ms}} </p>
-    <p class="texto"><b>Volumen:</b>{{item.volumen}} </p>
-    <p class="texto"><b>Duracion:</b>{{item.duracion}} </p> -->
-<!--     {{item.id}} tiempo  {{item.intervalo_ms}} -->
-   <div>
-
-
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
+   <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span></button>
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
 
     </div>
-</div>
+
 </script>
 
 <!-- Template for a registro -->
 <script type="text/ng-template" id="registro.html">
     <div class="registro" ng-click="openTickModal('sm',  item)">
    <h5>Registro</h5>
-   <button type="button" class="btn btn-primary {{item.iconClass}} center-block" > </button>
-  <!--   <p class="texto"><b>Intervalo:</b>{{item.intervalo_ms}} </p>
-    <p class="texto"><b>Volumen:</b>{{item.volumen}} </p>
-    <p class="texto"><b>Duracion:</b>{{item.duracion}} </p> -->
-<!--     {{item.id}} tiempo  {{item.intervalo_ms}} -->
-   <div>
+   <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span> </button>
 
-
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
-
-    </div>
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
 </div>
 </script>
 
@@ -140,27 +133,25 @@
 <script type="text/ng-template" id="cronometro.html">
     <div class="cronometro" ng-click="openTickModal('sm',  item)">
    <h5>Cronometro</h5>
-   <button type="button" class="btn btn-primary {{item.iconClass}} center-block" > </button>
-  <!--   <p class="texto"><b>Intervalo:</b>{{item.intervalo_ms}} </p>
-    <p class="texto"><b>Volumen:</b>{{item.volumen}} </p>
-    <p class="texto"><b>Duracion:</b>{{item.duracion}} </p> -->
-<!--     {{item.id}} tiempo  {{item.intervalo_ms}} -->
-   <div>
+   <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span> </button>
 
-
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
 
     </div>
-</div>
+
 </script>
 
 <!-- Template for a normal Imagem -->
@@ -169,91 +160,102 @@
         <h5>Imagen</h5>
 
                     <img class="imagenx " ng-src="{{item.link}}" alt="Seleccione Imagen" />
-<!--                     <p ng-hide="item.name==''">{{item.name}}</p> -->
 
-        <div>
-
-
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
 
     </div>
 </script>
 
-<!-- Template for a normal Imagem -->
+<!-- Template for a normal YouTube -->
 <script type="text/ng-template" id="youtube.html">
     <div class="youtube" ng-click="openYoutubeModal('lg',  item)">
         <h5>youtube</h5>
-<button type="button" class="btn  {{item.iconClass}} center-block" > </button>
-                    <!-- <img class="imagenx " ng-src="{{item.link}}" alt="Seleccione link" /> -->
-                    <!-- <p ng-hide="item.name==''">{{item.name}}</p> -->
-        <div>
 
+  <button type="button" class="btn btnItem center-block " >
+      <img class="" src="/images/YouTube_full-color_icon_(2017).svg" ; alt="YouTube" />
+        </button>
 
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.titulo}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
+      <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
+
 
     </div>
 </script>
 
-
+ <!-- Leer  -->
 <script type="text/ng-template" id="leer.html">
   <div class="leer" ng-click="open('sm', 'false', item)">
         <h5>Leer </h5>
-        <!-- <div class="itemIcon btn  btn-lg {{item.iconClass}}"></div> -->
-       <button type="button" class="btn  {{item.iconClass}} center-block" > </button>
+
+       <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span></button>
 
 
-        <div>
-              <div class="iteminfo glyphicon glyphicon-time"
-               uib-popover={{item.texto}} popover-trigger="'mouseenter'">
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
               </div>
-              <div class="iteminfo glyphicon glyphicon-volume-up"
-               uib-popover={{item.texto}} popover-trigger="'mouseenter'">
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
               </div>
-              <div class="iteminfo glyphicon glyphicon-comment"
-               uib-popover={{item.texto}} popover-trigger="'mouseenter'">
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
               </div>
-        </div>
- <!-- <p class="texto">{{item.texto}}</p> -->
+      </div>
   </div>
 </script>
 
+ <!-- escribir  -->
+<script type="text/ng-template" id="escribir.html">
+  <div class="escribir" ng-click="open('sm', 'false', item)">
+        <h5>escribir</h5>
 
-<script type="text/ng-template" id="infoitem.html">
-<div>
-        <div class="itemIcon {{item.iconClass}}">
-        </div>
+       <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span></button>
 
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.texto}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
 
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
+  </div>
 </script>
-
 
 <!-- Template for a audio item -->
 <script type="text/ng-template" id="audio.html">
@@ -261,19 +263,22 @@
     <h5>Audio</h5>
 
     <!-- <p class="texto"><b>name:</b>{{item.name}} </p> -->
- <button type="button" class="btn  {{item.iconClass}} center-block" > </button>
+ <button type="button" class="btn btn-lg  center-block" > <span class="{{item.iconClass}}"></span> </button>
 
-<div>
-        <div class="iteminfo glyphicon glyphicon-time"
-         uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-volume-up"
-         uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
-        </div>
-        <div class="iteminfo glyphicon glyphicon-comment"
-         uib-popover={{item.name}} popover-trigger="'mouseenter'">
-        </div>
-        </div>
+   <div class= "itemInformation " >
+              <div class="itemInfo1 "
+               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
+              </div>
+              <div class="itemInfo1 "
+               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
+              </div>
+      </div>
 </div>
 </script>
 
@@ -282,18 +287,24 @@
     <div class="spotify" ng-click="openSpotifyModal('lg',  item)">
         <h5>Spotify</h5>
  <!--    <p class="texto"><b>search:</b>{{item.search}} </p> -->
-        <button type="button" class="btn btn-lg {{item.iconClass}} " > </button>
+        <button type="button" class="btn btnItem center-block " >
+      <img class="" src="/images/Spotify_logo_without_text.svg" ; alt="Spotify" />
+        </button>
     <!-- <p class="texto"><b>Cantidad Items:</b>{{item.tracks.length}} </p> -->
-      <div>
-              <div class="iteminfo glyphicon glyphicon-time"
+      <div class= "itemInformation " >
+              <div class="itemInfo1 "
                uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-time"></span>
               </div>
-              <div class="iteminfo glyphicon glyphicon-volume-up"
+              <div class="itemInfo1 "
                uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-volume-up"></span>
               </div>
-              <div class="iteminfo glyphicon glyphicon-comment"
+              <div class="itemInfo1 "
                uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               <span class="glyphicon glyphicon-comment"></span>
               </div>
+
       </div>
 </div>
 </script>
@@ -312,8 +323,8 @@
             </li>
 
             <li dnd-list="[]">
-            <button uib-popover=" Delette" popover-trigger="'mouseenter'" type="button" class="btn btn-default btn-lg" ><span class="glyphicon glyphicon-trash"></button>
-            <!-- <li><img src="images/trashcan.jpg"></li> -->
+            <button uib-popover=" Delette" popover-trigger="mouseenter" type="button" class="btn btn-default btn-lg" ><span class="glyphicon glyphicon-trash"></span> </button>
+
             </li>
 
 
@@ -379,8 +390,10 @@
                   uib-popover={{item.type}} popover-trigger="'mouseenter'"
                   class="btn-group"
                 >
-                <button type="button" class="btn  btn-lg {{item.iconClass}}" disabled="disabled"> </button>
-
+                <!-- <button type="button" class="btn  btn-lg {{item.iconClass}}" disabled="disabled"> </button> -->
+        <button type="button" class="btn btn-lg {{item.iconClass}}  " >
+            <img class="btn-size " src="{{item.iconSrc}}"  alt="" />
+        </button>
 
             </li>
 
@@ -389,7 +402,7 @@
         </div>
     </div>
 </div>
-
+<!-- Sidebar -->
 
 <!-- Main area with dropzones and source code -->
 <div class="col-md-8 practica">
@@ -411,4 +424,5 @@
 </div> -->
 
 
+</div>
 </div>

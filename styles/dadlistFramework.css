@@ -13,7 +13,7 @@
 
 }
 
-.box > h3 {
+.box > h3 {             /*h3 hijo de box*/
     color: #333;
     border-color: #ddd;
     border-bottom: 1px solid transparent;
@@ -79,7 +79,7 @@
 
 }
 
-.box-orange > h3 {
+.box-orange  h3 {
     color: #fcf8e3; /*color del texto*/
     background-color: #ff6a00;
     border-color: #FF6A00;
@@ -90,24 +90,18 @@
 
  /*ordena las cosas dentro de un bloque (elementos en paralelo)
  uno al lado del otro!!!*/
- .box-orange .leer {
-    float: left;
- }
-  .box-orange .item{
+ .box-orange .box-orange,.box-orange .box-blue,
+  .box-orange .spotify  ,.box-orange .item, .box-orange .youtube,
+  .box-orange .tick  ,.box-orange .cronometro, .box-orange .registro,
+  .box-orange .audio  ,.box-orange .leer, .box-orange .escribir,
+  .box-orange .imagen  ,.box-orange .tick, .box-orange .cronometro,
+  .box-orange .registro
+
+  {
     float: left;
  }
 
-  .box-orange .box-orange{
-    float: left;
- }
 
-  .box-orange .box-blue{
-    float: left;
- }
-
-   .box-orange .imagen{
-    float: left;
- }
 
 
  /*ordena las cosas dentro de un herramientas, uno al lado del otro!!!*/
