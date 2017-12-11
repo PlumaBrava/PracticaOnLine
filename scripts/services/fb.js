@@ -85,7 +85,7 @@ this.writeNuevaPractica=function(userKey, model,propiedades) {
 
   var ref = firebase.database().ref();
   var newPracticaKey= ref.child('practicas').child(userKey);
-  var a={practica:JSON.parse( model),Propiedades:propiedades};
+  var a={practica:JSON.parse( model),propiedades:propiedades};
 
  var list = $firebaseArray(newPracticaKey);
             list.$add(a).then(function(ref) {
@@ -176,7 +176,7 @@ this.addPracticaMisPracticas=function(practicaKey,userKey, model,propiedades) {
 this.writeModificacionPractica=function(practicaKey,userKey, model,propiedades) {
   console.log('addPracticaMisPracticas');
   console.log(userKey);
-  // console.log(model);
+  console.log(model);
   console.log(propiedades);
   // Get a key for a new Post.
 
@@ -187,7 +187,8 @@ this.writeModificacionPractica=function(practicaKey,userKey, model,propiedades) 
   var obj = $firebaseObject(newPracticaKey);
   // obj.practica=JSON.parse( model);
   obj.propiedades=propiedades;
-  obj.practica=JSON.parse( model);
+  // obj.practica=JSON.parse( model);
+  obj.practica= model;
 
     obj.$save().then(function(ret) {
                 console.log(ret);
@@ -208,7 +209,29 @@ obj.$remove().then(function(ref) {
 }, function(error) {
   console.log('Error:', error);
 });
+};
 
+this.leerPractica=function(userKey, practicaKey) {
+     console.log('leerPractica');
+     console.log(userKey);
+     console.log(practicaKey);
+     return new Promise(function (resolve, reject){
+     console.log(userKey);
+     console.log(practicaKey);
+      var r = firebase.database().ref();
+  var ref= r.child('practicas').child(userKey).child(practicaKey);
+
+var obj = $firebaseObject(ref);
+obj.$loaded().then(function(ref) {
+   console.log(ref);
+ resolve({ value: 'retorno leerPractica', result: ref});
+
+}).catch( function(error) {
+  console.log('Error:', error);
+   reject({ value: 'error lleerPractica', result: error});
+});
+
+});
 };
 
 
@@ -218,6 +241,25 @@ this.getDate=function(){
   return firebase.database.ServerValue.TIMESTAMP;
 };
 
+// transforama un valor en milisegundos (ms) en horas, minutos y segundos.
 
+this.msToDHMSMS = function(time){
+
+
+   console.log(time);
+  var hours = Math.floor( time / 3600000 );
+  var minutes = Math.floor( (time % 3600000) / 60000 );
+  var seconds = Math.floor( ( (time % 3600000) % 60000 ) / 1000);
+
+//Anteponiendo un 0 a los minutos si son menos de 10
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+//Anteponiendo un 0 a los segundos si son menos de 10
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  var result = hours + ':' + minutes + ':' + seconds;
+
+  return result;
+
+};
 
  }]);

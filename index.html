@@ -11,11 +11,13 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+    <link rel="stylesheet" href="bower_components/mobile-drag-drop/release/default.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/dadlist.css">
+    <link rel="stylesheet" href="styles/armarPractica.css">
+    <link rel="stylesheet" href="styles/modalSpotify.css">
     <link rel="stylesheet" href="styles/dadlistFramework.css">
      <!-- endbuild -->
 
@@ -62,7 +64,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                <li class="nav-item"><a ui-sref="mispracticas" ng-show="showBar" ui-sref-active="active">Mis Practicas</a></li>
 
-               <li class="nav-item"><a ui-sref="armarpractica" ng-show="showBar" ui-sref-active="active">armar</a></li>
+<!--                <li class="nav-item"><a ui-sref="armarpractica" ng-show="showBar" ui-sref-active="active">armar</a></li> -->
 
               <!-- <li><a ng-href="#/">Contact</a></li> -->
             </ul>
@@ -113,6 +115,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="bower_components/ng-youtube-embed/build/ng-youtube-embed.min.js"></script>
+    <script src="bower_components/mobile-drag-drop/release/index.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -130,6 +133,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <script src="scripts/controllers/spotifycallback.js"></script>
         <!-- endbuild -->
 
-        <script src="https://www.youtube.com/iframe_api"></script>
+      <!--   <script src="https://www.youtube.com/iframe_api"></script> -->
+      <!-- https://github.com/ArunMichaelDsouza/ng-youtube-embed -->
 </body>
 </html>

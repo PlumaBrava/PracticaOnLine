@@ -101,7 +101,8 @@ $stateProvider
 .state('armarpractica',{
     url:'/armarpractica',
         params: {
-            param1: null
+            userKey: null,
+            practicaKey: null
         },
     templateUrl:'views/armarpractica.html',
     controller:'ArmarpracticaCtrl as armarpractica'

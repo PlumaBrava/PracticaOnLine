@@ -636,5 +636,48 @@ return new Promise(function (resolve, reject){
 };
 
 
+// Play Audio
+
+this.duracionAudio=function(link){
+  console.log('duracionAudio: '+link);
+  console.log(link);
+
+return new Promise(function (resolve, reject){
+    console.log('Construccion de la promesa duracionAudio');
+
+   Howler.mobileAutoEnable = true;
+
+    var sound = new Howl({
+      src: [link],
+      format: ['mp3'],
+      html5: true
+
+    });
+
+
+
+    // Clear listener after first call.
+  sound.once('load', function(){
+        console.log('duracion Audio..load');
+        console.log(sound);
+        console.log(sound._duration);
+        resolve({ value: 'duracionAudioOK', result: sound._duration});
+  });
+
+  // sound.on('error', function(){
+
+
+  //           console.log('duracionAudio error: ');
+  //           reject({ value: 'duracionAudioError', result: 'Error duracionAudio'});
+
+  //   });
+
+});
+
+
+};
+
+
+
   }]);
 

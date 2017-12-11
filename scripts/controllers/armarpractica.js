@@ -8,13 +8,13 @@
  * Controller of the practicaApp
  */
 angular.module('practicaApp')
-   .controller('ArmarpracticaCtrl', ['$scope','comandos','$uibModal','fb',function($scope,comandos,$uibModal,fb) {
+   .controller('ArmarpracticaCtrl', ['$scope','comandos','$uibModal','fb','$stateParams',function($scope,comandos,$uibModal,fb,$stateParams) {
    // .controller('ArmarpracticaCtrl', ['$scope','$uibModal','fb',function($scope,$uibModal,fb) {
     console.log('ArmarpracticaCtrl');
 
 
     var self=this;
-
+   $scope.error="";
     $scope.models = {
         selected: null,
 
@@ -29,7 +29,7 @@ angular.module('practicaApp')
             // {type: 'container', id: 1, duracion:0, columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical'},//Se ejecutan tareas en serie
             // {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
             {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' },        // Dipara musica de Spotify
-             {type: 'youtube', id: 4,link:'',name:'jj',description:'',duracion:0,iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
+             {type: 'youtube', id: 4,link:'t1wBwyS94xY',name:'jj',description:'',duracion:0,iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
             {type: 'audio', id: 5, link:'',volumen:1,name:'',iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
             {type: 'leer', id: 6, texto:'Texto de prueba',iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
             {type: 'escribir', id: 7, texto:'Texto en Pantalla',iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
@@ -48,32 +48,32 @@ angular.module('practicaApp')
                         [
                             {
                                 'type': 'item',
-                                'id': '1'
+                                'id': '111'
                             },
                             {
                                 'type': 'item',
-                                'id': '2'
+                                'id': '222'
                             }
                         ],
                         [
                             {
                                 'type': 'item',
-                                'id': '3'
+                                'id': '333'
                             }
                         ]
                     ]
                 },
                 {
                     'type': 'item',
-                    'id': '4'
+                    'id': '444'
                 },
                 {
                     'type': 'item',
-                    'id': '5'
+                    'id': '5555'
                 },
                 {
                     'type': 'item',
-                    'id': '6'
+                    'id': '6666'
                 }
             ]  ,
             'B': [
@@ -160,6 +160,9 @@ angular.module('practicaApp')
     };
 
 
+$scope.HMSdesdeMS=function(ms){
+    return fb.msToDHMSMS(ms);
+}
 
 
 
@@ -318,30 +321,57 @@ return obj;
 
 var load=function(){
     console.log('load');
-      console.log(comandos.getModelAsJason());
-if (!comandos.getModelAsJason()){
-    console.log('load undefined');
+      console.log($stateParams);
+      console.log($stateParams.param1)
+      console.log($stateParams.param2);
 
-}
-    else{
-    console.log('load no null');
-    console.log(comandos.getModelAsJason);
-    $scope.models.dropzones=    angular.fromJson(comandos.getModelAsJason());
-}
+self.userKey=$stateParams.userKey;
+self.practicaKey=$stateParams.practicaKey;
+      fb.leerPractica(self.userKey, self.practicaKey)
+      .then(function(obj){
+         console.log('then ');
+         console.log(obj);
+         $scope.$apply(function () {
+                $scope.models.dropzones=    obj.result.practica;
+                $scope.models.propiedades=    obj.result.propiedades;
+                $scope.nombrePractica=obj.result.propiedades.nombre;
+                console.log($scope.models.dropzones);
+                console.log($scope.models.propiedades);
+            });
+
+      })
+      .catch(function(error){
+        $scope.error='error al leer Practica: '+error;
+            console.log('error al leerPractica'+error);
+      });
+      // console.log(comandos.getModelAsJason());
+      // console.log(comandos.getModelAsJason());
+
+// if (!comandos.getModelAsJason()){
+//     console.log('load undefined');
+
+// }
+//     else{
+//     console.log('load no null');
+//     console.log(comandos.getModelAsJason);
+//     $scope.models.dropzones=    angular.fromJson(comandos.getModelAsJason());
+// }
 };
 
 
-load();
+
 
     $scope.$watch('models.dropzones', function(model) {
         $scope.modelAsJson = angular.toJson(model, true);
     }, true);
-
+load();
 $scope.save=function(){
     console.log('save');
     console.log('save: '+fb.getUserKey());
     comandos.setModelAsJason($scope.modelAsJson);
-    fb.writePractica(fb.getUserKey(), $scope.modelAsJson, $scope.models.propiedades);
+
+    fb.writeModificacionPractica(self.practicaKey,self.userKey, $scope.models.dropzones,$scope.models.propiedades);
+
 };
 
   this.items = ['item1', 'item2', 'item3'];
@@ -559,6 +589,7 @@ $scope.openImagenModal = function (size, item) {
         item.link  = returnedItem.link;
         item.name  = returnedItem.name;
         item.duracion  = returnedItem.duracion;
+        item.duracionHMS=returnedItem.duracionHMS;
         item.volumen  = returnedItem.volumen;
         item.titulo  = returnedItem.titulo;
         item.autor  = returnedItem.autor;
@@ -603,8 +634,11 @@ $scope.openAudioModal = function (size, item) {
         // item.texto=returnedItem;
         item.link = returnedItem.link;
         item.name = returnedItem.name;
+        if(returnedItem.duracion){
         item.duracion = returnedItem.duracion;
-
+        }else{
+            item.duracion=0;
+        }
 
     }, function () {
 
@@ -646,12 +680,13 @@ $scope.openSpotifyModal = function (size, item) {
 
 
 
-        item.link = returnedItem.link;
-        item.name = returnedItem.name;
+
         item.duracion = returnedItem.duracion;
+        item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
         item.numeroTracks=returnedItem.duracion;
         item.tracks=returnedItem.tracks;
         item.volumen=returnedItem.volumen;
+        item.volumenText=returnedItem.volumen*100 +' %';
 
 
     }, function () {
@@ -771,30 +806,80 @@ console.log($ctrl );
 }])
 
 
-.controller('ModalInstanceYouTube',['$scope','$uibModalInstance','item', 'subirarchivofb','ngYoutubeEmbedService','$http',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http) {
+.controller('ModalInstanceYouTube',['$scope','$uibModalInstance','item', 'subirarchivofb','ngYoutubeEmbedService','$http','fb',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http,fb) {
 
  console.log('ModalInstanceYouTube');
   var $ctrl = this;
-$scope.videoURL=item.link;
+  // $scope.videoID=item.link;
+ $scope.videoURL=item.link;
  $scope.name=item.name;
  $scope.okdisponible=false;
  $scope.link=item.link;
+// $ctrl.itemq=item;
+ $scope.itemq = {
+
+    link : item.link,
+    name: item.name,
+    duracion:item.duracion,
+    volumen:item.volumen,
+    duracionHMS:item.duracionHMS,
+    titulo:item.titulo,
+    autor:item.autor
+  };
+console.log('itemq');
+console.log($scope.itemq );
+console.log($scope );
+console.log(ngYoutubeEmbedService );
+
+
+// this.p=null;
+
 
 
 this.select=function(){
     console.log('select' );
-
-
     $scope.okdisponible=true;
-    var player = ngYoutubeEmbedService.getPlayerById("myvideo"); // Returns the iframe player instance
-    console.log('Player');
-    console.log($scope.videoURL);
-    console.log(ngYoutubeEmbedService);
-    console.log(player);
-    player.loadVideoById($scope.link);
+    $scope.videoURL=$scope.link;
 
+
+
+      // var player3 = ngYoutubeEmbedService.getVideoIdByUrl($scope.videoURL);
+
+//         var player3 = ngYoutubeEmbedService.getPlayerById($scope.link);
+// console.log(player3);
+// player3.clearVideo();
+// player3.cueVideoById($scope.link);
+// player3.nextVideo();
+// player3.playVideo();
+
+// console.log(player3.getCurrentTime());
+//     // var player4 = ngYoutubeEmbedService.getVideoIdByUrl($scope.link);
+//     //     console.log(player4);
+
+//       ngYoutubeEmbedService.setReadyState();
+
+
+
+//       // ngYoutubeEmbedService.
+
+//     var videoData=player3.getVideoData();
+//     console.log(videoData);
+//         // $scope.$apply(function () {
+//         $scope.itemq = {
+
+//          duracion:player3.getDuration(),
+//          duracion:player3.getDuration(),
+//          duracionHMS:fb.msToDHMSMS(player3.getDuration()),
+//             volumen:player3.getVolume(),
+//             titulo:videoData.title,
+//             autor:videoData.author
+//         };
+// });
 
 };
+
+
+
 
 this.showVideoInfo = function() {
     var player = ngYoutubeEmbedService.getPlayerById('myvideo');
@@ -815,6 +900,7 @@ this.showVideoInfo = function() {
     $scope.playerReady = function(event) {
         console.log('playerReady'); // Event data logged
         console.log(event); // Event data logged
+        // this.myPlayer
     };
 
     // Gets fired when the state of the iframe player changes
@@ -822,14 +908,17 @@ this.showVideoInfo = function() {
         console.log('playerStateChanged'); // Event data logged
         console.log(event); // Event data logged
             console.log('player.getVideoData()');
-            var player1 = ngYoutubeEmbedService.getPlayerById("myvideo");
+            var player1 = ngYoutubeEmbedService.getPlayerById('videoID');
     console.log(player1);
+    console.log(player1.getDuration());
+    console.log(fb.msToDHMSMS(player1.getDuration()*1000));
     var videoData=player1.getVideoData();
+    console.log(videoData);
     console.log(videoData);
         $scope.$apply(function () {
         $scope.itemq = {
-
          duracion:player1.getDuration(),
+         duracionHMS:fb.msToDHMSMS(player1.getDuration()*1000),
             volumen:player1.getVolume(),
             titulo:videoData.title,
             autor:videoData.author
@@ -886,43 +975,31 @@ var req = {
 
 };
 
-// $ctrl.itemq=item;
- $scope.itemq = {
-
-    link : item.link,
-    name: item.name,
-    duracion:item.duracion,
-    volumen:item.volumen,
-    titulo:item.titulo,
-    autor:item.autor
-  };
-console.log('itemq');
-console.log($scope.itemq );
  // Gets fired when the iframe player has finished loading
     $scope.playerReady = function(event) {
         console.log('playerReady'); // Event data logged
         console.log(event); // Event data logged
-        var player = ngYoutubeEmbedService.getPlayerById('myvideo'); // Returns the iframe player instance
-      console.log('Player');
-      console.log(player);
+      //   var player = ngYoutubeEmbedService.getPlayerById('myvideo'); // Returns the iframe player instance
+      // console.log('Player');
+      // console.log(player);
     };
 
 
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
 
-      var player = ngYoutubeEmbedService.getPlayerById("myvideo");
+      var player = ngYoutubeEmbedService.getPlayerById("videoID");
     console.log(player);
       console.log(player.getDuration());
-    // console.log(player.showVideoInfo());
 
-    console.log();
     console.log(player.getVolume());
      $scope.itemq = {
 
     link : $scope.link,
     name: $scope.name,
+
     duracion:player.getDuration(),
+    duracionHMS:fb.msToDHMSMS(player.getDuration()*1000),
     volumen:player.getVolume(),
     titulo:player.getVideoData().title,
     autor:player.getVideoData().author
@@ -936,9 +1013,6 @@ console.log($scope.itemq );
     $uibModalInstance.dismiss('cancel');
   };
 
- $ctrl.fileToUpload = null;
-   $ctrl.onChange = function onChange(fileList) {
-    $ctrl.fileToUpload = fileList[0];};
 
 }])
 
@@ -949,6 +1023,7 @@ console.log($scope.itemq );
   var $ctrl = this;
   $scope.nombre=item.name;
   $scope.path=item.link;
+  $scope.duracion=item.duracion;
 
   $ctrl.itemq = {
 
@@ -989,6 +1064,7 @@ console.log(recorderService );
              $scope.$apply(function () {
             $scope.okdisponible=true;
             $scope.nombre=$scope.file.name;
+            $ctrl.duracionAudioFile();
             });
 
             }else{
@@ -1003,7 +1079,28 @@ console.log(recorderService );
 this.playAudioFile=function(){
     console.log('playAudioFile');
     console.log($scope.path);
-    comandos.playAudio($scope.path);
+    comandos.playAudio($scope.path)
+    .then(function(result){
+        console.log('playAudioFile'+result);
+    })
+    .catch(function(error){
+        console.log('playAudioFile'+error);
+    });
+};
+
+
+
+this.duracionAudioFile=function(){
+    console.log('duracioAudioFile');
+    console.log($scope.path);
+    comandos.duracionAudio($scope.path).then(function(obj){
+        console.log('playAudioFile:'+obj.result);
+           $scope.$apply(function () {
+        $scope.duracion=obj.result;
+    });
+    }).catch(function(error){
+        console.log('playAudioFile'+error);
+    });
 };
 
 $scope.subir=function(){
@@ -1021,8 +1118,8 @@ $scope.subir=function(){
                           $ctrl.itemq = {
 
                                 link :result.downloadURL,
-                                name:result.metadata.name
-                                // name:$scope.nombre
+                                name:result.metadata.name,
+                                duracion:$scope.duracion
                               };
 
                            $uibModalInstance.close($ctrl.itemq);
@@ -1103,10 +1200,14 @@ console.log($ctrl );
 
 
 this.setTracksformItem=function(item){
+       console.log('setTracksformItem' );
+       console.log(item );
   if(item){
   self.tracks=item.tracks;
   $scope.mVolumen=item.volumen;
+  if(self.tracks){
   self.tracks.duracion=item.duracion;
+  }
 }
 };
 

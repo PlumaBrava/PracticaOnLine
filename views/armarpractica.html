@@ -1,4 +1,4 @@
-<p>This is the armarpractica view.</p>
+<p class="bg-danger">{{error}}</p>
 <!-- Markup for lists inside the dropzone. It's inside a seperate template
      because it will be used recursively. The dnd-list directive enables
      to drop elements into the referenced array. The dnd-draggable directive
@@ -190,7 +190,7 @@
 
       <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -293,17 +293,17 @@
     <!-- <p class="texto"><b>Cantidad Items:</b>{{item.tracks.length}} </p> -->
       <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
-               uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
+               uib-popover={{item.volumenText}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-volume-up"></span>
               </div>
-              <div class="itemInfo1 "
+<!--               <div class="itemInfo1 "
                uib-popover={{item.name}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-comment"></span>
-              </div>
+              </div> -->
 
       </div>
 </div>
@@ -323,7 +323,7 @@
             </li>
 
             <li dnd-list="[]">
-            <button uib-popover=" Delette" popover-trigger="mouseenter" type="button" class="btn btn-default btn-lg" ><span class="glyphicon glyphicon-trash"></span> </button>
+            <button uib-popover=" Delette" popover-trigger="'mouseenter'" type="button" class="btn btn-default btn-lg" ><span class="glyphicon glyphicon-trash"></span> </button>
 
             </li>
 
@@ -411,7 +411,7 @@
             <div class="dropzone box box-yellow">
                 <!-- The dropzone also uses the list template -->
                 <!-- <h3>Practica {{zone}}</h3> -->
-                <h3>Practica </h3>
+                <h3>Practica {{nombrePractica}} </h3>
                 <div ng-include="'list.html'"></div>
             </div>
         </div>

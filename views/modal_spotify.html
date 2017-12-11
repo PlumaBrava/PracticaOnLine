@@ -1,4 +1,4 @@
-<div  class="modal-demo">
+<div  class="modal-Spotify">
 
         <div class="modal-header">
             <h3 class="modal-title" id="modal-title">Spotify</h3>
@@ -8,7 +8,7 @@
 
 
 <div class="row">
-<p>Buscar:</p>
+  <p>Buscar:</p>
 
     <div>
     <label class="radio-inline"><input type="radio" name="optradio" checked ng-model='mOption' value='MisListas' >Mis Listas</label>
@@ -19,100 +19,99 @@
     </div>
 
 <input id="ex12"  type="text" ng-model="buscarTexto" ng-show="mOption!='MisListas'"/>
-
 <button class='btn btn-primary' ng-click="$ctrl.buscar(buscarTexto)">Buscar</button>
-<!-- <button class='btn btn-danger' ng-click="$ctrl.setVolumen(mVolumen)" >Volumen {{mVolumen}}</button> -->
 
 
-<div id="slidecontainer">
-  <input type="range" min="1" max="100" ng-model="mVolumen" value="50" class="slider" id="myRange" ng-Change="$ctrl.setVolumen(mVolumen)"> volumen
+<!-- Barra de Volumen -->
+<div id="barraVolumen">
+  <input type="range" min="1" max="100" ng-model="mVolumen" value="50" class="BarraVolumen" id="myRange" ng-Change="$ctrl.setVolumen(mVolumen)"> volumen
 </div>
-<!-- <button id="destroyEx5Slider" class='btn btn-alert' ng-click="$ctrl.playAlbum(itemActual)">play - {{itemActual.uri}}</button>
-</div> -->
 
 
 
-<!--  -->
-<div class="CarrouselDiv">
-<div id="myCarousel" class="carousel slide row" data-ride="carousel" ng-show="$ctrl.items" data-interval="false" >
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
-    <li ng-repeat="searchItem in $ctrl.items" data-target="#myCarousel" data-slide-to="{{$index}}"  ng-class="{active :  {{$index}} == 0 }"></li>
-    <!-- <li data-target="#myCarousel" data-slide-to="2"></li> -->
-  </ol>
+<!-- Carrousel con imagen de Spotify -->
+<div class="CarrouselDiv" ng-show="$ctrl.items" >
+  <div id="myCarousel" class="carousel slide row" data-ride="carousel" data-interval="false" >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
+      <li ng-repeat="searchItem in $ctrl.items" data-target="#myCarousel" data-slide-to="{{$index}}"  ng-class="{active :  {{$index}} == 0 }"></li>
+      <!-- <li data-target="#myCarousel" data-slide-to="2"></li> -->
+    </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
- <!--    <div class="item active">
-      <img src="la.jpg" alt="Chania">
-      <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>LA is always so much fun!</p>
-      </div>
-    </div> -->
 
+      <div ng-class="{item: true ,  active: {{$index}} <1 }"  ng-repeat="searchItem in $ctrl.items" ng-click=" $ctrl.buscarTracks(searchItem.owner.id, searchItem.id )"  >
+        <img ng-src="{{searchItem.images[0].url}}" alt="Sin Imagen">
+          <div class="carousel-caption">
+            <h3 >{{searchItem.name}} </h3>
+            <p>{{searchItem.artists[0].name}}</p>
 
-<!-- $ctrl.playAlbum(searchItem.uri) -->
-    <div ng-class="{item: true ,  active: {{$index}} <1 }"  ng-repeat="searchItem in $ctrl.items" ng-click=" $ctrl.buscarTracks(searchItem.owner.id, searchItem.id )"  >
-      <img ng-src="{{searchItem.images[0].url}}" alt="Sin Imagen">
-      <div class="carousel-caption">
-        <h3 >{{searchItem.name}} </h3>
-        <p>{{searchItem.artists[0].name}}</p>
+          </div>
       </div>
-    </div>
   </div>
 
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-click= "$ctrl.clearTracks()">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
 
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" data-slide="prev" ng-click= "$ctrl.clearTracks()">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-click= "$ctrl.clearTracks()">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next" ng-click= "$ctrl.clearTracks()">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+   </div>
 </div>
-</div>
-<!-- ///// tabla de tracks -->
- <h3  ng-show="$ctrl.tracks" >tracks {{$ctrl.tracks.length}} Duracion {{$ctrl.msToDHMSMS( $ctrl.tracks.DuracionTotalMs)}} </h3 >
- <input  type="checkbox" name="selectAll"    value="false"   ng-model="selectAll" ng-click="$ctrl.selectAllTracks(selectAll)"> Selecciona todo<br>
- <div class="table table-hover table-bordered">
+<!--  Titulo de tabla de tracks -->
 
-        <div class="item-container row list-item" ng-repeat="track in $ctrl.tracks"  >
-        <!-- <div class="row"> -->
-
-            <div class="col-sm-3">
-              <input  type="checkbox" name="selectTrack"    value="false"   ng-model="track.selected" ng-click="$ctrl.selectTracks($index,track.selected)"> <!-- Selecciona todo --><br>
-               <!-- {{track.selected}} -->
-              <img ng-src="{{searchItem.images[2].url}}" ng-click= "$ctrl.playSong(track.uri)" alt="play">
-              </div>
-            <div class="col-sm-3">
-                 <p>Cancion: {{track.name}}</p>
-
-            </div>
-            <div class="col-sm-3">
-                <p>Artista: {{track.artist}}</p>
-
-            </div>
-            <div class="col-sm-3">
-
-                <p>Duración: {{$ctrl.msToDHMSMS( track.durationMs)}}</p>
-            </div>
+ <h3  ng-show="$ctrl.tracks" >tracks {{$ctrl.tracks.length}} <span ng-show="$ctrl.tracks.DuracionTotalMs">Duracion {{$ctrl.msToDHMSMS( $ctrl.tracks.DuracionTotalMs)}}</span>  </h3 >
 
 
-    </div>
-</div>
+<!-- Tabla de temas -->
 
 
+
+
+ <div class="table table-hover table-bordered" ng-show="$ctrl.tracks"">
+
+   <table id="TraksTable" class="table table-bordred table-striped table-hover">
+
+                    <thead>
+                       <th> <input  type="checkbox" name="selectAll"    value="false"   ng-model="selectAll" ng-click="$ctrl.selectAllTracks(selectAll)"> Selecciona todo<br></th>
+
+                       <th></th>
+                       <th>Cancion</th>
+                       <th>Artista</th>
+                       <th>Duracion</th>
+                       <th></th>
+
+
+                   </thead>
+
+    <tbody ng-repeat="track in $ctrl.tracks">
+        <td>
+            <input  type="checkbox" name="selectTrack"    value="false"   ng-model="track.selected" ng-click="$ctrl.selectTracks($index,track.selected)">
+             <span class="glyphicon glyphicon-play spotifyPlay"  ng-click= "$ctrl.playSong(track.uri)"   uib-popover="Play Spotify" popover-trigger="'mouseenter'"></span>
+           </td>
+
+        <td></td>
+        <td>{{track.name}}</td>
+        <td>{{track.artist}}</td>
+        <td>{{$ctrl.msToDHMSMS( track.durationMs)}}</td>
+    </tbody>
+  </table>
+
+ </div>
+
+<!-- Footer -->
 
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-show="okdisponible" ng-click="$ctrl.ok()">OK</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
 
-        </div>
+</div>
 
 

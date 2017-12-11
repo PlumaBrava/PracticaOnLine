@@ -55,14 +55,55 @@ angular.module('practicaApp')
             // propiedades.fechaCreacion=currentDate;
 
 
-            var dropzones= {
-                'A': [
-                    {
-                        'type': 'container',
-                        'id': 1,
-                        'columns': [{texto:1}]
-                    }]
-                };
+            var dropzones= {'A': [
+                {duracion: 0, iconClass: "glyphicon glyphicon-object-align-vertical", id: 1, nombre: "nombre", type: "container", columns:[[
+                    {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' }
+                ]]},
+                {duracion: 0, iconClass: "glyphicon glyphicon-object-align-horizontal", id: 2, nombre: "nombre", type: "bloque", columns:[[
+                    {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' }
+                ]]}
+                ]};
+
+            // {
+                //
+                // 'A': [
+                //  {
+                //     'type': 'container',
+                //     'id': 1,
+                //     'columns': [
+                //         [
+                //             {
+                //                 'type': 'item',
+                //                 'id': '1'
+                //             },
+                //             {
+                //                 'type': 'item',
+                //                 'id': '2'
+                //             }
+                //         ],
+                //         [
+                //             {
+                //                 'type': 'item',
+                //                 'id': '3'
+                //             }
+                //         ]
+                //     ]
+                // },
+                // {
+                //     'type': 'item',
+                //     'id': '4'
+                // },
+                // {
+                //     'type': 'item',
+                //     'id': '5'
+                // },
+                // {
+                //     'type': 'item',
+                //     'id': '6'
+                // }
+
+                //  ]
+                // };
             var model=angular.toJson(dropzones, true);
 
             if($scope.modificacion){
@@ -85,7 +126,7 @@ angular.module('practicaApp')
 
 $scope.armarPractica=function(){
     console.log('armarpractica');
-    $state.go('armarpractica');
+    $state.go('armarpractica',{userKey:fb.getUserKey(),practicaKey:$stateParams.param1.$id});
 
 };
 
