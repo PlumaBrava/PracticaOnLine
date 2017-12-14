@@ -36,10 +36,11 @@ $urlRouterProvider.rule(function ($injector, $location) {
 
           if(path==='' && $location.url().indexOf('access_token')!==-1 && $location.url().indexOf('token_type')!==-1 && $location.url().indexOf('expires_in'))
             {
-              console.log('cambio URL');
-              $location.url('/spotifycallback/'+$location.url().replace('#','?'));
+              console.log('cambio URL spotifycallback');
+              $location.url('/spotifycallback'+$location.url().replace('#','?'));
             // $location.replace().path('/spotifycallback/');
         }
+
 
         console.log(normalized);
         if (path !== normalized) {
@@ -112,7 +113,7 @@ $stateProvider
 .state('spotifycallback',{
     // url:'/spotifycallback/',
     // url:'/spotifycallback/?access_token&token_type&expires_in',
-    url:'/spotifycallback/?access_token&token_type&expires_in',
+    url:'/spotifycallback?access_token&token_type&expires_in',
     templateUrl:'views/spotifycallback.html',
     resolve: {
     'urlFix': ['$location', function($location){
@@ -123,7 +124,7 @@ $stateProvider
    },
     controller:'SpotifycallbackCtrl as sp'
 });
- console.log(' resolve location');
+ console.log(' resolve location state');
  console.log($stateProvider);
 
 
@@ -134,12 +135,30 @@ $stateProvider
 // });
 
 
-// $stateProvider
-// .state('practica',{
-//     url:'/practica',
-//     templateUrl:'views/practica.html',
-//     controller:'PracticaCtrl as practica'
-// });
+$stateProvider
+.state('practicar',{
+    url:'/practicar',
+    params: {
+            param1:null,
+            userKey: null,
+            practicaKey: null
+        },
+    templateUrl:'views/practicar.html',
+    controller:'PracticarCtrl as practicar'
+});
+
+$stateProvider
+.state('practicarlink',{
+    // url:'/practicarlink',
+    url:'/practicarlink?userKey&practicaKey',
+    // params: {
+    //         param1:null,
+    //         userKey: null,
+    //         practicaKey: null
+    //     },
+    templateUrl:'views/practicar.html',
+    controller:'PracticarCtrl as practicar'
+});
 
 
   }])
@@ -163,4 +182,17 @@ $stateProvider
 
 .run(['editableOptions', function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-}]);
+}])
+;
+// .config(['$provide', function ($provide) {
+//   $provide.decorator('$rootScope', function ($delegate) {
+//     var _emit = $delegate.$emit;
+
+//     $delegate.$emit = function () {
+//       console.log.apply(console, arguments);
+//       _emit.apply(this, arguments);
+//     };
+
+//     return $delegate;
+//   });
+// }]);

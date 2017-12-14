@@ -30,13 +30,13 @@ angular.module('practicaApp')
             // {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
             {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' },        // Dipara musica de Spotify
              {type: 'youtube', id: 4,link:'t1wBwyS94xY',name:'jj',description:'',duracion:0,iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
-            {type: 'audio', id: 5, link:'',volumen:1,name:'',iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
-            {type: 'leer', id: 6, texto:'Texto de prueba',iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
-            {type: 'escribir', id: 7, texto:'Texto en Pantalla',iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
-            {type: 'imagen', id: 8,link:'',name:'', iconClass:'btn-imagen glyphicon glyphicon-picture'  },                           // Muestra Imagen
+            {type: 'audio', id: 5, link:'',volumen:1,name:'',duracion:0,iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
+            {type: 'leer', id: 6, texto:'Texto de prueba',duracion:0,iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
+            {type: 'escribir', id: 7, texto:'Texto en Pantalla',duracion:0,iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
+            {type: 'imagen', id: 8,link:'',name:'',duracion:0, iconClass:'btn-imagen glyphicon glyphicon-picture'  },                           // Muestra Imagen
             {type: 'tick', id: 9, intervaloMs: 1000, volumen:1,duracion:6000,iconClass:'btn-tick glyphicon glyphicon-bell'},       // activa el cuenta timpo
-            {type: 'cronometro', id: 10, digital:true, analogico:true,iconClass:'btn-cronometro glyphicon glyphicon-hourglass'},      // permite medir mi tiempo.
-            {type: 'registro', id: 11,iconClass:'btn-registro glyphicon glyphicon-registration-mark' }        // permite tomar registo de tiempo o cantidades...
+            {type: 'cronometro', id: 10, digital:true, duracion:0, analogico:true,iconClass:'btn-cronometro glyphicon glyphicon-hourglass'},      // permite medir mi tiempo.
+            {type: 'registro', id: 11,duracion:0,iconClass:'btn-registro glyphicon glyphicon-registration-mark' }        // permite tomar registo de tiempo o cantidades...
         ],
         propiedades:{nombre: 'nombre de la practica',descripcion:'description', usuarioCreador: {},fechaCreacion:'',fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
         dropzones: {
@@ -281,6 +281,22 @@ switch(obj.type){
           duracionContainer=duracionContainer+objInterno[i].duracion;
           break;
 
+        case 'leer':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
+          if(duracionBloque<objInterno[i].duracion){
+            duracionBloque=objInterno[i].duracion;
+          }
+          duracionContainer=duracionContainer+objInterno[i].duracion;
+        break;
+
+         case 'youtube':
+          console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
+          if(duracionBloque<objInterno[i].duracion){
+            duracionBloque=objInterno[i].duracion;
+          }
+          duracionContainer=duracionContainer+objInterno[i].duracion;
+          break;
+
           case 'registro':
           console.log('level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
           if(duracionBloque<objInterno[i].duracion){
@@ -331,13 +347,13 @@ self.practicaKey=$stateParams.practicaKey;
       .then(function(obj){
          console.log('then ');
          console.log(obj);
-         $scope.$apply(function () {
+         // $scope.$apply(function () {
                 $scope.models.dropzones=    obj.result.practica;
                 $scope.models.propiedades=    obj.result.propiedades;
                 $scope.nombrePractica=obj.result.propiedades.nombre;
                 console.log($scope.models.dropzones);
                 console.log($scope.models.propiedades);
-            });
+            // });
 
       })
       .catch(function(error){
@@ -474,6 +490,7 @@ $scope.save=function(){
         console.log(item);
 
         item.texto=returnedItem;
+        item.duracion=0;
 
     }, function () {
 
@@ -525,6 +542,50 @@ $scope.openTickModal = function (size, item) {
     });
   };
 
+  $scope.openTimerModal = function (size, item) {
+
+    var parentElem = null;
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+
+      templateUrl: 'views/modal_timer.html',
+      controller: 'ModalInstanceTimer',
+      controllerAs: '$ctrl',
+      size: size,
+      appendTo: parentElem,
+      resolve: {
+
+        item:function(){
+            return item;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (returnedItem) {
+
+
+        console.log('return:'+returnedItem);
+        console.log(returnedItem);
+        console.log(item);
+
+
+        // item.texto=returnedItem;
+        // item.intervaloMs = returnedItem.intervaloMs;
+        // item.volumen = returnedItem.volumen;
+        item.duracion = Number(returnedItem.duracion);
+        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+
+    }, function () {
+
+        console.log('return dismissed:');
+      // $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
 $scope.openImagenModal = function (size, item) {
 
     var parentElem = null;
@@ -551,6 +612,7 @@ $scope.openImagenModal = function (size, item) {
 
         item.link  = returnedItem.link;
         item.name  = returnedItem.name;
+        item.duracion  = 0;
 
 
     }, function () {
@@ -744,6 +806,31 @@ console.log($ctrl );
   };
 })
 
+.controller('ModalInstanceTimer', function ($uibModalInstance,  item) {
+  var $ctrl = this;
+     // {type: 'tick', id: 8, intervaloMs: 1000, volumen:1,duracion:6000},       // activa el cuenta timpo
+
+  $ctrl.itemq = {
+
+    // intervaloMs : item.intervaloMs,
+    // volumen : item.volumen,
+    duracion : item.duracion
+  };
+console.log('$uibModalInstance' );
+console.log(item );
+console.log($uibModalInstance );
+console.log($ctrl );
+  this.ok = function () {
+     console.log('uibModalInstance.ok: ' );
+    $uibModalInstance.close($ctrl.itemq);
+  };
+
+  $ctrl.cancel = function () {
+     console.log('uibModalInstance.cancel: ' );
+    $uibModalInstance.dismiss('cancel');
+  };
+})
+
   .controller('ModalInstanceImagen',['$scope','$uibModalInstance','item', 'subirarchivofb', function ($scope, $uibModalInstance,  item,subirArchivoFb) {
 
  console.log('ModalInstanceImagen');
@@ -829,7 +916,7 @@ console.log($ctrl );
 console.log('itemq');
 console.log($scope.itemq );
 console.log($scope );
-console.log(ngYoutubeEmbedService );
+// console.log(ngYoutubeEmbedService );
 
 
 // this.p=null;
@@ -882,13 +969,13 @@ this.select=function(){
 
 
 this.showVideoInfo = function() {
-    var player = ngYoutubeEmbedService.getPlayerById('myvideo');
-    console.log(player);
-      console.log(player.getDuration());
-    // console.log(player.showVideoInfo());
+    // var player = ngYoutubeEmbedService.getPlayerById('myvideo');
+  //   console.log(player);
+  //     console.log(player.getDuration());
+  //   // console.log(player.showVideoInfo());
 
-    console.log(player.getVideoData());
-    console.log(player.getVolume());
+  //   console.log(player.getVideoData());
+  //   console.log(player.getVolume());
   };
 
  $scope.stateChanged = function(e) {
@@ -908,22 +995,22 @@ this.showVideoInfo = function() {
         console.log('playerStateChanged'); // Event data logged
         console.log(event); // Event data logged
             console.log('player.getVideoData()');
-            var player1 = ngYoutubeEmbedService.getPlayerById('videoID');
-    console.log(player1);
-    console.log(player1.getDuration());
-    console.log(fb.msToDHMSMS(player1.getDuration()*1000));
-    var videoData=player1.getVideoData();
-    console.log(videoData);
-    console.log(videoData);
-        $scope.$apply(function () {
-        $scope.itemq = {
-         duracion:player1.getDuration(),
-         duracionHMS:fb.msToDHMSMS(player1.getDuration()*1000),
-            volumen:player1.getVolume(),
-            titulo:videoData.title,
-            autor:videoData.author
-        };
-    });
+    //         var player1 = ngYoutubeEmbedService.getPlayerById('videoID');
+    // console.log(player1);
+    // console.log(player1.getDuration());
+    // console.log(fb.msToDHMSMS(player1.getDuration()*1000));
+    // var videoData=player1.getVideoData();
+    // console.log(videoData);
+    // console.log(videoData);
+    //     $scope.$apply(function () {
+        // $scope.itemq = {
+         // duracion:player1.getDuration(),
+         // duracionHMS:fb.msToDHMSMS(player1.getDuration()*1000),
+            // volumen:player1.getVolume(),
+            // titulo:videoData.title,
+            // autor:videoData.author
+        // };
+    // });
   };
 
 
@@ -988,21 +1075,28 @@ var req = {
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
 
-      var player = ngYoutubeEmbedService.getPlayerById("videoID");
-    console.log(player);
-      console.log(player.getDuration());
+      // var player = ngYoutubeEmbedService.getPlayerById("videoID");
+    // console.log(player);
+    //   console.log(player.getDuration());
 
-    console.log(player.getVolume());
+    // console.log(player.getVolume());
      $scope.itemq = {
 
     link : $scope.link,
     name: $scope.name,
 
-    duracion:player.getDuration(),
-    duracionHMS:fb.msToDHMSMS(player.getDuration()*1000),
-    volumen:player.getVolume(),
-    titulo:player.getVideoData().title,
-    autor:player.getVideoData().author
+    // duracion:player.getDuration(),
+    // duracionHMS:fb.msToDHMSMS(player.getDuration()*1000),
+    // volumen:player.getVolume(),
+    // titulo:player.getVideoData().title,
+    // autor:player.getVideoData().author
+
+
+     duracion:5,
+    duracionHMS:fb.msToDHMSMS(5*1000),
+    volumen:1,
+    titulo:'player.getVideoData().title',
+    autor:'jj'
 
   };
     $uibModalInstance.close($scope.itemq);
@@ -1060,7 +1154,7 @@ console.log(recorderService );
             });
 
         if($scope.file){
-        if($scope.file.type==='audio/mp3'){
+        if($scope.file.type==='audio/mp3' ||$scope.file.type==='audio/wav' ){
              $scope.$apply(function () {
             $scope.okdisponible=true;
             $scope.nombre=$scope.file.name;

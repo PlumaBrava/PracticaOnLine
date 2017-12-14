@@ -5,7 +5,7 @@
  * @name practicaApp.controller:SoptifycallbackCtrl
  * @description
  * # SoptifycallbackCtrl
- * Controller of the practicaApp
+ * Controller of the practicaApp  DESARROLLO!!!
  */
 angular.module('practicaApp')
 .config(['SpotifyProvider',function (SpotifyProvider) {

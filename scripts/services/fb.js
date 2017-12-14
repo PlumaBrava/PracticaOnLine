@@ -9,7 +9,7 @@
  */
 angular.module('practicaApp')
   // .service('fb',['$localStorage','$firebaseObject','$firebaseArray','$firebaseStorage', function (localStorage,$firebaseObject,$firebaseArray,$firebaseStorage) {
-  .service('fb',['$localStorage','$firebaseObject','$firebaseArray', function (localStorage,$firebaseObject,$firebaseArray) {
+  .service('fb',['$localStorage','$firebaseObject','$firebaseArray','$q', function (localStorage,$firebaseObject,$firebaseArray,$q) {
   // .service('fb',['$localStorage', function (localStorage) {
     // AngularJS will instantiate a singleton by calling 'new' on this function
     var self=this;
@@ -215,7 +215,7 @@ this.leerPractica=function(userKey, practicaKey) {
      console.log('leerPractica');
      console.log(userKey);
      console.log(practicaKey);
-     return new Promise(function (resolve, reject){
+     return $q(function (resolve, reject){
      console.log(userKey);
      console.log(practicaKey);
       var r = firebase.database().ref();

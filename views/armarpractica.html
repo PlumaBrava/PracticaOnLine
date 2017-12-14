@@ -131,7 +131,7 @@
 
 <!-- Template for a cronometro -->
 <script type="text/ng-template" id="cronometro.html">
-    <div class="cronometro" ng-click="openTickModal('sm',  item)">
+    <div class="cronometro" ng-click="openTimerModal('sm',  item)">
    <h5>Cronometro</h5>
    <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span> </button>
 
@@ -241,16 +241,16 @@
 
 
    <div class= "itemInformation " >
-              <div class="itemInfo1 "
+              <!-- <div class="itemInfo1 "
                uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
                uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-volume-up"></span>
-              </div>
+              </div> -->
               <div class="itemInfo1 "
-               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               uib-popover={{item.texto}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-comment"></span>
               </div>
       </div>

@@ -9,8 +9,9 @@
  */
 angular.module('practicaApp')
   // .controller('MispracticasCtrl', function () {
-  .controller('MispracticasCtrl', ['$scope','$state','fb',function ($scope,$state,fb) {
+  .controller('MispracticasCtrl', ['$scope','$state','fb','$copyToClipboard', function ($scope,$state,fb,$copyToClipboard) {
 
+    $scope.myUserID=fb.getUserKey();
    // var self=this;
      fb.cargarMisPracticas(fb.getUserKey()).then(function(lista){
 
@@ -20,24 +21,7 @@ angular.module('practicaApp')
       $scope.lista=lista.result;});
      });
 
- console.log($scope.lista);
-
-//     var setData=function(){
-//         console.log('MispracticasCtrl getUserKey()');
-//         console.log(fb.getUserKey());
-//     fb.leerMisPracticas(fb.getUserKey()).then(function(data){
-//         console.log('MispracticasCtrl leerMisPracticas them');
-//         console.log(data);
-//          $scope.$apply(function () {
-//             $scope.lista=data.result;
-//             console.log($scope.lista);
-//      });
-//     }).catch(function(data){
-//         console.log('MispracticasCtrl leerMisPracticas catch');
-//         console.log(data);
-//     });
-// };
-
+    console.log($scope.lista);
 
 $scope.configurar=function(datosPractica){
 
@@ -66,7 +50,21 @@ $scope.lista.$remove(item).then(function(ref) {
   // ref.key === item.$id; // true
 });
 
+};
 
+$scope.practicar=function(data)   {
+console.log('ejecutarPracticar');
+console.log(data);
+ $state.go('practicar',{userKey:fb.getUserKey(),practicaKey:data.$id,param1: data});
+};
+
+
+   $scope.copyHrefToClipboard = function(e,practica) {
+          console.log(e);
+
+            $copyToClipboard.copy('http://localhost:9000/#!/practicarlink?userKey='+fb.getUserKey()+'&practicaKey='+practica.$id).then(function () {
+                //show some notification
+            });
 };
 
   $scope.$on('$destroy', function() {

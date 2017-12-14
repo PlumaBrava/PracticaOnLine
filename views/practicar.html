@@ -1,0 +1,63 @@
+ <!-- <script src="scripts/p5/p5.js"></script> -->
+ <!-- <script src="scripts/p5/p5_practica.js"></script> -->
+<p ng-show="cargandoPractica">cargando Practica</p>
+
+<div class="toolbox box box-grey box-padding">
+        <h3>tools</h3>
+        <div class="row">
+
+
+                <button type="button" class="btn btn-default btn-lg" ng-click="execute()"  ><span class="glyphicon glyphicon-play"></span></button>
+
+
+                <button type="button" class="btn btn-default btn-lg" ng-click="pausa1()" ><span class="glyphicon glyphicon-pause"></span></button>
+
+
+                <button type="button" class="btn btn-default btn-lg" ng-click="stop1()" ><span class="glyphicon glyphicon-stop"></span></button>
+
+
+    </div>
+    </div>
+  <h1>Practica: {{nombrePractica}}</h1>
+<div class="col-md-4">
+
+
+</div>
+ <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{pantalla.avance}}" aria-valuemin="0" aria-valuemax="100" style="width:{{pantalla.avance}}%">
+      <span class="sr-only">{{pantalla.avance}}% Complete</span>
+    </div>
+  </div>
+
+  <div>
+  <h2 ng-show="nombreContainer">{{nombreContainer}}</h2>
+  <h2 ng-show="nombreBloque">{{nombreBloque}}</h2>
+    {{pantalla.texto}}<br/>
+</div>
+<div class="row">
+
+<img class="img-rounded col-md-4"  width="304" height="236" ng-src="{{pantalla.imagen}}" alt="Sin Imagen"/><br/>
+<span class="img-rounded col-md-4">{{tickDisplay}}</span>
+</div>
+
+ <div >
+    <ng-youtube-embed
+         video="videoURL"
+videoid="videoID"
+autoplay="true"
+        enablejsapi="true"
+        onready="playerReadyP"
+        onstatechange="playerStateChangedP()"
+                >
+
+    </ng-youtube-embed>
+    </div>
+    <!-- end="20" -->
+
+<!--
+
+       autoplay="true"
+        color="white"
+        disablekb="true" -->
+
+<div id='myContainer'></div>

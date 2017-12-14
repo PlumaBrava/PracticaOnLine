@@ -8,10 +8,8 @@
  * Controller of the practicaApp
  */
 angular.module('practicaApp')
-  .controller('MainCtrl',  ['$stateParams', '$state','$firebaseAuth', '$scope', 'fb',function ($stateParams, $state,firebaseAuth,$scope,fb) {
+  .controller('MainCtrl',  ['$stateParams', '$state','$firebaseAuth', '$scope', 'fb','$location',function ($stateParams, $state,firebaseAuth,$scope,fb,$location) {
 
-// var msg = new SpeechSynthesisUtterance('Hola Juan');
-// window.speechSynthesis.speak(msg);
 
 $scope.user='Sign Up';
 $scope.photoURL='';
@@ -37,17 +35,28 @@ auth.$onAuthStateChanged(function(firebaseUser) {
             // $scope.$apply(function () {
             $scope.photoURLshow=true;
             $scope.photoURL=firebaseUser.photoURL;
-            // $state.go('mispracticas');
+            if($location.url()==='/login'){
+            $state.go('mispracticas');
+        };
             // } );
         // console.log('$scope.photoURLshow:', $scope.photoURLshow);
         // console.log('$scope.photoURL:', $scope.photoURL);
     }
-     console.log('path Main to mis practicas');
-     console.log($state);
+     console.log('state Main to mis practicas');
+     console.log($location);
+     console.log($location.url());
+     console.log($location.path);
 
   // $state.go('mispracticas');
   } else {
     console.log('Signed out');
+     console.log('state Main to mis practicas');
+     console.log($state.current);
+     // console.log('$urlRouterProvider');
+console.log($location);
+     console.log($location.url());
+     console.log($location.path);
+
     $scope.user='Sign Up';
     $scope.photoURL=null;
     $scope.photoURLshow=false;
@@ -57,7 +66,9 @@ auth.$onAuthStateChanged(function(firebaseUser) {
     $scope.photoURLshow=false;
      $scope.showBar=false;
      console.log('$scope.showBar:', $scope.showBar);
+    if($location.url()!=='/practicarlink'){
      $state.go('home');
+    }
     } );
      // console.log('$scope.photoURLshow:', $scope.photoURLshow);
      //    console.log('$scope.photoURL:', $scope.photoURL);
