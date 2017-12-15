@@ -48,11 +48,17 @@
     background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
 }
 
-.box-blue {
+.containerPractica {
     border-color: #bce8f1;
 }
 
-.box-blue > h3 {
+.botonContainer {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1
+}
+
+.containerPractica > h3 {
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;
@@ -74,12 +80,20 @@
     background-image: linear-gradient(to bottom,#fcf8e3 0,#faf2cc 100%);
 }
 
-.box-orange {
+.bloque {
     border-color: #FF6A00;
 
 }
 
-.box-orange  h3 {
+.botonBloque{
+        color: #fcf8e3; /*color del texto*/
+    background-color: #ff6a00;
+    border-color: #FF6A00;
+
+}
+
+
+.bloque >  h3 {
     color: #fcf8e3; /*color del texto*/
     background-color: #ff6a00;
     border-color: #FF6A00;
@@ -90,18 +104,26 @@
 
  /*ordena las cosas dentro de un bloque (elementos en paralelo)
  uno al lado del otro!!!*/
- .box-orange .box-orange,.box-orange .box-blue,
-  .box-orange .spotify  ,.box-orange .item, .box-orange .youtube,
-  .box-orange .tick  ,.box-orange .cronometro, .box-orange .registro,
-  .box-orange .audio  ,.box-orange .leer, .box-orange .escribir,
-  .box-orange .imagen  ,.box-orange .tick, .box-orange .cronometro,
-  .box-orange .registro
+  .bloque> .column>ul>li> .bloque,.bloque> .column>ul>li>.containerPractica,
+  .bloque> .column>ul>li>.spotify  ,.bloque> .column>ul>li>.item, .bloque> .column>ul>li>.youtube,
+  .bloque> .column>ul>li>.tick  ,.bloque >.column>ul>li> .cronometro, .bloque> .column>ul>li>.registro,
+  .bloque> .column>ul>li>.audio  ,.bloque >.column>ul>li> .leer, .bloque> .column>ul>li> .escribir,
+  .bloque> .column>ul>li>.imagen  ,.bloque>.column>ul>li>.tick, .bloque> .column>ul>li>.cronometro,
+  .bloque> .column>ul>li>.registro
 
   {
     float: left;
  }
 
-
+  .containerPractica >.column>ul>li> .bloque,..containerPractica> .column>ul>li> .containerPractica,
+  .containerPractica >.column>ul>li> .spotify,.containerPractica> .column>ul>li> .item, .containerPractica >.column>ul>li>.youtube,
+  .containerPractica >.column>ul>li> .tick,   .containerPractica> .column>ul>li>.cronometro, .containerPractica >.column>ul>li>.registro,
+  .containerPractica >.column>ul>li> .audio,  .containerPractica> .column>ul>li>.leer, .containerPractica >.column>ul>li>.escribir,
+  .containerPractica >.column>ul>li> .imagen,  .containerPractica> .column>ul>li>.tick, .containerPractica> .column>ul>li> .cronometro,
+  .containerPractica >.column>ul>li> .registro
+{
+    clear: left;
+}
 
 
  /*ordena las cosas dentro de un herramientas, uno al lado del otro!!!*/

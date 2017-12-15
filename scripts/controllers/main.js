@@ -66,7 +66,8 @@ console.log($location);
     $scope.photoURLshow=false;
      $scope.showBar=false;
      console.log('$scope.showBar:', $scope.showBar);
-    if($location.url()!=='/practicarlink'){
+    // if($location.url()!=='/practicarlink'){
+    if($location.url().indexOf('practicarlink')===-1){
      $state.go('home');
     }
     } );

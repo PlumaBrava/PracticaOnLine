@@ -20,23 +20,23 @@ angular.module('practicaApp')
 
         templatesConetendores: [
 
-            {type: 'container', id: 1, duracion:0, nombre:'nombre',columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical'},//Se ejecutan tareas en serie
-            {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
+            {type: 'container', id: 1, duracion:0,duracionHMS:'00:00:00', nombre:'nombre',columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical botonContainer'},//Se ejecutan tareas en serie
+            {type: 'bloque', id: 2, duracion:0,duracionHMS:'00:00:00', nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal botonBloque'},         //Se ejecutan tareas en paralelo
 
         ],
         templates: [
 
             // {type: 'container', id: 1, duracion:0, columns: [[]], iconClass:'glyphicon glyphicon-object-align-vertical'},//Se ejecutan tareas en serie
             // {type: 'bloque', id: 2, duracion:0, nombre:'nombre',columns: [[]],iconClass:'glyphicon glyphicon-object-align-horizontal'},         //Se ejecutan tareas en paralelo
-            {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' },        // Dipara musica de Spotify
-             {type: 'youtube', id: 4,link:'t1wBwyS94xY',name:'jj',description:'',duracion:0,iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
-            {type: 'audio', id: 5, link:'',volumen:1,name:'',duracion:0,iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
-            {type: 'leer', id: 6, texto:'Texto de prueba',duracion:0,iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
-            {type: 'escribir', id: 7, texto:'Texto en Pantalla',duracion:0,iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
-            {type: 'imagen', id: 8,link:'',name:'',duracion:0, iconClass:'btn-imagen glyphicon glyphicon-picture'  },                           // Muestra Imagen
-            {type: 'tick', id: 9, intervaloMs: 1000, volumen:1,duracion:6000,iconClass:'btn-tick glyphicon glyphicon-bell'},       // activa el cuenta timpo
-            {type: 'cronometro', id: 10, digital:true, duracion:0, analogico:true,iconClass:'btn-cronometro glyphicon glyphicon-hourglass'},      // permite medir mi tiempo.
-            {type: 'registro', id: 11,duracion:0,iconClass:'btn-registro glyphicon glyphicon-registration-mark' }        // permite tomar registo de tiempo o cantidades...
+            {type: 'spotify', id: 3,search: 'track' , volumen:1,duracion:0,duracionHMS:'00:00:00',numeroTracks:0, tracks:[] , iconClass:'btn-spotify',iconSrc:'/images/Spotify_logo_without_text.svg' },        // Dipara musica de Spotify
+             {type: 'youtube', id: 4,link:'t1wBwyS94xY',name:'jj',description:'',duracion:0,duracionHMS:'00:00:00',iconClass:'btn-youtube',iconSrc:'/images/YouTube_full-color_icon_(2017).svg'}, // link a you tube
+            {type: 'audio', id: 5, link:'',volumen:1,name:'',duracion:0,duracionHMS:'00:00:00',iconClass:'btn-audio glyphicon glyphicon-music' },          // Reporduce audio
+            {type: 'leer', id: 6, texto:'Texto de prueba',duracion:0,duracionHMS:'00:00:00',iconClass:'btn-leer glyphicon glyphicon-bullhorn'},           // Lee un texto
+            {type: 'escribir', id: 7, texto:'Texto en Pantalla',duracion:0,duracionHMS:'00:00:00',iconClass:'btn-escribir glyphicon glyphicon-pencil'},           // Escribe un texto en Pantalla
+            {type: 'imagen', id: 8,link:'',name:'',duracion:0,duracionHMS:'00:00:00', iconClass:'btn-imagen glyphicon glyphicon-picture'  },                           // Muestra Imagen
+            {type: 'tick', id: 9, intervaloMs: 1000, volumen:1,duracion:6000,duracionHMS:'00:00:06',iconClass:'btn-tick glyphicon glyphicon-bell'},       // activa el cuenta timpo
+            {type: 'cronometro', id: 10, digital:true, duracion:0,duracionHMS:'00:00:00', analogico:true,iconClass:'btn-cronometro glyphicon glyphicon-hourglass'},      // permite medir mi tiempo.
+            {type: 'registro', id: 11,duracion:0,duracionHMS:'00:00:00',iconClass:'btn-registro glyphicon glyphicon-registration-mark' }        // permite tomar registo de tiempo o cantidades...
         ],
         propiedades:{nombre: 'nombre de la practica',descripcion:'description', usuarioCreador: {},fechaCreacion:'',fechaModicicacion:[],publica:false,cantidadSegidores:0,calificacion:100,duracion:0},        // permite tomar registo de tiempo o cantidades...
         dropzones: {
@@ -75,87 +75,13 @@ angular.module('practicaApp')
                     'type': 'item',
                     'id': '6666'
                 }
-            ]  ,
-            'B': [
-                {
-                    'type': 'item',
-                    'id': 7
-                }]
-
-
-                // ,
-            //     {
-            //         'type': 'item',
-            //         'id': '8'
-            //     },
-            //     {
-            //         'type': 'container',
-            //         'id': '2',
-            //         'columns': [
-            //             [
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '9'
-            //                 },
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '10'
-            //                 },
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '11'
-            //                 }
-            //             ],
-            //             [
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '12'
-            //                 },
-            //                 {
-            //                     'type': 'container',
-            //                     'id': '3',
-            //                     'columns': [
-            //                         [
-            //                             {
-            //                                 'type': 'item',
-            //                                 'id': '13'
-            //                             }
-            //                         ],
-            //                         [
-            //                             {
-            //                                 'type': 'item',
-            //                                 'id': '14'
-            //                             }
-            //                         ]
-            //                     ]
-            //                 },
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '15'
-            //                 },
-            //                 {
-            //                     'type': 'item',
-            //                     'id': '16'
-            //                 }
-            //             ]
-            //         ]
-            //     },
-            //     {
-            //         'type': 'item',
-            //         'id': 16
-            //     }
-            // ],
-
-            // 'c': [
+            ]
+             // ,
+            // 'B': [
             //     {
             //         'type': 'item',
             //         'id': 7
-            //     },
-            //     {
-            //         'type': 'item',
-            //         'id': '8'
-            //     }
-            //     ]
+            //     }]
         }
     };
 
@@ -309,21 +235,26 @@ switch(obj.type){
 
 console.log(obj.type);
   obj.duracion=duracionContainer;
+  obj.duracionHMS=fb.msToDHMSMS(duracionContainer);
 switch(obj.type){
     case 'container':
           obj.duracion=duracionContainer;
+          obj.duracionHMS=fb.msToDHMSMS(duracionContainer);
           console.log('level:' +level+' ' +obj.type +' - duracion container: '+ obj.duracion);
 
           break;
 
           case 'bloque':
           obj.duracion=duracionBloque;
+          obj.duracionHMS=fb.msToDHMSMS(duracionBloque);
           console.log('level:' +level+' ' +obj.type +' - duracion container: '+ obj.duracion);
             break;
 
 }
 
-
+$scope.duracionPracticaHMS=fb.msToDHMSMS(duracionContainer);
+$scope.duracion=(duracionContainer);
+console.log('duracionPracticaHMS: '+ $scope.duracionPracticaHMS);
 // retorno el objeto completo para que con la recursividad se ajusten todas las duraciones.
 
 console.log('retorno:');
@@ -351,6 +282,7 @@ self.practicaKey=$stateParams.practicaKey;
                 $scope.models.dropzones=    obj.result.practica;
                 $scope.models.propiedades=    obj.result.propiedades;
                 $scope.nombrePractica=obj.result.propiedades.nombre;
+                $scope.duracionPracticaHMS=obj.result.propiedades.duracionHMS;
                 console.log($scope.models.dropzones);
                 console.log($scope.models.propiedades);
             // });
@@ -378,14 +310,17 @@ self.practicaKey=$stateParams.practicaKey;
 
 
     $scope.$watch('models.dropzones', function(model) {
+        console.log('evento watch model.dropzones');
         $scope.modelAsJson = angular.toJson(model, true);
-    }, true);
+            $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+        }, true);
 load();
 $scope.save=function(){
     console.log('save');
     console.log('save: '+fb.getUserKey());
     comandos.setModelAsJason($scope.modelAsJson);
-
+    $scope.models.propiedades.duracionHMS=$scope.duracionPracticaHMS;
+    $scope.models.propiedades.duracion=$scope.duracion;
     fb.writeModificacionPractica(self.practicaKey,self.userKey, $scope.models.dropzones,$scope.models.propiedades);
 
 };
@@ -399,7 +334,7 @@ $scope.save=function(){
 // callbacks de la lista
 
   $scope.dragoverCallback = function(index, external, type, callback) {
-        $scope.logListEvent('dragged over', index, external, type);
+        $scope.logListEvent('evento dragged over', index, external, type);
         // Invoke callback to origin for container types.
         if (type === 'container' && !external) {
             console.log('Container being dragged contains ' + callback() + ' items');
@@ -408,8 +343,8 @@ $scope.save=function(){
     };
 
     $scope.dropCallback = function(event,index, item, external, type,list) {
-      console.log('CallbackBloqueRaiz');
-      $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+      console.log('evento dropCallback');
+
         $scope.logListEvent('dropped at', index, external, type);
         // Return false here to cancel drop. Return true if you insert the item yourself.
           console.log(event);
@@ -422,7 +357,7 @@ $scope.save=function(){
     };
 
      $scope.dropCallbackBloque = function(event,index, item, external, type) {
-               console.log('CallbackBloque');
+               console.log('evento CallbackBloque');
         $scope.logListEvent('dropped at', index, external, type);
         // Return false here to cancel drop. Return true if you insert the item yourself.
           console.log(event);
@@ -434,18 +369,21 @@ $scope.save=function(){
     };
 
     $scope.logEvent = function(message) {
+        console.log('eventbbo logEvent');
         console.log(message);
     };
 
     $scope.logListEvent = function(action, index, external, type) {
+        console.log('evento logListEvent');
         var message = external ? 'External ' : '';
         message += type + ' element was ' + action + ' position ' + index;
         console.log(message);
+
     };
 
 
     $scope.onDragstart = function(list, event) {
-        console.log('onDragstart');
+        console.log('evento onDragstart');
         console.log(list);
         console.log(event);
        // list.dragging = true;
@@ -491,7 +429,8 @@ $scope.save=function(){
 
         item.texto=returnedItem;
         item.duracion=0;
-
+        item.duracionHMS='00:00:00';
+        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
     }, function () {
 
         console.log('return dismissed:');
@@ -533,6 +472,9 @@ $scope.openTickModal = function (size, item) {
         item.intervaloMs = returnedItem.intervaloMs;
         item.volumen = returnedItem.volumen;
         item.duracion = Number(returnedItem.duracion);
+        item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
+        item.ascendente=returnedItem.ascendente;
+        item.tipoDigital=returnedItem.tipoDigital;
         $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
 
     }, function () {
@@ -576,7 +518,10 @@ $scope.openTickModal = function (size, item) {
         // item.intervaloMs = returnedItem.intervaloMs;
         // item.volumen = returnedItem.volumen;
         item.duracion = Number(returnedItem.duracion);
+        item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
         $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+
+
 
     }, function () {
 
@@ -613,6 +558,10 @@ $scope.openImagenModal = function (size, item) {
         item.link  = returnedItem.link;
         item.name  = returnedItem.name;
         item.duracion  = 0;
+        item.duracionHMS='00:00:00';
+        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+
+
 
 
     }, function () {
@@ -656,6 +605,10 @@ $scope.openImagenModal = function (size, item) {
         item.titulo  = returnedItem.titulo;
         item.autor  = returnedItem.autor;
 
+        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
+
+
+
        }, function () {
 
         console.log('return dismissed:');
@@ -698,9 +651,14 @@ $scope.openAudioModal = function (size, item) {
         item.name = returnedItem.name;
         if(returnedItem.duracion){
         item.duracion = returnedItem.duracion;
+        item.duracionHMS=fb.msToDHMSMS(returnedItem.duracion);
         }else{
             item.duracion=0;
+            item.duracionHMS='00:00:00';
         }
+
+
+
 
     }, function () {
 
@@ -750,6 +708,7 @@ $scope.openSpotifyModal = function (size, item) {
         item.volumen=returnedItem.volumen;
         item.volumenText=returnedItem.volumen*100 +' %';
 
+        $scope.models.dropzones.A=self.calculoDeDuracion($scope.models.dropzones.A,0);
 
     }, function () {
 
@@ -783,13 +742,14 @@ console.log($ctrl );
 })
 .controller('ModalInstanceTick', function ($uibModalInstance,  item) {
   var $ctrl = this;
-     // {type: 'tick', id: 8, intervaloMs: 1000, volumen:1,duracion:6000},       // activa el cuenta timpo
-
+$ctrl.error=null;
   $ctrl.itemq = {
 
-    intervaloMs : item.intervaloMs,
+    intervaloMs : item.intervaloMs/1000,
     volumen : item.volumen,
-    duracion : item.duracion
+    duracion : item.duracion/1000,
+    tipoDigital:item.tipoDigital,
+    ascendente:item.ascendente
   };
 console.log('$uibModalInstance' );
 console.log(item );
@@ -797,7 +757,14 @@ console.log($uibModalInstance );
 console.log($ctrl );
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
+     if($ctrl.itemq.intervaloMs>=$ctrl.itemq.duracion){
+        $ctrl.error='el intervalo debe ser menor que la duración';
+     }
+        else{
+     $ctrl.itemq.duracion=$ctrl.itemq.duracion*1000;
+     $ctrl.itemq.intervaloMs=$ctrl.itemq.intervaloMs*1000;
     $uibModalInstance.close($ctrl.itemq);
+    };
   };
 
   $ctrl.cancel = function () {
@@ -1092,7 +1059,7 @@ var req = {
     // autor:player.getVideoData().author
 
 
-     duracion:5,
+     duracion:5000,
     duracionHMS:fb.msToDHMSMS(5*1000),
     volumen:1,
     titulo:'player.getVideoData().title',
@@ -1118,13 +1085,15 @@ var req = {
   $scope.nombre=item.name;
   $scope.path=item.link;
   $scope.duracion=item.duracion;
+  $scope.duracionHMS=item.duracionHMS;
 
   $ctrl.itemq = {
 
     link: item.link,
     volumen:item.volumen,
     name:item.name,
-    duracion : item.duracion
+    duracion : item.duracion,
+    duracionHMS : item.duracionHMS
   };
 console.log('ModalInstanceAudio' );
 console.log(item );
@@ -1190,7 +1159,8 @@ this.duracionAudioFile=function(){
     comandos.duracionAudio($scope.path).then(function(obj){
         console.log('playAudioFile:'+obj.result);
            $scope.$apply(function () {
-        $scope.duracion=obj.result;
+        $scope.duracion=obj.result*1000;//El resultado esta en segundos
+        $scope.duracionHMS=obj.result;//El resultado esta en segundos
     });
     }).catch(function(error){
         console.log('playAudioFile'+error);
@@ -1213,7 +1183,7 @@ $scope.subir=function(){
 
                                 link :result.downloadURL,
                                 name:result.metadata.name,
-                                duracion:$scope.duracion
+                                duracion:$scope.duracion   //ya tiene el valor en ms
                               };
 
                            $uibModalInstance.close($ctrl.itemq);
@@ -1256,7 +1226,7 @@ $ctrl.f1=function(a){
                               };
                           $scope.okdisponible=true;
                       },function(result) {
-                      console.log('error Imagen');
+                      console.log('error audio');
                       console.log(result);
                       });
 

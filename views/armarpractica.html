@@ -41,18 +41,11 @@
      -->
 
 <script type="text/ng-template" id="bloque.html">
-    <div class="container-element box box-orange">
-
-    <div>
-        <h3 editable-text="item.nombre" e-form="textBtnForm">
-<button type="button" class="btn btn-primary btn-sm {{item.iconClass}}" disabled="disabled" > </button>
-        {{item.nombre || "nombre bloque:"}}- Duracion: {{item.duracion}}
-       <button class="btn btn-default" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-    edit
-  </button>
-</h3>
-</div>
-
+    <div class="container-element box bloque">
+      <h3 editable-text="item.nombre">
+        <button type="button" class="btn btn-primary btn-sm {{item.iconClass}}" disabled="disabled" > </button>
+        {{item.nombre || "nombre bloque:"}}- Duracion: {{item.duracionHMS}}
+      </h3>
         <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"  ></div>
         <div class="clearfix"></div>
     </div>
@@ -66,11 +59,11 @@
         Su duración sera la suma de los tiempos de cada uno de sus componentes.
      -->
 <script type="text/ng-template" id="container.html">
-    <div class="container-element box box-blue"
-     >
-        <h3 editable-text="item.nombre" >
- <button type="button" class="btn btn-primary btn-sm {{item.iconClass}}" disabled="disabled"> </button>
-        {{item.nombre || "nombre container:"}} - Duracion: {{item.duracion}}</h3>
+    <div class="container-element box containerPractica" >
+      <h3 editable-text="item.nombre" >
+         <button type="button" class="btn btn-primary btn-sm {{item.iconClass}}" disabled="disabled"> </button>
+        {{item.nombre || "nombre container:"}} - Duracion: {{item.duracionHMS}}
+      </h3>
         <div class="column" ng-repeat="list in item.columns" ng-include="'list.html'"></div>
         <div class="clearfix"></div>
     </div>
@@ -83,12 +76,12 @@
 
 <!-- Template for tick -->
 <script type="text/ng-template" id="tick.html">
-    <div class="tick" ng-click="openTickModal('sm',  item)">
+    <div class="tick" ng-click="openTickModal('lg',  item)">
    <h5>Tick</h5>
    <button type="button" class="btn btn-lg  center-block" >  <span class="{{item.iconClass}}"></span></button>
    <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -113,7 +106,7 @@
 
    <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -137,7 +130,7 @@
 
    <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -163,7 +156,7 @@
 
    <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -216,16 +209,16 @@
 
 
    <div class= "itemInformation " >
-              <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+             <!--  <div class="itemInfo1 "
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
                uib-popover={{item.volumen}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-volume-up"></span>
-              </div>
+              </div> -->
               <div class="itemInfo1 "
-               uib-popover={{item.name}} popover-trigger="'mouseenter'">
+               uib-popover={{item.texto}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-comment"></span>
               </div>
       </div>
@@ -242,7 +235,7 @@
 
    <div class= "itemInformation " >
               <!-- <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -267,7 +260,7 @@
 
    <div class= "itemInformation " >
               <div class="itemInfo1 "
-               uib-popover={{item.duracion}} popover-trigger="'mouseenter'">
+               uib-popover={{item.duracionHMS}} popover-trigger="'mouseenter'">
                <span class="glyphicon glyphicon-time"></span>
               </div>
               <div class="itemInfo1 "
@@ -332,13 +325,24 @@
 
 
             <li>
-               <div ng-if="models.selected" class="box box-grey box-padding"
+               <button  ng-if="models.selected"
+                        type="button" class= "btn btn-lg {{models.selected.iconClass}}  "
+                        uib-popover="Copy {{models.selected.type}}"
+                        popover-trigger="'mouseenter'"
+                        dnd-draggable="models.selected"
+                        dnd-effect-allowed="copy"
+                            >
+                <img class="btn-size " src="{{models.selected.iconSrc}}"  alt="" />
+
+                        </button>
+
+              <!--  <div ng-if="models.selected" class="box box-grey box-padding"
                  dnd-draggable="models.selected"
                             dnd-effect-allowed="copy">
                     <h3>Selected</h3>
                     <strong>Type: </strong> {{models.selected.type}}<br>
                     <input type="text" ng-model="models.selected.id" class="form-control" style="margin-top: 5px" />
-                </div>
+                </div> -->
             </li>
         </ul>
     </div>
@@ -346,7 +350,7 @@
 
 <div class="toolbox box box-grey box-padding" >
         <h3 data-toggle="collapse" data-target="#Contenedores">Contenedores</h3>
-        <div id="Contenedores" class="btn-toolbar collapse " role="toolbar">
+        <div id="Contenedores" class="btn-toolbar collapse in" role="toolbar">
          <div class="btn-group">
         <ul >
 
@@ -411,7 +415,7 @@
             <div class="dropzone box box-yellow">
                 <!-- The dropzone also uses the list template -->
                 <!-- <h3>Practica {{zone}}</h3> -->
-                <h3>Practica {{nombrePractica}} </h3>
+                <h3>Practica: {{nombrePractica}} - Duracion: {{duracionPracticaHMS}}</h3>
                 <div ng-include="'list.html'"></div>
             </div>
         </div>

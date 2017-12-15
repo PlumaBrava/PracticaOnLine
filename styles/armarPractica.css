@@ -212,20 +212,24 @@ height:24px;
 .btn-spotify{
   background:#1EA62A;
   border-color: #1EA62A;
+   margin: auto;
+   width:48px;
+  height:48px;
 }
 
 
-.toolbox .btn-spotify{   /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
+.toolbox .btn-spotify, .box-grey .btn-spotify {   /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
   padding: 0px;
   margin: auto;
 }
 
-.toolbox .btn-youtube{ /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
+.toolbox .btn-youtube, .box-grey .btn-youtube{ /*Con esta combinacion se ajusta el padding y margin de estos botones de herramientas*/
   padding: 0px;
   margin: auto;
 }
 .btn-youtube{           /*Las clases btn-xxxx se colocan el apramarpractiva.js para que se puedan modificar segun el caso*/
-  background: #FF790BE7;
+  /*background: #FF790BE7;*/
+  background: transparent;
   border-color: #FF790BE7;
   margin: auto;
    width:48px;

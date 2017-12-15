@@ -6,25 +6,44 @@
             <h3 class="modal-title" id="modal-title">Tick</h3>
         </div>
         <div class="modal-body" id="modal-body">
-            <ul>
-                <!-- <li > -->
-                    <a > intervalo_ms
-                        <input type="text"  ng-model="$ctrl.itemq.intervaloMs"/>
-                    </a>
-                    <a > volumen
-                        <input type="text"  ng-model="$ctrl.itemq.volumen"/>
-                    </a>
-                    <a > duracion
-                        <input type="text"  ng-model="$ctrl.itemq.duracion"/>
-                    </a>
-                <!-- </li> -->
-            </ul>
-            <!-- Selected: <b>{{ $ctrl.selected.item }}</b> -->
+<p class="bg-danger">{{$ctrl.error}}</p>
+    <p class="form-group">
+        <label for="Tipo">Tipo:  </label>
 
-            <!-- <div class="texto">{{$ctrl.item.texto}}</div> -->
+        <input type="radio" ng-model="$ctrl.itemq.tipoDigital" value="true" >Digital
+        <input type="radio" ng-model="$ctrl.itemq.tipoDigital" value="false">Analogico
+
+    </p>
+
+    <p class="form-group">
+        <label for="Tipo">Ascendente:  </label>
+
+        <input type="radio" ng-model="$ctrl.itemq.ascendente" value="true" >Ascendente
+        <input type="radio" ng-model="$ctrl.itemq.ascendente" value="false">Descendente
+
+    </p>
+
+            <div >
+
+                    <p > intervalo (segundos)
+                        <input type="text"  ng-model="$ctrl.itemq.intervaloMs"/>
+                    </p>
+
+                    <p > duracion (segundos)
+                        <input type="text"  ng-model="$ctrl.itemq.duracion"/>
+                    </p>
+               <!--  <a > volumen
+                        <input type="text"  ng-model="$ctrl.itemq.volumen"/>
+                    </a> -->
+
+            <!-- Barra de Volumen -->
+            <div id="barraVolumen" class="row">
+              <input type="range" min="1" max="100" ng-model="$ctrl.itemq.volumen" value="50" class="BarraVolumen" id="myRange" ng-Change="$ctrl.setVolumen(mVolumen)"> volumen
+            </div>
+            </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>   <button class="btn btn-primary" type="button" ng-click="$ctrl.test()">test</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
     <!-- </script> -->

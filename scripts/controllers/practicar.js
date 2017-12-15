@@ -63,7 +63,7 @@ self.practicaKey=$stateParams.practicaKey;
             self.modelo=obj.result.practica;
              console.log(obj.result.practica);
 
-                self.propiedades=    obj.result.propiedades;
+                $scope.propiedades=    obj.result.propiedades;
                 $scope.nombrePractica=obj.result.propiedades.nombre;
                 $scope.cargandoPractica=false;
 
@@ -94,7 +94,7 @@ load();
 
     $scope.estado=ESTADO_PLAY;
 
-    self.startPracticaTimer(self.modelo.A[0].duracion);
+    self.startPracticaTimer($scope.propiedades.duracion);
 
     self.ejecturarSerie(self.modelo.A);
 
@@ -222,7 +222,7 @@ this.play=function(valores){
 
             case "tick":
             console.log("case tick");
-            self.startTick(valores.intervaloMs,valores.duracion).then(function(obj){
+            self.startTick(valores).then(function(obj){
               console.log("Play-Retorno Promesa Tick");
               console.log(obj);
             fulfill({ value: "Retorno Promesa Tick", result: "Retorno Promesa Tick result" });
@@ -384,9 +384,9 @@ this.startPracticaTimer=function(duracion){
   console.log("startPracticaTimer "+duracion);
   if(duracion){
   self.tickPractica=interval( self.playTickPractica,1000);
-  $scope.tickPracticaTime=  0;
+  $scope.tickPracticaTime=  1000;
   $scope.duracionPractica=  duracion;
-  console.log(self.tick);
+  console.log(self.tickPractica);
 // return new Promise(function (resolve, reject){
 //     console.log("Construccion de la promesa Tick");
     setTimeout(function() {
@@ -434,12 +434,27 @@ this.playTickPractica=function(){
 
 // Tick
 
-this.startTick=function(intervaloMs,duracion){
-  console.log("startTick: "+intervaloMs);
-  self.tick=interval( self.playTick,intervaloMs);
+this.startTick=function(datosTick){
+  var intervaloMs=  datosTick.intervaloMs;
+  var duracion=datosTick.duracion
+  console.log("startTick intervaloMs: "+intervaloMs);
+  console.log("startTick duracion: "+duracion);
+  console.log("startTick ascendente: "+datosTick.ascendente);
+$scope.datosTick=datosTick;
+  if (datosTick.ascendente== 'true'){
+      console.log("startTick ascendente true: "+duracion);
   $scope.tickTime=  0;
+   } else{
+      console.log("startTick asec false duracion : "+duracion);
+    $scope.tickTime=duracion;
+     console.log("startTick asec false duracion : "+duracion);
+   };
+     console.log("$scope.tickTime : "+$scope.tickTime);
   $scope.tickInterval=  intervaloMs;
+
   $scope.tickDisplay=fb.msToDHMSMS($scope.tickTime);
+   console.log('playTick1 intervaloMs'+intervaloMs);
+    self.tick=interval( self.playTick,intervaloMs,datosTick);
   console.log(self.tick);
 return new Promise(function (resolve, reject){
     console.log("Construccion de la promesa Tick");
@@ -470,16 +485,27 @@ $scope.tickDisplay=  null;
 
 };
 
-this.playTick=function(){
- console.log("playTick: "+$scope.estado);
+this.playTick=function(datosTick){
+ console.log("playTick1: "+$scope.estado);
+ console.log($scope.datosTick);
+ // console.log("playTick1: "+datosTick.volumen);
     if($scope.estado==ESTADO_STOP){
         self.stopTick();
     }
     else{
+
+if ($scope.datosTick.ascendente== 'true'){
+ console.log("playTick1: ascendent ");
+  $scope.tickTime=$scope.tickTime+$scope.tickInterval;
+   } else{
+    console.log("playTick1: desc ");
+    $scope.tickTime=$scope.tickTime-$scope.tickInterval;
+   };
+
    // console.log("tick-HOWL6");
    // console.log("mp3 codecs ogg: "+  Howler.codecs("mp3"));
-   $scope.tickTime=$scope.tickTime+$scope.tickInterval;
- console.log("tickTimer: "+$scope.tickTime);
+
+ console.log(" playTick1 tickTimer: "+$scope.tickTime);
 
 $scope.tickDisplay=  fb.msToDHMSMS($scope.tickTime);
    Howler.mobileAutoEnable = true;
@@ -487,22 +513,23 @@ $scope.tickDisplay=  fb.msToDHMSMS($scope.tickTime);
     var sound = new Howl({
       src: ['/audio/flap.mp3'],
       format: ['mp3'],
+
       html5: true
 
     });
 
-
+    // sound.volume( vol/100);
 
     // Clear listener after first call.
   sound.once('load', function(){
         // console.log("once..load");
-        // console.log(sound);
+ console.log(" playTick1 load: ");
     sound.play();
   });
 
 // Fires when the sound finishes playing.
     sound.on('end', function(){
-      console.log('Finished!');
+      console.log(' playTick1 Finished!');
       sound.unload();
     });
 
@@ -536,8 +563,7 @@ return new Promise(function (resolve, reject){
 
 this.playAudio=function(link){
   console.log("playAudio: "+link);
-  // self.tick=interval( self.playTick,timeMs);
-  // console.log(self.tick);
+
 return new Promise(function (resolve, reject){
     console.log("Construccion de la promesa playAudio");
      console.log("$scope.estado: "+$scope.estado);

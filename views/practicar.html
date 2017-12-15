@@ -18,7 +18,7 @@
 
     </div>
     </div>
-  <h1>Practica: {{nombrePractica}}</h1>
+  <h1>Practica: {{propiedades.nombre}}- Duracion {{propiedades.duracionHMS}}</h1>
 <div class="col-md-4">
 
 
@@ -37,7 +37,7 @@
 <div class="row">
 
 <img class="img-rounded col-md-4"  width="304" height="236" ng-src="{{pantalla.imagen}}" alt="Sin Imagen"/><br/>
-<span class="img-rounded col-md-4">{{tickDisplay}}</span>
+<span class="img-rounded col-md-4 timer"><h1>{{tickDisplay}}</h1></span>
 </div>
 
  <div >
@@ -47,7 +47,7 @@ videoid="videoID"
 autoplay="true"
         enablejsapi="true"
         onready="playerReadyP"
-        onstatechange="playerStateChangedP()"
+        onstatechange="playerStateChangedP"
                 >
 
     </ng-youtube-embed>
