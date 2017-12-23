@@ -8,7 +8,7 @@
  * Service in the practicaApp.
  */
 angular.module('practicaApp')
-   .service('comandos',['$localStorage', '$interval','Spotify','$http',function (localStorage,interval, Spotify,$http)  {
+   .service('comandos',['$localStorage', '$interval','Spotify','$http','$q',function (localStorage,interval, Spotify,$http,$q)  {
 
 
     var self=this;
@@ -280,68 +280,111 @@ angular.module('practicaApp')
 
 
 
-// // Tick
+// Tick
 
-// this.startTick=function(timeMs,duracion){
-//   console.log('startTick: '+timeMs);
-//   self.tick=interval( self.playTick,timeMs);
-//   console.log(self.tick);
-// return new Promise(function (resolve, reject){
-//     console.log('Construccion de la promesa Tick');
-//     setTimeout(function() {
-//             self.stopTick();
-//             console.log('Resolve ok Tick: '+ duracion);
-//             resolve({ value: 'fin tick', result: duracion});
-//         }, duracion);
-//     });
+this.startTick=function(timeMs,duracion,vol){
+  var deferred = $q.defer();
+  self.playTickConuter=0;
+  self.vol=vol;
+  console.log('startTick: '+timeMs);
+  self.tick=interval( self.playTick,timeMs);
+  console.log(self.tick);
 
-// };
+    console.log('Construccion de la promesa Tick');
+    setTimeout(function() {
+            self.stopTick();
+            console.log('Resolve ok Tick: '+ duracion);
+            deferred.resolve({ value: 'fin tick', result: duracion});
+        }, duracion);
 
-// this.stopTick=function(){
-//   console.log('stopTick');
-//   console.log('Tick angular.isDefined(self.tick): '+angular.isDefined(self.tick));
-//   // console.log('angular.isDefined(self.StopTick):'+angular.isDefined(self.StopTick));
-//   // if (angular.isDefined(self.tick) && angular.isDefined(self.StopTick)) {
-//   if (angular.isDefined(self.tick) ) {
-//             interval.cancel(self.tick);
-//             // interval.cancel(self.stopTick);
-//             // stop = undefined;
-//           }
+ return deferred.promise;
+};
 
-// };
+this.stopTick=function(){
+  console.log('stopTick');
+  console.log('Tick angular.isDefined(self.tick): '+angular.isDefined(self.tick));
+  // console.log('angular.isDefined(self.StopTick):'+angular.isDefined(self.StopTick));
+  // if (angular.isDefined(self.tick) && angular.isDefined(self.StopTick)) {
+  if (angular.isDefined(self.tick) ) {
+            interval.cancel(self.tick);
+            // interval.cancel(self.stopTick);
+            // stop = undefined;
+          }
 
-// this.playTick=function(){
+};
 
-//    // console.log('tick-HOWL6');
-//    // console.log('mp3 codecs ogg: '+  Howler.codecs('mp3'));
+this.playTick=function(){
 
-//    Howler.mobileAutoEnable = true;
+   // console.log('tick-HOWL6');
+   // console.log('mp3 codecs ogg: '+  Howler.codecs('mp3'));
+self.playTickConuter=self.playTickConuter+1;
+   Howler.mobileAutoEnable = true;
 
-//     var sound = new Howl({
-//       src: ['/audio/flap.mp3'],
-//       format: ['mp3'],
-//       html5: true
+    var sound = new Howl({
+      src: ['/audio/flap.mp3'],
+      format: ['mp3'],
+      html5: true,
+      volume: self.vol
 
-//     });
-
-
-
-//     // Clear listener after first call.
-//   sound.once('load', function(){
-//         // console.log('once..load');
-//         // console.log(sound);
-//     sound.play();
-//   });
-
-// // Fires when the sound finishes playing.
-//     sound.on('end', function(){
-//       console.log('Finished!');
-//       sound.unload();
-//     });
+    });
 
 
 
-// };
+    // Clear listener after first call.
+  sound.once('load', function(){
+        // console.log('once..load');
+        // console.log(sound);
+    sound.play();
+  });
+
+// Fires when the sound finishes playing.
+    sound.on('end', function(){
+      console.log('Finished!');
+      sound.unload();
+    });
+
+
+
+};
+
+
+
+this.startCronometro=function(scope,duracion){
+  scope.tiempoCronometro=0;
+ console.log('startCronometro: ');
+   var deferred = $q.defer();
+  self.cronometroScope=scope;
+  console.log('cronometro: '+duracion);
+  self.segundero=interval( self.cronometroSegundero,1000);
+  console.log(self.segundero);
+
+    console.log('Construccion de la promesa cronometro');
+    setTimeout(function() {
+            self.stopCronometroSegundero();
+
+
+            console.log('Resolve ok cronometro: '+ duracion);
+            deferred.resolve({ value: 'fin cronometro', result: duracion});
+        }, duracion);
+
+ return deferred.promise;
+};
+
+this.cronometroSegundero= function(){
+  console.log('cronometroSegunder $broadcast: ');
+ self.cronometroScope.$broadcast("cronometroSegundero", "some data");
+};
+
+this.stopCronometroSegundero=function(){
+   console.log('stopcronometroSegunder ok cronometro: ');
+  if (angular.isDefined(self.segundero) ) {
+            interval.cancel(self.segundero);
+            self.segundero=undefined;
+            // interval.cancel(self.stopTick);
+            // stop = undefined;
+          }
+};
+
 
 
 // // Leer

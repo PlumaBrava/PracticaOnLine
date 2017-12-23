@@ -8,8 +8,9 @@
  *
  * Main module of the application.
  */
+ // ngYoutubeEmbed
 angular
-  .module('practicaApp', ['ui.router','firebase','ngStorage','spotify', 'angularAudioRecorder', 'dndLists','ui.bootstrap','xeditable','ngYoutubeEmbed'])
+  .module('practicaApp', ['ui.router','firebase','ngStorage','spotify', 'angularAudioRecorder', 'dndLists','ui.bootstrap','xeditable','youtube-embed'])
   // .config(['$stateProvider','$urlRouterProvider', '$locationProvider', function($stateProvider,$urlRouterProvider,$locationProvider ){
   .config(['$stateProvider','$urlRouterProvider',  function($stateProvider,$urlRouterProvider ){
 

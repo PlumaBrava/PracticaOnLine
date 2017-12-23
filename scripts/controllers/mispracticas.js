@@ -62,7 +62,8 @@ console.log(data);
    $scope.copyHrefToClipboard = function(e,practica) {
           console.log(e);
 
-            $copyToClipboard.copy('http://localhost:9000/#!/practicarlink?userKey='+fb.getUserKey()+'&practicaKey='+practica.$id).then(function () {
+            $copyToClipboard.copy('https://practicaonline.com/#!/practicarlink?userKey='+fb.getUserKey()+'&practicaKey='+practica.$id).then(function () {
+            // $copyToClipboard.copy('http://localhost:9000/#!/practicarlink?userKey='+fb.getUserKey()+'&practicaKey='+practica.$id).then(function () {
                 //show some notification
             });
 };

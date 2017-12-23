@@ -1,63 +1,55 @@
  <!-- <script src="scripts/p5/p5.js"></script> -->
  <!-- <script src="scripts/p5/p5_practica.js"></script> -->
 <p ng-show="cargandoPractica">cargando Practica</p>
+<div ng-hide="cargandoPractica">
 
-<div class="toolbox box box-grey box-padding">
-        <h3>tools</h3>
-        <div class="row">
+    <h1  class="text-center"> {{propiedades.nombre}} ({{propiedades.duracionHMS}})</h1>
+    <h3 class="text-center" ng-show="practicaTimerDisplay">({{practicaTimerDisplay}})</h3>
 
-
-                <button type="button" class="btn btn-default btn-lg" ng-click="execute()"  ><span class="glyphicon glyphicon-play"></span></button>
-
-
-                <button type="button" class="btn btn-default btn-lg" ng-click="pausa1()" ><span class="glyphicon glyphicon-pause"></span></button>
-
-
-                <button type="button" class="btn btn-default btn-lg" ng-click="stop1()" ><span class="glyphicon glyphicon-stop"></span></button>
-
-
+    <div>
+        <h2   class="text-center" ng-show="nombreContainer">{{nombreContainer}}</h2>
+        <h2  class="text-center" ng-show="nombreBloque">{{nombreBloque}}</h2>
+        <h3  class="" ng-show="mostrarPracticarTexto">{{pantalla.texto}}<br/></h3>
     </div>
-    </div>
-  <h1>Practica: {{propiedades.nombre}}- Duracion {{propiedades.duracionHMS}}</h1>
-<div class="col-md-4">
 
+
+<div class="row">
+    <div class=" col-md-6 ">
+        <img class="img-rounded "  width="100%" height="100%"  ng-show="mostrarPracticarImagen" ng-src="{{pantalla.imagen}}" alt="Sin Imagen">
+    </div>
+    <div class=" col-md-6 timer">
+        <h1 ng-show="tickDisplay">{{tickDisplay}}</h1>
+        <h1 ng-show="cronometroDisplay">{{cronometroDisplay}}</h1>
+    </div>
+</div>
+
+ <div >
+        <div ng-show="mostrarPracticarVideo">
+        <youtube-video  video-id="practicarVideo"  player="practicarVideoPlayer" player-width="'100%'" player-height="'300px'"
+        > </youtube-video>
+        </div>
 
 </div>
- <div class="progress">
+
+<div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{pantalla.avance}}" aria-valuemin="0" aria-valuemax="100" style="width:{{pantalla.avance}}%">
       <span class="sr-only">{{pantalla.avance}}% Complete</span>
     </div>
   </div>
 
-  <div>
-  <h2 ng-show="nombreContainer">{{nombreContainer}}</h2>
-  <h2 ng-show="nombreBloque">{{nombreBloque}}</h2>
-    {{pantalla.texto}}<br/>
-</div>
-<div class="row">
 
-<img class="img-rounded col-md-4"  width="304" height="236" ng-src="{{pantalla.imagen}}" alt="Sin Imagen"/><br/>
-<span class="img-rounded col-md-4 timer"><h1>{{tickDisplay}}</h1></span>
-</div>
+<div class="toolbox box box-grey box-padding">
+        <h3>tools</h3>
+        <div class="row">
 
- <div >
-    <ng-youtube-embed
-         video="videoURL"
-videoid="videoID"
-autoplay="true"
-        enablejsapi="true"
-        onready="playerReadyP"
-        onstatechange="playerStateChangedP"
-                >
+                <button type="button" class="btn btn-default btn-lg" ng-click="execute()"  ><span class="glyphicon glyphicon-play"></span></button>
 
-    </ng-youtube-embed>
+                <button type="button" class="btn btn-default btn-lg" ng-click="pausa1()" ><span class="glyphicon glyphicon-pause"></span></button>
+
+                <button type="button" class="btn btn-default btn-lg" ng-click="stop1()" ><span class="glyphicon glyphicon-stop"></span></button>
+
     </div>
-    <!-- end="20" -->
-
-<!--
-
-       autoplay="true"
-        color="white"
-        disablekb="true" -->
+</div>
 
 <div id='myContainer'></div>
+</div>

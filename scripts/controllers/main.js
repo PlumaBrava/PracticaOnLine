@@ -8,7 +8,7 @@
  * Controller of the practicaApp
  */
 angular.module('practicaApp')
-  .controller('MainCtrl',  ['$stateParams', '$state','$firebaseAuth', '$scope', 'fb','$location',function ($stateParams, $state,firebaseAuth,$scope,fb,$location) {
+  .controller('MainCtrl',  ['$stateParams', '$state','$firebaseAuth', '$scope', 'fb','$location','spotiService',function ($stateParams, $state,firebaseAuth,$scope,fb,$location,spotiService) {
 
 
 $scope.user='Sign Up';
@@ -85,6 +85,9 @@ $scope.logOut=function () {
             $scope.photoURLshow=false;
             fb.setUser(null);
             fb.setUserKey(null);
+            spotiService.clearSpotify()
+            // fb.setSpotifyAccessTocken(null);
+            // fb.setSpotifyUserID(null);
         // } );
 
    }).catch(function(){

@@ -55,6 +55,7 @@ angular.module('practicaApp')
   console.log(SpotifyProvider);
 }])
 
+// .controller('SpotifycallbackCtrl',['$stateParams', '$state','$location','$localStorage', function (stateParams, state,location,$localStorage) {
 .controller('SpotifycallbackCtrl',['$stateParams', '$state','$location', function (stateParams, state,location) {
     console.log(' Spotify callback');
     console.log(' stateParams');
@@ -76,7 +77,15 @@ angular.module('practicaApp')
 
 
         if(this.AccessToken&&this.ExpiresIn&&this.TokenType){
-          localStorage.setItem('spotify-token', this.AccessToken);
+      localStorage.setItem('spotify-token', this.AccessToken);// ojo Con esto funciona el then de la libreria para Spotify.login.
+                                                              // so falta da error!!!
+      localStorage.setItem('spotifyToken', this.AccessToken);
+      localStorage.setItem('spotifyTokenExpiresIn', this.ExpiresIn);
+      localStorage.setItem('spotifyTokenTokenType', this.TokenType);
+
+
+
+
           window.close();
         } else
         {

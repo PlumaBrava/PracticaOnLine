@@ -1,3 +1,4 @@
+ <script src="https://www.youtube.com/iframe_api"></script>
 <div  class="modal-demo">
 
         <div class="modal-header">
@@ -20,7 +21,12 @@
 <div class="row">
 
     <div class="col-sm-8">
-    <ng-youtube-embed
+            <div class=""></div>
+
+            <!-- Use 'youtube-video' as an element or attribute. -->
+<youtube-video video-id="theBestVideo"  player="bestPlayer" player-width="'100%'" player-height="'300px'"
+  > </youtube-video>
+    <!-- <ng-youtube-embed
          video="videoURL"
         videoid="videoID"
         autoplay="true"
@@ -29,9 +35,9 @@
         enablejsapi="true"
         onready="playerReady"
         onstatechange="playerStateChanged"
-                >
-    <!-- end="20" -->
-    </ng-youtube-embed>
+                > -->
+    <!-- end="20"
+    <!-- </ng-youtube-embed>  -->
     </div>
     <div class="col-sm-4">
           <SPAN><b>Titulo {{itemq.titulo}} </b>{{itemq.titulo}}</b></SPAN><br />

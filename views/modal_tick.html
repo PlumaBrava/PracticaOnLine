@@ -32,18 +32,19 @@
                     <p > duracion (segundos)
                         <input type="text"  ng-model="$ctrl.itemq.duracion"/>
                     </p>
-               <!--  <a > volumen
-                        <input type="text"  ng-model="$ctrl.itemq.volumen"/>
+       <!--          <a > tickDisplay
+                        <input type="text"  ng-model="$ctrl.tickDisplay"/>
                     </a> -->
 
             <!-- Barra de Volumen -->
             <div id="barraVolumen" class="row">
-              <input type="range" min="1" max="100" ng-model="$ctrl.itemq.volumen" value="50" class="BarraVolumen" id="myRange" ng-Change="$ctrl.setVolumen(mVolumen)"> volumen
+              <input type="range" min="0" max="100"  ng-model="$ctrl.itemq.volumen" value="50" class="BarraVolumen" id="myRange" ng-disabled="!$ctrl.testDisponible"> volumen
             </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>   <button class="btn btn-primary" type="button" ng-click="$ctrl.test()">test</button>
+            <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+             <button class="btn btn-primary" type="button" ng-click="$ctrl.test()" ng-disabled="!$ctrl.testDisponible">test</button>
             <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
         </div>
     <!-- </script> -->

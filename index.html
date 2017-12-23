@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/modalSpotify.css">
     <link rel="stylesheet" href="styles/dadlistFramework.css">
     <link rel="stylesheet" href="styles/practicar.css">
+
      <!-- endbuild -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -93,7 +94,7 @@
                         <img  ng-src="{{photoURL}}" class="img-circle"  width="24" height="24" ng-show="photoURLshow"> {{user}}
                     </a></li>
                   <!-- <li><a ui-sref="logout" ><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li> -->
-                  <li ng-click="logOut()"><a data-target="#logOutModal"><span class="glyphicon glyphicon-log-out"  ></span> LogOut</a></li>
+                  <li ng-click="logOut()"  ng-show="showBar"><a data-target="#logOutModal"><span class="glyphicon glyphicon-log-out"  ></span> LogOut</a></li>
              </ul>
 
           </div>
@@ -132,7 +133,7 @@
     <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-    <script src="bower_components/ng-youtube-embed/build/ng-youtube-embed.min.js"></script>
+    <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -151,9 +152,14 @@
         <script src="scripts/controllers/practicar.js"></script>
         <script src="scripts/controllers/copytoclipboard.js"></script>
         <script src="scripts/directives/whatsapp.js"></script>
+        <script src="scripts/services/spotiservice.js"></script>
         <!-- endbuild -->
 
-      <!--   <script src="https://www.youtube.com/iframe_api"></script> -->
+<!-- Include YT library and this directive -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<!-- <script src="angular-youtube-embed.js"></script> -->
+
+        <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
       <!-- https://github.com/ArunMichaelDsouza/ng-youtube-embed -->
 </body>
 </html>

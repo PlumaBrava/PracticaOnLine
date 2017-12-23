@@ -32,6 +32,7 @@ angular.module('practicaApp')
 
 
 
+
   this.getUserKey=function(){
          console.log('gettUserKey:'+self.userKey);
             if(self.isUserLog){
@@ -250,13 +251,24 @@ this.msToDHMSMS = function(time){
   var hours = Math.floor( time / 3600000 );
   var minutes = Math.floor( (time % 3600000) / 60000 );
   var seconds = Math.floor( ( (time % 3600000) % 60000 ) / 1000);
+  var result;
+  var hoursResult;
+  var minutesResult;
+  var secondsResult;
 
 //Anteponiendo un 0 a los minutos si son menos de 10
-  minutes = minutes < 10 ? '0' + minutes : minutes;
+  minutesResult = minutes < 10 ? '0' + minutes : minutes;
 
 //Anteponiendo un 0 a los segundos si son menos de 10
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  var result = hours + ':' + minutes + ':' + seconds;
+  secondsResult = seconds < 10 ? '0' + seconds : seconds;
+
+  result = hours + ':' + minutesResult + ':' + secondsResult;
+
+ if(hours==0){
+    result =  minutesResult + ':' + secondsResult;
+  } else {
+    result = hours + ':' + minutesResult + ':' + secondsResult;
+};
 
   return result;
 

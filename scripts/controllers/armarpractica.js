@@ -740,7 +740,7 @@ console.log($ctrl );
     $uibModalInstance.dismiss('cancel');
   };
 })
-.controller('ModalInstanceTick', function ($uibModalInstance,  item) {
+.controller('ModalInstanceTick', ['$uibModalInstance','item', 'comandos', function ( $uibModalInstance,  item,comandos) {
   var $ctrl = this;
 $ctrl.error=null;
   $ctrl.itemq = {
@@ -755,6 +755,22 @@ console.log('$uibModalInstance' );
 console.log(item );
 console.log($uibModalInstance );
 console.log($ctrl );
+     $ctrl.testDisponible=true;
+  this.test = function () {
+     console.log('uibModalInstance.test: ' );
+     if($ctrl.itemq.intervaloMs>=$ctrl.itemq.duracion){
+        $ctrl.error='el intervalo debe ser menor que la duración';
+        $ctrl.testDisponible=false;
+     }
+        else{
+            $ctrl.testDisponible=false;
+            comandos.startTick($ctrl.itemq.intervaloMs*1000,$ctrl.itemq.duracion*1000,$ctrl.itemq.volumen/100).then(function(retorno){
+      $ctrl.testDisponible=true;
+            });
+            // $ctrl.tickDisplay=comandos.playTickConuter;
+    };
+  };
+
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
      if($ctrl.itemq.intervaloMs>=$ctrl.itemq.duracion){
@@ -767,21 +783,22 @@ console.log($ctrl );
     };
   };
 
-  $ctrl.cancel = function () {
+   this.cancel = function () {
      console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
   };
-})
+}])
 
 .controller('ModalInstanceTimer', function ($uibModalInstance,  item) {
   var $ctrl = this;
-     // {type: 'tick', id: 8, intervaloMs: 1000, volumen:1,duracion:6000},       // activa el cuenta timpo
+
 
   $ctrl.itemq = {
 
     // intervaloMs : item.intervaloMs,
     // volumen : item.volumen,
-    duracion : item.duracion
+    duracion : item.duracion,
+    duracionSegundos:item.duracion/1000
   };
 console.log('$uibModalInstance' );
 console.log(item );
@@ -789,10 +806,11 @@ console.log($uibModalInstance );
 console.log($ctrl );
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
+     $ctrl.itemq.duracion=$ctrl.itemq.duracionSegundos*1000;
     $uibModalInstance.close($ctrl.itemq);
   };
 
-  $ctrl.cancel = function () {
+   this.cancel = function () {
      console.log('uibModalInstance.cancel: ' );
     $uibModalInstance.dismiss('cancel');
   };
@@ -859,17 +877,25 @@ console.log($ctrl );
 
 }])
 
+// 'ngYoutubeEmbedService'
 
-.controller('ModalInstanceYouTube',['$scope','$uibModalInstance','item', 'subirarchivofb','ngYoutubeEmbedService','$http','fb',function ($scope, $uibModalInstance,  item,subirArchivoFb,ngYoutubeEmbedService,$http,fb) {
+.controller('ModalInstanceYouTube',['$scope','$uibModalInstance','item', 'subirarchivofb','$http','fb','$rootScope',function ($scope, $uibModalInstance,  item,subirArchivoFb,$http,fb,$rootScope) {
 
  console.log('ModalInstanceYouTube');
+
+
+
   var $ctrl = this;
-  // $scope.videoID=item.link;
- $scope.videoURL=item.link;
+
+
+ $scope.theBestVideo =item.link;
+
+
+
  $scope.name=item.name;
  $scope.okdisponible=false;
  $scope.link=item.link;
-// $ctrl.itemq=item;
+
  $scope.itemq = {
 
     link : item.link,
@@ -883,103 +909,121 @@ console.log($ctrl );
 console.log('itemq');
 console.log($scope.itemq );
 console.log($scope );
-// console.log(ngYoutubeEmbedService );
 
 
-// this.p=null;
+ console.log('player');
 
+  console.log($scope.player );
+  console.log( window.onYouTubeIframeAPIReady );
+
+
+  $rootScope.$on('youtubeIframeEmbedApiLoaded', function(event, videoId) {
+console.log('youtubeIframeEmbedApiLoaded' );
+console.log(event );
+console.log(videoId );
+  });
+
+$rootScope.$on('addNewPlayer', function(event, videoId) {
+console.log('addNewPlayer' );
+console.log(event );
+console.log(videoId );
+  });
+
+ $scope.$on('youtube.player.ended', function ($event, player) {
+    console.log('ENDED' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+ $scope.$on('youtube.player.ready', function ($event, player) {
+    console.log('ready' );
+    console.log($event );
+    console.log(player);
+      player.playVideo();
+
+  });
+
+ $scope.$on('youtube.player.ended', function ($event, player) {
+    console.log('ENDED' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+ $scope.$on('youtube.player.playing', function ($event, player) {
+    console.log('playing' );
+    console.log($event );
+    console.log(player);
+  console.log('Duracion: '+player.getDuration());
+  console.log('Titulo: '+player.getVideoData().title);
+
+     $scope.itemq = {
+
+    link : $scope.link,
+    name: $scope.name,
+
+    duracion:player.getDuration()*1000,
+    duracionHMS:fb.msToDHMSMS(Number(player.getDuration())*1000),
+    volumen:player.getVolume(),
+    titulo:player.getVideoData().title,
+    autor:player.getVideoData().author
+
+  };
+        $scope.okdisponible=true;
+  });
+
+ $scope.$on('youtube.player.paused', function ($event, player) {
+    console.log('paused' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+ $scope.$on('youtube.player.buffering', function ($event, player) {
+    console.log('buffering' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+
+ $scope.$on('youtube.player.queued', function ($event, player) {
+    console.log('queued' );
+    console.log($event );
+    console.log(player);
+
+       player.playVideo();
+    console.log('Duracion: '+player.getDuration());
+  });
+
+ $scope.$on('youtube.player.error', function ($event, player) {
+    console.log('error' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+
+ $scope.$on('youtube.player.paused', function ($event, player) {
+    console.log('paused' );
+    console.log($event );
+    console.log(player);
+
+  });
 
 
 this.select=function(){
-    console.log('select' );
-    $scope.okdisponible=true;
-    $scope.videoURL=$scope.link;
+    console.log('youtubeselect' );
+ $scope.theBestVideo =item.link;
+$scope.bestPlayer.cueVideoById($scope.link);
+
+ $scope.okdisponible=false;
+    console.log($scope.bestPlayer );
 
 
-
-      // var player3 = ngYoutubeEmbedService.getVideoIdByUrl($scope.videoURL);
-
-//         var player3 = ngYoutubeEmbedService.getPlayerById($scope.link);
-// console.log(player3);
-// player3.clearVideo();
-// player3.cueVideoById($scope.link);
-// player3.nextVideo();
-// player3.playVideo();
-
-// console.log(player3.getCurrentTime());
-//     // var player4 = ngYoutubeEmbedService.getVideoIdByUrl($scope.link);
-//     //     console.log(player4);
-
-//       ngYoutubeEmbedService.setReadyState();
-
-
-
-//       // ngYoutubeEmbedService.
-
-//     var videoData=player3.getVideoData();
-//     console.log(videoData);
-//         // $scope.$apply(function () {
-//         $scope.itemq = {
-
-//          duracion:player3.getDuration(),
-//          duracion:player3.getDuration(),
-//          duracionHMS:fb.msToDHMSMS(player3.getDuration()),
-//             volumen:player3.getVolume(),
-//             titulo:videoData.title,
-//             autor:videoData.author
-//         };
-// });
 
 };
-
-
-
-
-this.showVideoInfo = function() {
-    // var player = ngYoutubeEmbedService.getPlayerById('myvideo');
-  //   console.log(player);
-  //     console.log(player.getDuration());
-  //   // console.log(player.showVideoInfo());
-
-  //   console.log(player.getVideoData());
-  //   console.log(player.getVolume());
-  };
-
- $scope.stateChanged = function(e) {
-    console.log('stateChanged');
-    console.log(e);
-  };
-
- // Gets fired when the iframe player has finished loading
-    $scope.playerReady = function(event) {
-        console.log('playerReady'); // Event data logged
-        console.log(event); // Event data logged
-        // this.myPlayer
-    };
-
-    // Gets fired when the state of the iframe player changes
-    $scope.playerStateChanged = function(event) {
-        console.log('playerStateChanged'); // Event data logged
-        console.log(event); // Event data logged
-            console.log('player.getVideoData()');
-    //         var player1 = ngYoutubeEmbedService.getPlayerById('videoID');
-    // console.log(player1);
-    // console.log(player1.getDuration());
-    // console.log(fb.msToDHMSMS(player1.getDuration()*1000));
-    // var videoData=player1.getVideoData();
-    // console.log(videoData);
-    // console.log(videoData);
-    //     $scope.$apply(function () {
-        // $scope.itemq = {
-         // duracion:player1.getDuration(),
-         // duracionHMS:fb.msToDHMSMS(player1.getDuration()*1000),
-            // volumen:player1.getVolume(),
-            // titulo:videoData.title,
-            // autor:videoData.author
-        // };
-    // });
-  };
-
 
 
 
@@ -1029,16 +1073,6 @@ var req = {
 
 };
 
- // Gets fired when the iframe player has finished loading
-    $scope.playerReady = function(event) {
-        console.log('playerReady'); // Event data logged
-        console.log(event); // Event data logged
-      //   var player = ngYoutubeEmbedService.getPlayerById('myvideo'); // Returns the iframe player instance
-      // console.log('Player');
-      // console.log(player);
-    };
-
-
   this.ok = function () {
      console.log('uibModalInstance.ok: ' );
 
@@ -1052,18 +1086,18 @@ var req = {
     link : $scope.link,
     name: $scope.name,
 
-    // duracion:player.getDuration(),
-    // duracionHMS:fb.msToDHMSMS(player.getDuration()*1000),
-    // volumen:player.getVolume(),
-    // titulo:player.getVideoData().title,
-    // autor:player.getVideoData().author
+    duracion:$scope.bestPlayer.getDuration()*1000,
+    duracionHMS:fb.msToDHMSMS(Number($scope.bestPlayer.getDuration())*1000),
+    volumen:$scope.bestPlayer.getVolume(),
+    titulo:$scope.bestPlayer.getVideoData().title,
+    autor:$scope.bestPlayer.getVideoData().author
 
 
-     duracion:5000,
-    duracionHMS:fb.msToDHMSMS(5*1000),
-    volumen:1,
-    titulo:'player.getVideoData().title',
-    autor:'jj'
+    //  duracion:5000,
+    // duracionHMS:fb.msToDHMSMS(5*1000),
+    // volumen:1,
+    // titulo:'player.getVideoData().title',
+    // autor:'jj'
 
   };
     $uibModalInstance.close($scope.itemq);
@@ -1133,7 +1167,7 @@ console.log(recorderService );
             }else{
 
             $scope.$apply(function () {
-            $scope.error='tipo de Archivo incorrercto';
+            $scope.error='tipo de Archivo incorrecto';
             });
         }
         }
@@ -1147,6 +1181,10 @@ this.playAudioFile=function(){
         console.log('playAudioFile'+result);
     })
     .catch(function(error){
+        $scope.$apply(function () {
+            $scope.error=' Archivo incorrecto';
+        });
+
         console.log('playAudioFile'+error);
     });
 };
@@ -1235,7 +1273,7 @@ $ctrl.f1=function(a){
 
 }])
 
- .controller('ModalInstanceSpotify',['$scope','$uibModalInstance','item', 'Spotify','$http', function ($scope, $uibModalInstance,  item, Spotify,$http) {
+ .controller('ModalInstanceSpotify',['$scope','$uibModalInstance','item', 'Spotify','$http','fb','spotiService', function ($scope, $uibModalInstance,  item, Spotify,$http,fb,spotiService) {
 
   var self=this;
   var $ctrl = this;
@@ -1248,10 +1286,10 @@ $ctrl.f1=function(a){
     tracks:item.tracks
 
   };
-
+$scope.devices=null//dipositivos Spotify conectados
 $scope.okdisponible=false; // habilita el boton de ok
 $scope.volumen=item.volumen;
-var accessToken;         // Tocken para acceder a Spotify
+// var accessToken;         // Tocken para acceder a Spotify
 
 
 console.log('ModalInstanceSpotify' );
@@ -1271,8 +1309,8 @@ this.setTracksformItem=function(item){
   $scope.mVolumen=item.volumen;
   if(self.tracks){
   self.tracks.duracion=item.duracion;
+    }
   }
-}
 };
 
 this.setTracksformItem(item);
@@ -1287,33 +1325,66 @@ this.setTracksformItem(item);
     $uibModalInstance.dismiss('cancel');
   };
 
-//Loggin a Spotify
-console.log('Loggin a Spotify 4');
-      Spotify.login().then(function (data) {
-        console.log('Loggin a Spotify 4');
-        accessToken=data;
-        console.log(data);
-        // alert('You are now logged in');
-        self.getSpotifyUser();
-});
+if(!spotiService.isSpotifyReady()){
+spotiService.inicializaSpotify().then(
+  function(r){
+  console.log('inicializado ok Spotify: ' );
+  // accessToken=spotiService.getSpotifyAccessTocken();
+  // self.spotifyUserId=spotiService.getSpotifyUserID();
+  });
+};
+// revisar!!!
+// this.spotifyUserId= spotiService.getSpotifyUserID();
+// accessToken=spotiService.getSpotifyAccessTocken();
+// console.log('accessToken '+accessToken);
+// // Loggin a Spotify
+// if(!accessToken){
 
+//       Spotify.login().then(function (data) {
+//       console.log('Loggin a Spotify 3');
+//       console.log(data);
+//       accessToken=data;
+//        fb.setSpotifyAccessTocken(data);
+//         self.getSpotifyUser();
+//         self.getDevicesSpotify();
+
+//     }).catch(function(error){
+//       console.log('error');
+//       console.log(error);
+//     });
+
+//   };
+//     console.log(this);
+// }  else if (!self.spotifyUserId) {
+//         console.log(this);
+//         self.getSpotifyUser();
+//         self.getDevicesSpotify();
+// } else {
+//       console.log(this);
+//         self.getDevicesSpotify();
+// }
 
 // get Spotify User
 
-this.getSpotifyUser=function(){
-Spotify.getCurrentUser().then(function (data) {
-  console.log('getSpotifyUser');
-  console.log(data);
-  self.spotifyUserId=data.data.id;
-self.getUserProfile();
-  // Spotify.getUser(data.data.id).then(function (data) {
-  //   console.log('getUser');
-  //   console.log(data);
-  // });
+// this.getSpotifyUser=function(){
+// Spotify.getCurrentUser().then(function (data) {
+//   console.log('getSpotifyUser');
+//   console.log(data);
+//   fb.setSpotifyUserID(data);
+//   self.spotifyUserId=data.data.id;
+//   fb.setSpotifyUserID(data.data.id);
+// self.getUserProfile();
+//   // Spotify.getUser(data.data.id).then(function (data) {
+//   //   console.log('getUser');
+//   //   console.log(data);
+//   // });
 
-  });
+//   }).catch(function(error){
+//     console.log('getSpotifyUser error');
+//   console.log(error);
+//   });
 
-};
+// };
 
 
 $scope.mOption='MisListas'; // opcion de busqueda en modal_spotify
@@ -1327,7 +1398,7 @@ $ctrl.buscar=function(buscarTexto){
   switch($scope.mOption){
 //buscar UserPlay List
     case 'MisListas':
-      Spotify.getUserPlaylists(self.spotifyUserId,{'limit':10}).then(function(data){
+      Spotify.getUserPlaylists(spotiService.getSpotifyUserID(),{'limit':10}).then(function(data){
       console.log('search ok');
       var dataObj= angular.fromJson(data);
       // console.log('href '+dataObj.data.albums.items[0].name);
@@ -1453,7 +1524,7 @@ this.buscarAlbumTracks=function(albumId){
       duracion+=track.duration_ms;
       self.tracks=self.tracks.concat(t);
   }
-  self.tracks.DuracionTotalMs=duracion;
+  // self.tracks.DuracionTotalMs=duracion;
   console.log('tracks ');
   console.log( self.tracks);
   });
@@ -1478,7 +1549,7 @@ this.buscarPlayListTracks=function(ownerId,playListId){
       duracion+=track.duration_ms;
       self.tracks=self.tracks.concat(t);
       }
-    self.tracks.DuracionTotalMs=duracion;
+    // self.tracks.DuracionTotalMs=duracion;
     console.log('tracks ');
     console.log(self.tracks);
     });
@@ -1505,7 +1576,7 @@ this.buscarArtistTracks=function(artistId,CountryCode){
         duracion+=track.duration_ms;
         self.tracks=self.tracks.concat(t);
       }
-    self.tracks.DuracionTotalMs=duracion;
+    // self.tracks.DuracionTotalMs=duracion;
     console.log('tracks ');
     console.log(self.tracks);
   });
@@ -1535,7 +1606,7 @@ self.tracks=self.tracks.concat(t);
 
 
   }
-self.tracks.DuracionTotalMs=duracion;
+// self.tracks.DuracionTotalMs=duracion;
  console.log('tracks ');
  console.log(self.tracks);
 
@@ -1604,6 +1675,42 @@ this.buscarTracks=function(ownerId,id){
 
 };
 
+// // Verifica si esta habierto spotify
+
+// this.getDevicesSpotify=function(){
+
+//   console.log('getDevicesSpotify');
+// var reqDevices = {
+//  method: 'GET',
+//  url: 'https://api.spotify.com/v1/me/player/devices',
+//  headers: {
+//    'Accept': 'application/json',
+//     'Content-Type': 'application/json'
+//     }
+// };
+// reqDevices.headers.Authorization='Bearer ' +accessToken;
+//   $http(reqDevices).then(function (response) {
+//     console.log('reqDevices is good', response.data);
+//     console.log(response);
+//     $scope.devices=response.data.devices;
+//     if($scope.devices.length==0){
+//           alert('Debe abrir spotify para ejecutar canciones desde la application');
+//          }else if(!$scope.devices[0].is_active){
+//             alert('Spotify no esta activo. Ponga play a una cancion ');
+
+//         }else{
+//             console.log("volumen"+$scope.devices[0].volume_percent);
+//             $scope.mVolumen=$scope.devices[0].volume_percent;
+//         };
+
+
+// }, function (error) {
+//     console.log('reqDevices an error ', error.data);
+// });
+// };
+
+
+
 // Modifica el volumen con el que se está repoduciendo en spotify
 
 this.setVolumen=function(volumen){
@@ -1617,7 +1724,7 @@ var reqVolumen = {
     'Content-Type': 'application/json'
     }
 };
-reqVolumen.headers.Authorization='Bearer ' +accessToken;
+reqVolumen.headers.Authorization='Bearer ' +spotiService.getSpotifyAccessTocken();
   $http(reqVolumen).then(function (response) {
     console.log('all is good', response.data);
 }, function (error) {
@@ -1650,6 +1757,9 @@ this.selectAllTracks=function(select){
 this.selectTracks=function(id,select){
   console.log('selectTracks '+select);
   console.log('selectTracks '+id);
+  if(!self.tracks.DuracionTotalMs){
+    self.tracks.DuracionTotalMs=0;
+  }
   self.tracks[id].selected=select;
   console.log('self.tracks.DuracionTotalMs '+self.tracks.DuracionTotalMs);
   if(select){
@@ -1692,9 +1802,9 @@ $ctrl.playAlbum=function(albumUri){
   }};
 
   console.log('albumUri', albumUri);
-  console.log('accessToken', accessToken);
+  console.log('accessToken', spotiService.getSpotifyAccessTocken());
   console.log('itemActual', self.itemActual);
-  req.headers.Authorization='Bearer ' +accessToken;
+  req.headers.Authorization='Bearer ' +spotiService.getSpotifyAccessTocken();
   $http(req).then(function (response) {
     console.log('playAlbum', response.data);
     console.log(response);
@@ -1705,6 +1815,7 @@ $ctrl.playAlbum=function(albumUri){
 
 
 this.playSong=function(songUri){
+  if(spotiService.isSpotifyReady()){
   console.log('playSong');
   console.log(songUri);
   var req = {
@@ -1723,43 +1834,44 @@ this.playSong=function(songUri){
     'position': 0
     }}
   };
-  req.headers.Authorization='Bearer ' +accessToken;
+  req.headers.Authorization='Bearer ' +spotiService.getSpotifyAccessTocken();
   $http(req).then(function (response) {
-    console.log('playAlbum', response.data);
+    console.log('playSong', response.data);
   }, function (error) {
-    console.log('playAlbum an error occurred', error.data);
+    console.log('playSong an error occurred', error.data);
   });
+};
 };
 
 
-this.getUserProfile=function(){
-  console.log('getUserProfile');
-  // console.log(songUri);
-  var req = {
-    method: 'put',
+// this.getUserProfile=function(){
+//   console.log('getUserProfile');
+//   // console.log(songUri);
+//   var req = {
+//     method: 'get',
 
-     url: 'https://api.spotify.com/v1/me',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-        // 'Accept-Encoding':'gzip, deflate, compress'
-      }
-      // ,
-    // data: {
-     // 'context_uri': songUri,
-    // 'uris':[songUri],
-    // 'offset': {
-    // 'position': 0
-    // }
-  // }
-  };
-  req.headers.Authorization='Bearer ' +accessToken;
-  $http(req).then(function (response) {
-    console.log('playAlbum', response.data);
-  }, function (error) {
-    console.log('playAlbum an error occurred', error.data);
-  });
-};
+//      url: 'https://api.spotify.com/v1/me',
+//     headers: {
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//         // 'Accept-Encoding':'gzip, deflate, compress'
+//       }
+//       // ,
+//     // data: {
+//      // 'context_uri': songUri,
+//     // 'uris':[songUri],
+//     // 'offset': {
+//     // 'position': 0
+//     // }
+//   // }
+//   };
+//   req.headers.Authorization='Bearer ' +accessToken;
+//   $http(req).then(function (response) {
+//     console.log('playAlbum', response.data);
+//   }, function (error) {
+//     console.log('playAlbum an error occurred', error.data);
+//   });
+// };
 
 }]);
 

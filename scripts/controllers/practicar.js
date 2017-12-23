@@ -9,7 +9,7 @@
  */
 angular.module('practicaApp')
 //p5
-  .controller('PracticarCtrl', ['$scope', '$interval','$localStorage','Spotify','$http','$stateParams','fb',function($scope, interval,localStorage,Spotify,$http,$stateParams,fb) {
+  .controller('PracticarCtrl', ['$scope', '$interval','$localStorage','Spotify','$http','$stateParams','fb','comandos','spotiService', function($scope, interval,localStorage,Spotify,$http,$stateParams,fb,comandos,spotiService) {
         console.log("PracticarCtrl");
 
     var self=this;
@@ -21,6 +21,7 @@ $scope.estado=ESTADO_STOP;
 $scope.nombrePractica=null;
 $scope.nombreBloque=null;
 $scope.nombreContainer=null;
+ $scope.practicaTimerDisplay=null;
 $scope.pantalla={
     imagen: 'images/objetivo512x512.png',
     avance: 0,
@@ -34,7 +35,7 @@ $scope.pantalla={
 
 
     this.modelAsJson;
-    var access_token;         // Tocken para acceder a Spotify
+    // var access_token;         // Tocken para acceder a Spotify
 
   this.setModelAsJason=function(model){
          console.log('console-setModelAsJason ');
@@ -62,6 +63,19 @@ self.practicaKey=$stateParams.practicaKey;
 
             self.modelo=obj.result.practica;
              console.log(obj.result.practica);
+
+
+/// si tiene Spotify solicitar el log y si no lo tiene informar que se ejecuta sin musica!!!
+             console.log('tiene Spotify: '+ self.tieneSpotify(self.modelo.A,0));
+if(self.tieneSpotify(self.modelo.A,0) && !spotiService.isSpotifyReady()){
+spotiService.inicializaSpotify().then(
+  function(r){
+  console.log('inicializado ok Spotify: ' );
+
+  }).catch(function(error){
+     alert('Esta practiva usa Spotify y no esta activado ');
+  });
+};
 
                 $scope.propiedades=    obj.result.propiedades;
                 $scope.nombrePractica=obj.result.propiedades.nombre;
@@ -94,6 +108,8 @@ load();
 
     $scope.estado=ESTADO_PLAY;
 
+// $scope.pantalla.imagen= '';
+    self.imagen(null);
     self.startPracticaTimer($scope.propiedades.duracion);
 
     self.ejecturarSerie(self.modelo.A);
@@ -165,8 +181,9 @@ return new Promise(function (resolve, reject){
     Promise.resolve()
   ).then(function() {
     console.log('COMPLETED ejecucion serie');
-    self.stopPracticaTimer();
-    $scope.pantalla.imagen='images/objetivo512x512.png';
+    // self.stopPracticaTimer();
+    // $scope.pantalla.imagen='images/objetivo512x512.png';
+    $scope.pantalla.imagen='';
        resolve({ value: "fin EjecuionSerie", result: "fin EjecuionSerie"});
     });
   });
@@ -225,6 +242,7 @@ this.play=function(valores){
             self.startTick(valores).then(function(obj){
               console.log("Play-Retorno Promesa Tick");
               console.log(obj);
+
             fulfill({ value: "Retorno Promesa Tick", result: "Retorno Promesa Tick result" });
 
             }).catch(function(error){
@@ -236,13 +254,15 @@ this.play=function(valores){
 
             case "cronometro":
             console.log("case cronometro");
-            self.startCronometro(valores.duracion).then(function(obj){
-              console.log("Play-Retorno Promesa Cronometro");
+            console.log (comandos);
+            comandos.startCronometro($scope,valores.duracion).then(function(obj){
+            $scope.cronometroDisplay=null;
+              console.log("Play-Retorno Promesa cronometro");
               console.log(obj);
-            fulfill({ value: "Retorno Promesa Cronometro", result: "Retorno Promesa Cronometro result" });
+            fulfill({ value: "Retorno Promesa cronometro", result: "Retorno Promesa cronometro result" });
 
             }).catch(function(error){
-              console.log("Play-error Cronometro");
+              console.log("Play-error cronometro");
               console.log(error);
             });
             break;
@@ -337,6 +357,8 @@ this.play=function(valores){
                self.ejecturarParalelo(valores.columns[0]).then(function(obj){
                 console.log("Retorno Promesa bloque");
                  $scope.nombreBloque="";
+                 $scope.mostrarPracticarImagen=false;
+                 $scope.mostrarPracticarTexto=false;
                 console.log(obj);
                  fulfill({ value: "Retorno Promesa bloque", result: "Retorno Promesa bloque result ok" });
 
@@ -354,6 +376,8 @@ this.play=function(valores){
             self.ejecturarSerie(valores.columns[0]).then(function(obj){
                 console.log("Retorno Promesa container");
                 $scope.nombreContainer="";
+                 $scope.mostrarPracticarImagen=false;
+                 $scope.mostrarPracticarTexto=false;
                 console.log(obj);
                  fulfill({ value: "Retorno Promesa container", result: "Retorno Promesa container result" });
 
@@ -383,9 +407,10 @@ this.play=function(valores){
 this.startPracticaTimer=function(duracion){
   console.log("startPracticaTimer "+duracion);
   if(duracion){
-  self.tickPractica=interval( self.playTickPractica,1000);
-  $scope.tickPracticaTime=  1000;
+
+  $scope.tickPracticaTime=  0;
   $scope.duracionPractica=  duracion;
+  self.tickPractica=interval( self.playTickPractica,1000);
   console.log(self.tickPractica);
 // return new Promise(function (resolve, reject){
 //     console.log("Construccion de la promesa Tick");
@@ -401,6 +426,7 @@ this.startPracticaTimer=function(duracion){
 this.stopPracticaTimer=function(){
   console.log("stopPracticaTimer");
 $scope.tickPracticaTime=  null;
+ $scope.practicaTimerDisplay=null;
   // console.log("angular.isDefined(self.StopTick):"+angular.isDefined(self.StopTick));
   // if (angular.isDefined(self.tick) && angular.isDefined(self.StopTick)) {
   if (angular.isDefined(self.tickPractica) ) {
@@ -422,7 +448,8 @@ this.playTickPractica=function(){
     else{
    // console.log("tick-HOWL6");
    // console.log("mp3 codecs ogg: "+  Howler.codecs("mp3"));
-   $scope.tickPracticaTime=$scope.tickPracticaTime+1000;
+  $scope.tickPracticaTime=$scope.tickPracticaTime+1000;
+  $scope.practicaTimerDisplay=fb.msToDHMSMS($scope.tickPracticaTime);
  console.log("tickPracticaTimer: "+$scope.tickPracticaTime);
  $scope.pantalla.avance=$scope.tickPracticaTime/$scope.duracionPractica*100;
 };
@@ -435,6 +462,7 @@ this.playTickPractica=function(){
 // Tick
 
 this.startTick=function(datosTick){
+
   var intervaloMs=  datosTick.intervaloMs;
   var duracion=datosTick.duracion
   console.log("startTick intervaloMs: "+intervaloMs);
@@ -484,6 +512,7 @@ $scope.tickDisplay=  null;
           }
 
 };
+
 
 this.playTick=function(datosTick){
  console.log("playTick1: "+$scope.estado);
@@ -538,23 +567,17 @@ $scope.tickDisplay=  fb.msToDHMSMS($scope.tickTime);
 };
 
 
-// Timer
+// cronómetro
 
-this.startCronometro=function(duracion){
-  console.log("startCronometro: "+duracion);
 
-return new Promise(function (resolve, reject){
-    console.log("Construccion de la promesa Cronometro");
-    setTimeout(function() {
-            self.stopTick();
-            console.log("Resolve ok Cronometro: "+ duracion);
-            resolve({ value: "fin Cronometro", result: duracion});
-        }, duracion);
+$scope.$on("cronometroSegundero", function (evt, data) {
+    $scope.tiempoCronometro=$scope.tiempoCronometro+1000;
+     $scope.cronometroDisplay=fb.msToDHMSMS($scope.tiempoCronometro)
+                console.log("cronometroSegundero: ");
+                console.log(evt);
+                console.log(data);
+
     });
-
-};
-
-
 
 
 
@@ -704,15 +727,21 @@ this.imagen=function(link){
 
       console.log("Construccion de la promesa Imagen");
       if(link){
+        $scope.mostrarPracticarImagen=true;
+      } else {
+        $scope.mostrarPracticarImagen=false;
+      };
+
+
         $scope.pantalla.imagen=link;
 
           console.log("imagen link no nulo");
-          resolve({ value: "fin Leer ok", result: link});
-      }else {
-        console.log("imagen link  nulo")
-        reject({ value: "imagen link nulo", result: link});
+          resolve({ value: "fin imagen ok", result: link});
+      // }else {
+      //   console.log("imagen link  nulo")
+      //   reject({ value: "imagen link nulo", result: link});
 
-      };
+      // };
     });
   };
 
@@ -727,7 +756,7 @@ this.escribir=function(texto){
       console.log("Construccion de la promesa Escribir");
       if(texto){
         $scope.pantalla.texto=texto;
-
+        $scope.mostrarPracticarTexto=true;
           console.log("Escribir link no nulo");
           resolve({ value: "fin Escribir ok", result: texto});
       }else {
@@ -749,10 +778,84 @@ this.playYoutube=function(link){
 
       console.log("Construccion de la promesa playYoutube");
       if(link){
-        $scope.videoURL=link;
+        $scope.practicarVideo =link;
+        $scope.mostrarPracticarVideo =true;
 
-          console.log("youtube link no nulo");
-          resolve({ value: "fin youtube ok", result: link});
+ $scope.$on('youtube.player.ended', function ($event, player) {
+    console.log('ENDED' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+ $scope.$on('youtube.player.ready', function ($event, player) {
+    console.log('ready' );
+    console.log($event );
+    console.log(player);
+      player.playVideo();
+
+  });
+
+ $scope.$on('youtube.player.ended', function ($event, player) {
+    console.log('ENDED' );
+    console.log($event );
+    console.log(player);
+     console.log("youtube link no nulo");
+             $scope.mostrarPracticarVideo =false;
+     resolve({ value: "fin youtube ok", result: link});
+
+  });
+
+ $scope.$on('youtube.player.playing', function ($event, player) {
+    console.log('playing' );
+    console.log($event );
+    console.log(player);
+  console.log('Duracion: '+player.getDuration());
+  console.log('Titulo: '+player.getVideoData().title);
+
+  });
+
+
+ $scope.$on('youtube.player.paused', function ($event, player) {
+    console.log('paused' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+ $scope.$on('youtube.player.buffering', function ($event, player) {
+    console.log('buffering' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+
+ $scope.$on('youtube.player.queued', function ($event, player) {
+    console.log('queued' );
+    console.log($event );
+    console.log(player);
+
+       player.playVideo();
+    console.log('Duracion: '+player.getDuration());
+  });
+
+ $scope.$on('youtube.player.error', function ($event, player) {
+    console.log('error' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+
+ $scope.$on('youtube.player.paused', function ($event, player) {
+    console.log('paused' );
+    console.log($event );
+    console.log(player);
+
+  });
+
+
       }else {
         console.log("youtube link  nulo")
         reject({ value: "youtube link nulo", result: link});
@@ -761,40 +864,7 @@ this.playYoutube=function(link){
     });
   };
 
-  $scope.$on('playerStateChangedP', function () {
-            console.log('playing!!!')
-        });
 
-
-  $scope.playerReadyP = function(event) {
-        console.log('youtube playerReadyP'); // Event data logged
-        console.log(event); // Event data logged
-        // this.myPlayer
-    };
-
-    // Gets fired when the state of the iframe player changes
-    $scope.playerStateChangedP = function(event) {
-        console.log('youtube playerStateChangedP'); // Event data logged
-        console.log(event); // Event data logged
-
-    //         var player1 = ngYoutubeEmbedService.getPlayerById('videoID');
-    // console.log(player1);
-    // console.log(player1.getDuration());
-    // console.log(fb.msToDHMSMS(player1.getDuration()*1000));
-    // var videoData=player1.getVideoData();
-    // console.log(videoData);
-    // console.log(videoData);
-    //     $scope.$apply(function () {
-    //     $scope.itemq = {
-    //      duracion:player1.getDuration(),
-    //      duracionHMS:fb.msToDHMSMS(player1.getDuration()*1000),
-    //         volumen:player1.getVolume(),
-    //         titulo:videoData.title,
-    //         autor:videoData.author
-    //     };
-    // });
-
-};
 
 
 
@@ -803,6 +873,24 @@ this.playSongArray=function(array){
 
   console.log("playSongArray");
   console.log(array);
+  var cantidadCanciones=array.length-1;
+  console.log("cantidadCanciones "+ cantidadCanciones);
+  // for(var i = cantidadCanciones; i > -1 ; i-- ) {
+  //       console.log('playSongArray '+ i );
+
+  //   }
+   for(var i = cantidadCanciones; i > -1 ; i-- ) {
+        console.log('playSongArray '+ i +' - '+array[i].selected);
+
+            if(!array[i].selected){
+                // console.log('array[i].selected verdad '+i);
+                array.splice(i, 1);   //Elimina las canciones que no estan seleccionadas
+                 // console.log(array);
+            }
+
+
+    }
+    // console.log(array);
   return new Promise(function (res, rej){
     console.log("Construccion de la promesa playSongArray");
   //   setTimeout(function() {
@@ -852,13 +940,7 @@ this.playSong=function(song){
 
   return new Promise(function (resolve, reject){
     console.log("Construccion de la promesa playSong");
-    self.getAccessTocken().then(function(data){
-      console.log("playSong retorno de getAccessTocken");
-      console.log(data);
-      self.access_token=data.result;
-      console.log("playSong access_token");
 
-      console.log(self.access_token);
 
       var req = {
         method: 'put',
@@ -867,16 +949,15 @@ this.playSong=function(song){
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
-            // "Accept-Encoding":"gzip, deflate, compress"
+
           },
         data: {
-        // "context_uri": songUri,
         "uris":[song.uri],
         "offset": {
         "position": 0
         }}
       };
-      req.headers.Authorization="Bearer " +self.access_token;
+      req.headers.Authorization="Bearer " +spotiService.getSpotifyAccessTocken();
       console.log("playSong construye http req");
       $http(req).then(function (response) {
         console.log('PlaySong Respuesta', response.data);
@@ -898,15 +979,6 @@ this.playSong=function(song){
           reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
       });
 
-}).catch(function(error){
-  console.log("Playa Song catch retorno de getAccessTocken con error");
-  console.log(error);
-  reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
-  });
-
-
-
-
   });
 
 };
@@ -919,13 +991,6 @@ this.stopSpotify=function(){
 
   return new Promise(function (resolve, reject){
     console.log("Construccion de la promesa stopSpotify");
-    self.getAccessTocken().then(function(data){
-      console.log("stopSpotify retorno de getAccessTocken");
-      console.log(data);
-      self.access_token=data.result;
-      console.log("stopSpotifyaccess_token");
-
-      console.log(self.access_token);
 
       var req = {
         method: 'put',
@@ -945,7 +1010,7 @@ this.stopSpotify=function(){
         // }
         // }
       };
-      req.headers.Authorization="Bearer " +self.access_token;
+      req.headers.Authorization="Bearer " +spotiService.getSpotifyAccessTocken();
       console.log("stopSpotify construye http req");
       $http(req).then(function (response) {
         console.log('stopSpotify Respuesta', response.data);
@@ -962,11 +1027,7 @@ this.stopSpotify=function(){
           reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
       });
 
-}).catch(function(error){
-  console.log("Playa Song catch retorno de getAccessTocken con error");
-  console.log(error);
-  reject({ value: "PlaySong Respuesta de la Promesa error", result: error.data});
-  });
+
 
 
 
@@ -979,32 +1040,32 @@ this.stopSpotify=function(){
 
 //Loggin a Spotify
 
-this.getAccessTocken=function(){
-   console.log("getAccessTocken");
-   console.log(self.access_token);
+// this.getAccessTocken=function(){
+//    console.log("getAccessTocken");
+//    console.log(self.access_token);
 
-return new Promise(function (resolve, reject){
-    console.log("getAccessTocken Construccion Promesa");
-    console.log(self.access_token);
-      if (self.access_token){
-         console.log("getAccessTocken Tocekn existe");
-        resolve({ value: "getAccessTocken Respuesta de la Promesa correcto tocken existente", result: self.access_token});
-      } else{
-        console.log("getAccessTocken else: access_token no existe");
-        console.log(Spotify);
-        Spotify.login().then(function (data) {
-              console.log("getAccessTocken exitoso");
-              self.access_token=data;
-              console.log(data);
-              resolve({ value: "getAccessTocken Respuesta de la Promesa correcto consigue tocken", result: self.access_token});
-          }).catch(function(error){
-              console.log("getAccessTocken Tocekn error");
-              reject({ value: "getAccessTocken Respuesta de la Promesa error", result: error});
-          });
-      };
+// return new Promise(function (resolve, reject){
+//     console.log("getAccessTocken Construccion Promesa");
+//     console.log(self.access_token);
+//       if (self.access_token){
+//          console.log("getAccessTocken Tocekn existe");
+//         resolve({ value: "getAccessTocken Respuesta de la Promesa correcto tocken existente", result: self.access_token});
+//       } else{
+//         console.log("getAccessTocken else: access_token no existe");
+//         console.log(Spotify);
+//         Spotify.login().then(function (data) {
+//               console.log("getAccessTocken exitoso");
+//               self.access_token=data;
+//               console.log(data);
+//               resolve({ value: "getAccessTocken Respuesta de la Promesa correcto consigue tocken", result: self.access_token});
+//           }).catch(function(error){
+//               console.log("getAccessTocken Tocekn error");
+//               reject({ value: "getAccessTocken Respuesta de la Promesa error", result: error});
+//           });
+//       };
 
-    });//fin de la promesa
-}; // fin de la funcion get AccessTocken
+//     });//fin de la promesa
+// }; // fin de la funcion get AccessTocken
 
 
 
@@ -1021,7 +1082,7 @@ var reqVolumen = {
     }
 };
 
-reqVolumen.headers.Authorization="Bearer " +access_token;
+reqVolumen.headers.Authorization="Bearer " +spotiService.getSpotifyAccessTocken();
   $http(reqVolumen).then(function (response) {
     console.log('all is good', response.data);
 }, function (error) {
@@ -1084,6 +1145,7 @@ interval(function() {
 
 
 
+
 // var sketch = function(p) {
 //     p.setup = function(){
 //       p.createCanvas(200, 200);
@@ -1100,6 +1162,87 @@ interval(function() {
 
 //   };
 //   new p5(sketch, 'myContainer');
+
+ $scope.$on('$destroy', function() {
+
+     console.log('$destroy');
+ self.stopPracticaTimer();
+    self.stopTick();
+
+    });
+
+
+
+
+
+this.tieneSpotify=function(obj, level){
+console.log('haySpotify');
+console.log(obj);
+
+level=level || 0;
+
+var objInterno=null;
+
+// Si el objeto es tipo container o bloque asigno a ObjInterno las columnas para poder compartir el for al
+// igualar las estructuras de datos.
+
+switch(obj.type){
+    case 'container':
+          console.log('haySpotify Container nivel:' +level+' - duracion container: '+ obj.duracion);
+          objInterno=obj.columns[0];
+          break;
+
+          case 'bloque':
+          console.log('haySpotify Bloque nivel:' +level+' - duracion bloque: '+ obj.duracion);
+          objInterno=obj.columns[0];
+          break;
+
+          default:
+          console.log('haySpotify default:' +level+' - duracion default: '+ obj.duracion);
+          objInterno=obj;
+
+}
+
+          console.log('haySpotify objInterno:');
+          console.log(objInterno);
+
+// recorro el objeto y calculo la duración del bloque y del container.
+// asigno la duración total y retorno el objeto completo.
+
+var resultado= false;
+
+    for (var i=0;i<objInterno.length;i++){
+      console.log('i :'+i);
+      console.log(objInterno[i].type);
+         switch (objInterno[i].type){
+
+          case 'container':
+          console.log('haySpotify level:' +level+' ' +objInterno[i].type +' - duracion: '+ objInterno[i].duracion);
+          resultado=self.tieneSpotify(objInterno[i],++level);
+
+          break;
+
+          case 'bloque':
+          console.log('haySpotify level:' +level+' ' +objInterno[i].type +' - duracion: '+ objInterno[i].duracion);
+          resultado=self.tieneSpotify(objInterno[i],++level);
+          break;
+
+          case 'spotify':
+          console.log( 'haySpotify level:' +level +' ' +objInterno[i].type+' - duracion: '+' :'+ objInterno[i].duracion);
+          resultado = true;
+
+          break;
+
+          }// fin switch
+
+          if (resultado === true) { break; }        //Salgo del for!!!
+    }//fin for
+
+
+return resultado;
+
+
+};
 
 
 

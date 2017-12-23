@@ -1,8 +1,24 @@
 /*css Practicar*/
+@import 'https://fonts.googleapis.com/css?family=Nova+Mono|Eczar';
+@import 'https://fonts.googleapis.com/css?family=Orbitron';
+
 
 .timer{
-color: red;
-text-align: center;
-font-family: 'Orbitron', sans-serif;
- font-weight: bold;
+/*color: red;*/
+/*text-align: center;*/
+/*font-family:  'Orbitron', sans-serif;*/
+ /*font-weight: bold;*/
+  /*font-size: 340px;*/
+
+
+    /*font-family: 'Nova Mono', monospace;*/
+
+}
+
+.timer h1{
+    text-align: center;
+    color: red;
+    font-size: 1000%;
+    text-shadow: 0px 0px 5px;
+    font-weight: bold;
 }
